@@ -10,6 +10,10 @@ const apiList = {
   addebooks: `${server}/editor/addebooks`,
   deleteebooks: `${server}/editor/deleteebooks`,
   updateebooks: `${server}/editor/updateebooks`,
+  getresults: `${server}/user/getresults`,
+  addapp: `${server}/editor/addapp`,
+  deleteapp: `${server}/editor/deleteapp`,
+  updateapp: `${server}/editor/updateapp`,
 };
 
 export default apiList;

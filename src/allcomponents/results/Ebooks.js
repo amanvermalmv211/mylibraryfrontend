@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import apiList from '../../libs/apiLists';
 import { toast } from 'react-toastify';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import SingleEbook from './SingleEbook';
 import DeleteModal, { FormModal } from '../notificationmessage/Modal';
 import { EbookValidation } from '../../libs/Validation';
+import { BiEdit } from 'react-icons/bi';
+import { RiDeleteBack2Line } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
 const Ebooks = () => {
 
@@ -23,7 +25,7 @@ const Ebooks = () => {
     const [ebooks, setEbooks] = useState([]);
 
     useEffect(() => {
-        if (open || openUpdate) {
+        if (open || openUpdate || openDel) {
             document.body.classList.add('modal-open');
         } else {
             document.body.classList.remove('modal-open');
@@ -33,7 +35,7 @@ const Ebooks = () => {
             document.body.classList.remove('modal-open');
         };
 
-    }, [open, openUpdate]);
+    }, [open, openUpdate, openDel]);
 
     const [ebookDetails, setEbookDetails] = useState({
         name: "",
@@ -68,7 +70,7 @@ const Ebooks = () => {
 
     const handleAddBook = async () => {
 
-        if(!EbookValidation(ebookDetails)){return}
+        if (!EbookValidation(ebookDetails)) { return }
 
         if (!isClicked) {
             setIsClicked(true);
@@ -102,10 +104,10 @@ const Ebooks = () => {
         }
     };
 
-    const handleUpdateEbook = async () => {     
+    const handleUpdateEbook = async () => {
 
-        if(!EbookValidation(ebookDetails)){return}
-
+        if (!EbookValidation(ebookDetails)) { return }
+        setSpinLoading(true);
         if (!isClicked) {
             setIsClicked(true);
             try {
@@ -121,24 +123,27 @@ const Ebooks = () => {
                 const json = await response.json();
                 if (json.success) {
                     toast.success(json.message);
-                    for(let i=0; i<ebooks.length; i++){
-                        if(ebooks[i]._id === json.data._id){
+                    for (let i = 0; i < ebooks.length; i++) {
+                        if (ebooks[i]._id === json.data._id) {
                             ebooks[i] = json.data
                             break;
                         }
                     }
                     setOpenUpdate(false);
                     setIsClicked(false);
+                    setSpinLoading(false);
                 }
                 else {
                     toast.error(json.message);
-                    setOpenDel(false);
+                    setOpenUpdate(false);
                     setIsClicked(false);
+                    setSpinLoading(false);
                 }
             }
             catch (err) {
                 toast.warn("Internal Server Error");
-                setOpenDel(false);
+                setOpenUpdate(false);
+                setSpinLoading(false);
                 setIsClicked(false);
             }
 
@@ -191,7 +196,6 @@ const Ebooks = () => {
             const json = await response.json();
             if (json.success) {
                 setEbooks(json.ebooks)
-                toast.success(json.message);
             }
             else {
                 toast.warn(json.message);
@@ -335,9 +339,23 @@ const Ebooks = () => {
 
                     <div className='flex flex-wrap items-center justify-center gap-6'>
 
+                        {/* <EbookAnim/> */}
+
                         {
                             ebooks.map((ebook, idx) => {
-                                return <SingleEbook key={idx} ebook={ebook} handleOpen={handleOpen} />
+                                return <div key={idx} className='border border-gray-300 rounded-lg overflow-hidden w-full md:w-72 bg-gray-200 text-gray-700 relative'>
+
+                                    <div className={`absolute top-0 left-0 p-1 ${localStorage.getItem("type") === 'editor' ? "block" : "invisible"}`}> <BiEdit size={20} className='hover:scale-110 cursor-pointer transition-all duration-200' onClick={() => { handleOpen(ebook, true) }} /> </div>
+
+                                    <div className={`absolute top-0 right-0 p-1 ${localStorage.getItem("type") === 'editor' ? "block" : "invisible"}`}> <RiDeleteBack2Line size={20} className='hover:scale-110 cursor-pointer transition-all duration-200' onClick={() => { handleOpen(ebook, false) }} /> </div>
+
+                                    <div className='p-2 overflow-y-auto h-28 nobar'>
+                                        <h4 className='font-semibold text-xl text-center p-1'>{ebook.name}</h4>
+                                        <p className='text-start font-semibold'>Author : <span className='font-normal'>{ebook.authname}</span></p>
+                                        <p className='text-start font-semibold'>Published On : <span className='font-normal'>{ebook.published}</span></p>
+                                    </div>
+                                    <Link to={ebook.ebooklink} target='_blank' className='w-full block text-center p-1.5 bg-blue-500 hover:bg-blue-600 text-white'>Read Now</Link>
+                                </div>
                             })
                         }
 

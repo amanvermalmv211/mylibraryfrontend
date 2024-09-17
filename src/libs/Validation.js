@@ -58,4 +58,14 @@ export const EbookValidation = (ebookDetail) => {
     return true;
 };
 
+export const resultsValidation = (appDetails) => {
+    if (isEmpty(appDetails.appname, "application name")) { return false; }
+    if (isEmpty(appDetails.formlink, "form link")) { return false; }
+    if (isEmpty(appDetails.youtubelink, "youtube link")) { return false; }
+    if (isEmpty(appDetails.endformdate, "last date")) { return false; }
+    if (isEmpty(appDetails.expirydate, "expiry date")) { return false; }
+
+    return true;
+};
+
 export default signupValidation;
