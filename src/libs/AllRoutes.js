@@ -1,5 +1,5 @@
 const genLinks = [
-    { name: "About", link: "" },
+    { name: "About", link: "/libowner" },
     { name: "Result", link: "/results" },
     { name: "E-Books", link: "/ebooks" },
     { name: "Contact Us", link: "/contactus" }
@@ -16,7 +16,7 @@ export const student = () => {
 export const owner = () => {
     return [
         { name: "Result", link: "/results" },
-        { name: "Library", link: "/" },
+        { name: "Library", link: "/libowner" },
         { name: "Dashboard", link: "/" },
         { name: "Management", link: "/" }
     ]

@@ -18,7 +18,7 @@ const AuthState = (props) => {
         else if(type === "editor"){
             setAllLinks(editor);
         }
-        else if(type === "owner"){
+        else if(type === "libowner"){
             setAllLinks(owner);
         }
         else{
