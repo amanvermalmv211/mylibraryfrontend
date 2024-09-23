@@ -6,6 +6,7 @@ const AuthState = (props) => {
 
     const [islogedin, setIsloggedin] = useState(false);
     const [userType, setUserType] = useState("");
+    const [userProfile, setUserProfile] = useState("login");
     const [allLinks, setAllLinks] = useState(genLinks);
 
     const setLinks = (type)=>{
@@ -30,7 +31,8 @@ const AuthState = (props) => {
         <AuthContext.Provider value={{
             islogedin, setIsloggedin,
             userType, setUserType,
-            allLinks, setLinks
+            allLinks, setLinks,
+            userProfile, setUserProfile
         }}>
             {props.children}
         </AuthContext.Provider>

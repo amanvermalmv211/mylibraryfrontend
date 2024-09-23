@@ -10,7 +10,7 @@ import { loginValidation } from '../../libs/Validation';
 const Login = () => {
 
     const context = useContext(authContext);
-    const { setIsloggedin, setLinks } = context;
+    const { setIsloggedin, setLinks, setUserProfile } = context;
 
     const [signupDetails, setSignupDetails] = useState({
         email: "",
@@ -61,6 +61,7 @@ const Login = () => {
                     localStorage.setItem("type", json.type);
                     toast.success(json.message);
                     setLinks(json.type);
+                    setUserProfile(json.type + "/profile")
                     setIsloggedin(true);
                     setSpinSingUpLoading(false);
                     navigate("/")

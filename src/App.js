@@ -14,6 +14,7 @@ import AuthState from './context/auth/AuthState';
 import SearchLibrary from './allcomponents/home/SearchLibrary';
 import Ebooks from './allcomponents/results/Ebooks';
 import LibOwner from './allcomponents/library/LibOwner';
+import LibOwnerProfile from './allcomponents/library/LibOwnerProfile';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route exact path="/login" element={<Login />}></Route>
             <Route exact path="/searchlibrary" element={<SearchLibrary />}></Route>
             <Route exact path="/libowner" element={<LibOwner />}></Route>
+            <Route exact path="/libowner/profile" element={<LibOwnerProfile />}></Route>
             <Route exact path="/results" element={<Results />}></Route>
             <Route exact path="/ebooks" element={<Ebooks />}></Route>
             <Route exact path="/contactus" element={<Contact />}></Route>

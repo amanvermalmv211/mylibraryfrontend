@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 const Navbar = () => {
 
     const context = useContext(authContext);
-    const { islogedin, setIsloggedin, setUserType, allLinks, setLinks } = context;
+    const { islogedin, setIsloggedin, setUserType, allLinks, setLinks, userProfile, setUserProfile } = context;
 
     const [open, setOpen] = useState(false);
     let navigate = useNavigate();
@@ -18,6 +18,12 @@ const Navbar = () => {
     useEffect(() => {
         setIsloggedin(localStorage.getItem("authtoken"));
         setUserType(localStorage.getItem("type"));
+        if(localStorage.getItem("type")){
+            setUserProfile(localStorage.getItem("type")+"/profile");
+        }
+        else{
+            setUserProfile("login")
+        }
         setLinks(localStorage.getItem("type"));
 
         // eslint-disable-next-line
@@ -27,6 +33,7 @@ const Navbar = () => {
         localStorage.removeItem("type");
         localStorage.removeItem("authtoken");
         setLinks("gen");
+        setUserProfile("login")
         setIsloggedin(false);
         toast.success("User logout successfully");
         navigate("/");
@@ -59,7 +66,7 @@ const Navbar = () => {
                             <IoIosSearch className='scale-150' />
                         </Link>
 
-                        <Link to="/login" className="border border-black p-0.5 rounded-full">
+                        <Link to={"/"+userProfile} className="border border-black p-0.5 rounded-full">
                             <FaUser className='scale-90' />
                         </Link>
 
@@ -74,7 +81,7 @@ const Navbar = () => {
                             <IoIosSearch className='scale-150' />
                         </Link>
 
-                        <Link to="/login" className="border border-black p-0.5 rounded-full">
+                        <Link to={"/"+userProfile} className="border border-black p-0.5 rounded-full">
                             <FaUser className='scale-90' />
                         </Link>
 
