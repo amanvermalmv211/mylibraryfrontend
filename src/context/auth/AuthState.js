@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import AuthContext from './authContext';
-import genLinks, { superadmin, student, editor, owner } from '../../libs/AllRoutes';
+import genLinks, { superadmin, student, editor, owner, userType } from '../../libs/AllRoutes';
 
 const AuthState = (props) => {
 
-    const [islogedin, setIsloggedin] = useState(false);
-    const [userType, setUserType] = useState("");
+    const [islogedin, setIsloggedin] = useState(localStorage.getItem("authtoken"));
     const [userProfile, setUserProfile] = useState("login");
+    const [loading, setLoading] = useState(false);
     const [allLinks, setAllLinks] = useState(genLinks);
 
-    const setLinks = (type)=>{
-        if(type === "superadmin"){
+    const setLinks = ()=>{
+        if(userType() === "superadmin"){
             setAllLinks(superadmin);
         }
-        else if(type === "student"){
+        else if(userType() === "student"){
             setAllLinks(student)
         }
-        else if(type === "editor"){
+        else if(userType() === "editor"){
             setAllLinks(editor);
         }
-        else if(type === "libowner"){
+        else if(userType() === "libowner"){
             setAllLinks(owner);
         }
         else{
@@ -29,9 +29,9 @@ const AuthState = (props) => {
 
     return (
         <AuthContext.Provider value={{
-            islogedin, setIsloggedin,
-            userType, setUserType,
             allLinks, setLinks,
+            loading, setLoading,
+            islogedin, setIsloggedin,
             userProfile, setUserProfile
         }}>
             {props.children}

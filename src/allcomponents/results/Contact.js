@@ -7,7 +7,7 @@ const Contact = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "My Library";
+        document.title = "Contact Us - ML";
     }, [])
 
     return (

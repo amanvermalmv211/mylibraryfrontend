@@ -1,9 +1,6 @@
-const genLinks = [
-    { name: "About", link: "/libowner" },
-    { name: "Result", link: "/results" },
-    { name: "E-Books", link: "/ebooks" },
-    { name: "Contact Us", link: "/contactus" }
-]
+export const userType = () =>{
+    return localStorage.getItem("type");
+}
 
 export const student = () => {
     return [
@@ -37,5 +34,13 @@ export const superadmin = () => {
         { name: "Requests", link: "/" }
     ]
 };
+
+const genLinks = [
+    { name: "About", link: "/libowner" },
+    { name: "Result", link: "/results" },
+    { name: "E-Books", link: "/ebooks" },
+    { name: "Contact Us", link: "/contactus" }
+]
+
 
 export default genLinks;

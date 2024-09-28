@@ -7,6 +7,7 @@ import { EbookValidation } from '../../libs/Validation';
 import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBack2Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import { EbookAnim } from '../notificationmessage/SkeletonAnim';
 
 const Ebooks = () => {
 
@@ -17,8 +18,9 @@ const Ebooks = () => {
     }, []);
 
     const [open, setOpen] = useState(false);
-    const [openUpdate, setOpenUpdate] = useState(false);
     const [openDel, setOpenDel] = useState(false);
+    const [openUpdate, setOpenUpdate] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [spinLoading, setSpinLoading] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
 
@@ -196,6 +198,7 @@ const Ebooks = () => {
             const json = await response.json();
             if (json.success) {
                 setEbooks(json.ebooks)
+                setLoading(false);
             }
             else {
                 toast.warn(json.message);
@@ -339,9 +342,7 @@ const Ebooks = () => {
 
                     <div className='flex flex-wrap items-center justify-center gap-6'>
 
-                        {/* <EbookAnim/> */}
-
-                        {
+                        {loading ? <EbookAnim/> : 
                             ebooks.map((ebook, idx) => {
                                 return <div key={idx} className='border border-gray-300 rounded-lg overflow-hidden w-full md:w-72 bg-gray-200 text-gray-700 relative'>
 

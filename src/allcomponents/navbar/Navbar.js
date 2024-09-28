@@ -6,25 +6,24 @@ import { HiMiniBars3CenterLeft } from "react-icons/hi2";
 import { RxCross2 } from "react-icons/rx";
 import authContext from '../../context/auth/authContext';
 import { toast } from 'react-toastify';
+import { userType } from '../../libs/AllRoutes';
 
 const Navbar = () => {
 
     const context = useContext(authContext);
-    const { islogedin, setIsloggedin, setUserType, allLinks, setLinks, userProfile, setUserProfile } = context;
+    const { islogedin, setIsloggedin, allLinks, setLinks, userProfile, setUserProfile } = context;
 
     const [open, setOpen] = useState(false);
     let navigate = useNavigate();
 
     useEffect(() => {
-        setIsloggedin(localStorage.getItem("authtoken"));
-        setUserType(localStorage.getItem("type"));
-        if(localStorage.getItem("type")){
-            setUserProfile(localStorage.getItem("type")+"/profile");
+        if(userType()){
+            setUserProfile(userType() + "/profile");
         }
         else{
             setUserProfile("login")
         }
-        setLinks(localStorage.getItem("type"));
+        setLinks();
 
         // eslint-disable-next-line
     }, []);
@@ -32,7 +31,7 @@ const Navbar = () => {
     const handleLogout = ()=>{
         localStorage.removeItem("type");
         localStorage.removeItem("authtoken");
-        setLinks("gen");
+        setLinks();
         setUserProfile("login")
         setIsloggedin(false);
         toast.success("User logout successfully");
@@ -49,10 +48,10 @@ const Navbar = () => {
                         </Link>
 
                         <div className='border-l border-blue-700 hidden lg:flex'>
-                            <ul className='pl-4'>
+                            <ul>
                                 {
-                                    allLinks.map((routes) => {
-                                        return <Link to={routes.link} key={routes.name} className='p-3'>{routes.name}</Link>
+                                    allLinks.map((route) => {
+                                        return <Link to={route.link} key={route.name} className='m-2'>{route.name}</Link>
                                     })
                                 }
                             </ul>

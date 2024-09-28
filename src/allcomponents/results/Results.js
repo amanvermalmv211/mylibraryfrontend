@@ -7,6 +7,7 @@ import { RiDeleteBack2Line } from 'react-icons/ri';
 import apiList from '../../libs/apiLists';
 import { resultsValidation } from '../../libs/Validation';
 import { toast } from 'react-toastify';
+import ResultAnim from '../notificationmessage/SkeletonAnim';
 
 const Results = () => {
 
@@ -23,6 +24,7 @@ const Results = () => {
 
     const [govJob, setGovJob] = useState([]);
     const [OthJob, setOthJob] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [admitCard, setAdmitCard] = useState([]);
     const [open, setOpen] = useState(false);
     const [openUpdate, setOpenUpdate] = useState(false);
@@ -238,6 +240,7 @@ const Results = () => {
     };
 
     const getResults = async () => {
+        setLoading(true);
         try {
             const response = await fetch(apiList.getresults, {
                 method: 'GET',
@@ -252,6 +255,7 @@ const Results = () => {
                 setGovJob(results.filter((data) => { return data.papername === "Government Jobs" }));
                 setOthJob(results.filter((data) => { return data.papername === "Other Applications" }));
                 setAdmitCard(results.filter((data) => { return data.papername === "Admit Card" }));
+                setLoading(false);
             }
             else {
                 toast.warn(json.message);
@@ -419,35 +423,35 @@ const Results = () => {
 
                                     <h4 className='font-semibold text-xl text-center p-3 bg-blue-700 text-white'>{alldata.name} ({alldata.data.length})</h4>
 
-                                    {/* <ResultAnim /> */}
-
-                                    <div className='h-[30rem] nobar overflow-y-auto'>
-                                        {
-                                            alldata.data.map((appData, idx) => {
-                                                return <>
-                                                    <div className={`p-1.5 ${idx % 2 === 0 ? "bg-gray-200" : "bg-gray-300"}`}>
-                                                        <div className='flex items-center justify-between'>
-                                                            {idx + 1}. {appData.appname}
-                                                            <Link to="/" className='pr-1 text-blue-600 underline'>Link</Link>
-                                                        </div>
-                                                        <div className='flex items-center justify-between text-xs md:text-sm'>
-                                                            <div className='flex items-center space-x-2'>
-                                                                <Link to="/" className='underline'>YouTube Video Link</Link>
-                                                                {
-                                                                    localStorage.getItem("type") === "editor" && <div className='flex items-center space-x-2'>
-                                                                        <div> <BiEdit size={17} className='hover:scale-110 cursor-pointer transition-all duration-200' onClick={() => { handleOpen(appData, true) }} /> </div>
-
-                                                                        <div> <RiDeleteBack2Line size={17} className='hover:scale-110 cursor-pointer transition-all duration-200' onClick={() => { handleOpen(appData, false) }} /> </div>
-                                                                    </div>
-                                                                }
+                                    {loading ? <ResultAnim /> :
+                                        <div className='h-[30rem] nobar overflow-y-auto'>
+                                            {
+                                                alldata.data.map((appData, idx) => {
+                                                    return <>
+                                                        <div className={`p-1.5 ${idx % 2 === 0 ? "bg-gray-200" : "bg-gray-300"}`}>
+                                                            <div className='flex items-center justify-between'>
+                                                                {idx + 1}. {appData.appname}
+                                                                <Link to="/" className='pr-1 text-blue-600 underline'>Link</Link>
                                                             </div>
-                                                            <div className='font-semibold'>Last date: <span className='text-red-500'>{new Date(appData.endformdate).getDate()}/{new Date(appData.endformdate).getMonth() + 1}/{new Date(appData.endformdate).getFullYear()}</span></div>
+                                                            <div className='flex items-center justify-between text-xs md:text-sm'>
+                                                                <div className='flex items-center space-x-2'>
+                                                                    <Link to="/" className='underline'>YouTube Video Link</Link>
+                                                                    {
+                                                                        localStorage.getItem("type") === "editor" && <div className='flex items-center space-x-2'>
+                                                                            <div> <BiEdit size={17} className='hover:scale-110 cursor-pointer transition-all duration-200' onClick={() => { handleOpen(appData, true) }} /> </div>
+
+                                                                            <div> <RiDeleteBack2Line size={17} className='hover:scale-110 cursor-pointer transition-all duration-200' onClick={() => { handleOpen(appData, false) }} /> </div>
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                                <div className='font-semibold'>Last date: <span className='text-red-500'>{new Date(appData.endformdate).getDate()}/{new Date(appData.endformdate).getMonth() + 1}/{new Date(appData.endformdate).getFullYear()}</span></div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </>
-                                            })
-                                        }
-                                    </div>
+                                                    </>
+                                                })
+                                            }
+                                        </div>
+                                    }
 
                                 </div>
                             })
