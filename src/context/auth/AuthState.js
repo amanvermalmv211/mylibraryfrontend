@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AuthContext from './authContext';
 import genLinks, { superadmin, student, editor, owner, userType } from '../../libs/AllRoutes';
+import { toast } from 'react-toastify';
 
 const AuthState = (props) => {
 
@@ -9,22 +10,31 @@ const AuthState = (props) => {
     const [loading, setLoading] = useState(false);
     const [allLinks, setAllLinks] = useState(genLinks);
 
-    const setLinks = ()=>{
-        if(userType() === "superadmin"){
+    const setLinks = () => {
+        if (userType() === "superadmin") {
             setAllLinks(superadmin);
         }
-        else if(userType() === "student"){
+        else if (userType() === "student") {
             setAllLinks(student)
         }
-        else if(userType() === "editor"){
+        else if (userType() === "editor") {
             setAllLinks(editor);
         }
-        else if(userType() === "libowner"){
+        else if (userType() === "libowner") {
             setAllLinks(owner);
         }
-        else{
+        else {
             setAllLinks(genLinks);
         }
+    }
+
+    const invalidUser = () => {
+        localStorage.removeItem("type");
+        localStorage.removeItem("authtoken");
+        setLinks();
+        setUserProfile("login")
+        setIsloggedin(false);
+        toast.warn("Invalid User");
     }
 
     return (
@@ -32,7 +42,7 @@ const AuthState = (props) => {
             allLinks, setLinks,
             loading, setLoading,
             islogedin, setIsloggedin,
-            userProfile, setUserProfile
+            userProfile, setUserProfile, invalidUser
         }}>
             {props.children}
         </AuthContext.Provider>

@@ -205,7 +205,7 @@ const Ebooks = () => {
             }
         }
         catch (err) {
-            toast.warn("Internal Server Error");
+            toast.warn(`E-book : ${err.message}`);
         }
 
     }

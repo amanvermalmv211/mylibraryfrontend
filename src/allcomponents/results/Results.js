@@ -262,7 +262,7 @@ const Results = () => {
             }
         }
         catch (err) {
-            toast.warn(err);
+            toast.warn(`Results :  ${err.message}`);
         }
 
     }
