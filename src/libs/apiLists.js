@@ -12,6 +12,7 @@ const apiList = {
   updateebooks: `${server}/editor/updateebooks`,
   getresults: `${server}/user/getresults`,
   addapp: `${server}/editor/addapp`,
+  geteditor: `${server}/editor/profile`,
   deleteapp: `${server}/editor/deleteapp`,
   updateapp: `${server}/editor/updateapp`,
 };
