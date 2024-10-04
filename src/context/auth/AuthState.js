@@ -11,7 +11,7 @@ const AuthState = (props) => {
     const [allLinks, setAllLinks] = useState(genLinks);
 
     const setLinks = () => {
-        if (userType() === "superadmin") {
+        if (userType() === "admin") {
             setAllLinks(superadmin);
         }
         else if (userType() === "student") {

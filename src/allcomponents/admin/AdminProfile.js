@@ -15,11 +15,11 @@ const AdminProfile = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        // if (userType() !== "admin") {
-        //     invalidUser()
-        //     navigate("/login")
-        //     return;
-        // }
+        if (userType() !== "admin") {
+            invalidUser()
+            navigate("/login")
+            return;
+        }
 
         getAdmin();
         // eslint-disable-next-line
@@ -27,27 +27,27 @@ const AdminProfile = () => {
 
     const getAdmin = async () => {
         setLoading(true);
-        // try {
-        //     const response = await fetch(apiList.getadmin, {
-        //         method: 'GET',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'authtoken': localStorage.getItem("authtoken")
-        //         }
-        //     });
+        try {
+            const response = await fetch(apiList.getadmin, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authtoken': localStorage.getItem("authtoken")
+                }
+            });
 
-        //     const json = await response.json();
-        //     if (json.success) {
-        //         setAdmin(json.data);
-        //         setLoading(false);
-        //     }
-        //     else {
-        //         toast.warn(json.message);
-        //     }
-        // }
-        // catch (err) {
-        //     toast.warn(`adminProfile :  ${err.message}`);
-        // }
+            const json = await response.json();
+            if (json.success) {
+                setAdmin(json.data);
+                setLoading(false);
+            }
+            else {
+                toast.warn(json.message);
+            }
+        }
+        catch (err) {
+            toast.warn(`adminProfile :  ${err.message}`);
+        }
 
     }
 
@@ -77,7 +77,7 @@ const AdminProfile = () => {
                                 </div>
 
                                 <div className='text-center'>
-                                    <div><span className='font-semibold'>Contact Number : </span><span>{admin.contactnum}</span></div>
+                                    <div>Here i will display the good tought</div>
                                 </div>
                             </div>
 

@@ -29,7 +29,7 @@ export const editor = () => {
 
 export const superadmin = () => {
     return [
-        { name: "Libraries", link: "/results" },
+        { name: "Libraries", link: "/alllibraries" },
         { name: "Dashboard", link: "/" },
         { name: "Requests", link: "/" }
     ]
