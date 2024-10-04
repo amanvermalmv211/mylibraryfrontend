@@ -31,7 +31,7 @@ export const superadmin = () => {
     return [
         { name: "Libraries", link: "/alllibraries" },
         { name: "Dashboard", link: "/" },
-        { name: "Requests", link: "/" }
+        { name: "Requests", link: "/request" }
     ]
 };
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AllLibrariesAnim } from '../notificationmessage/SkeletonAnim';
+import { Link } from 'react-router-dom';
 
 const AllLibraries = () => {
 
@@ -14,6 +15,48 @@ const AllLibraries = () => {
     // const [openDel, setOpenDel] = useState(false);
     // const [openUpdate, setOpenUpdate] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [allLib, setAllLib] = useState([
+        {
+            name: "Aman Verma",
+            libName: "Buddha Library",
+            contacNum: "6306805527",
+            emgcontactnum: "9455333762",
+            subscription: "12/12/2024",
+            activeStd: "400",
+            address: "Tedhi Bazar Ghazipur",
+            googlemapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d534.9340079649054!2d83.59583501112765!3d25.585213561240565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399201d9084b7745%3A0x85dff36e407107e4!2sHHPW%2B375%2C%20Tedi%20Bazar%2C%20Ghazipur%2C%20Rauja%20Shahabuddin%2C%20Uttar%20Pradesh%20233001!5e0!3m2!1sen!2sin!4v1728010089974!5m2!1sen!2sin"
+        },
+        {
+            name: "Aman Verma",
+            libName: "Buddha Library",
+            contacNum: "6306805527",
+            emgcontactnum: "9455333762",
+            subscription: "12/12/2024",
+            activeStd: "400",
+            address: "Tedhi Bazar Ghazipur",
+            googlemapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d534.9340079649054!2d83.59583501112765!3d25.585213561240565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399201d9084b7745%3A0x85dff36e407107e4!2sHHPW%2B375%2C%20Tedi%20Bazar%2C%20Ghazipur%2C%20Rauja%20Shahabuddin%2C%20Uttar%20Pradesh%20233001!5e0!3m2!1sen!2sin!4v1728010089974!5m2!1sen!2sin"
+        },
+        {
+            name: "Aman Verma",
+            libName: "Buddha Library",
+            contacNum: "6306805527",
+            emgcontactnum: "9455333762",
+            subscription: "12/12/2024",
+            activeStd: "400",
+            address: "Tedhi Bazar Ghazipur",
+            googlemapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d534.9340079649054!2d83.59583501112765!3d25.585213561240565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399201d9084b7745%3A0x85dff36e407107e4!2sHHPW%2B375%2C%20Tedi%20Bazar%2C%20Ghazipur%2C%20Rauja%20Shahabuddin%2C%20Uttar%20Pradesh%20233001!5e0!3m2!1sen!2sin!4v1728010089974!5m2!1sen!2sin"
+        },
+        {
+            name: "Aman Verma",
+            libName: "Buddha Library",
+            contacNum: "6306805527",
+            emgcontactnum: "9455333762",
+            subscription: "12/12/2024",
+            activeStd: "400",
+            address: "Tedhi Bazar Ghazipur",
+            googlemapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d534.9340079649054!2d83.59583501112765!3d25.585213561240565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399201d9084b7745%3A0x85dff36e407107e4!2sHHPW%2B375%2C%20Tedi%20Bazar%2C%20Ghazipur%2C%20Rauja%20Shahabuddin%2C%20Uttar%20Pradesh%20233001!5e0!3m2!1sen!2sin!4v1728010089974!5m2!1sen!2sin"
+        }
+    ]);
 
     // const getEbooks = async () => {
     //     try {
@@ -48,15 +91,20 @@ const AllLibraries = () => {
                         loading ? <AllLibrariesAnim /> :
                             <div className='grid md:grid-cols-2 gap-4 lg:gap-8'>
                                 {
-                                    [1, 2, 3, 4, 5, 6, 7, 8, 9].map((data) => {
-                                        return <div key={data} className='flex rounded-md overflow-hidden border border-gray-300 '>
-                                            <div className='bg-gray-300 w-2/5'></div>
+                                    allLib.map((data, idx) => {
+                                        return <div key={idx} className='flex rounded-md overflow-hidden border border-gray-300 '>
+                                            <div className='bg-gray-300 w-2/5'>
+                                                <iframe title='addloc' src={data.googlemapLink} loading="lazy" referrerpolicy="no-referrer-when-downgrade" className='w-full h-full'></iframe>
+                                            </div>
                                             <div className='w-3/5 p-1 lg:p-2'>
-                                                <div className='text-center md:text-xl mb-1 font-semibold'>Name Of Owner</div>
-                                                <div>Saraswati Peace Library</div>
-                                                <div>6306805527, 6306402081</div>
-                                                <div>Active Students: 200</div>
-                                                <div>Last Till: 12 January, 2024</div>
+                                                <div className='text-center md:text-xl font-semibold'>{data.name}</div>
+                                                <div className='max-lg:text-sm'>
+                                                    <div>{data.libName}</div>
+                                                    <div><Link to={`tel:+91${data.contacNum}`}>{data.contacNum}</Link>, <Link to={`tel:+91${data.emgcontactnum}`}>{data.emgcontactnum}</Link></div>
+                                                    <div>Active Students: {data.activeStd}</div>
+                                                    <div>Last Till: {data.subscription}</div>
+                                                    <div>{data.address}</div>
+                                                </div>
                                             </div>
                                         </div>
                                     })

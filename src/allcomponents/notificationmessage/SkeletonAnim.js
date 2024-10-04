@@ -27,6 +27,23 @@ export const LibownerProfileAnim = () => {
     )
 }
 
+export const RequestLibAnim = () => {
+    return (
+        <div className='grid md:grid-cols-3 gap-4'>
+            {
+                [1, 2, 3, 4, 5, 6, 7, 8, 9].map((idx) => {
+                    return <div key={idx} className='rounded-md overflow-hidden animate-pulse border border-gray-300'>
+                        <div className='bg-blue-300 p-4'></div>
+                        <div className='w-28 p-2 rounded-sm bg-gray-300 m-1.5'></div>
+                        <div className='w-60 p-2 rounded-sm bg-gray-300 m-1.5'></div>
+                        <div className='w-40 p-2 rounded-sm bg-gray-300 m-1.5'></div>
+                    </div>
+                })
+            }
+        </div>
+    )
+}
+
 export const AllLibrariesAnim = () => {
     return (
         <div className='grid md:grid-cols-2 gap-6 animate-pulse'>
