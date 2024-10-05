@@ -24,7 +24,7 @@ const AuthState = (props) => {
             setAllLinks(owner);
         }
         else {
-            setAllLinks(superadmin);
+            setAllLinks(genLinks);
         }
     }
 

@@ -20,21 +20,21 @@ const Contact = () => {
                         <h2 className='text-xl text-blue-600 font-semibold mb-2'>myLibrary for Enterpreneurs!</h2>
 
                         <h1 className='mb-2 text-4xl font-bold md:text-5xl'>Wanna join us?</h1>
-                        <p className='mb-4 text-gray-700 text-justify'>If you plan to start your own library but still confused how to do so, Let join us. We properly guide you to start a good library and help to reach out to the students to join your library. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, adipisci, asperiores esse accusantium aliquam soluta dignissimos saepe incidunt quasi</p>
+                        <p className='mb-4 text-gray-700 text-justify'>If you’re planning to start your own library but are still unsure how to proceed, join us! We will guide you in establishing a successful library and help you connect with students. Our mission is to support library owners across the country in joining our platform and enhancing their services. Reach out to learn more!</p>
                     </div>
 
-                    <div className='lg:w-2/5 h-80 py-2 md:py-4'>
+                    <div className='lg:w-2/5 h-64 py-2 md:py-4'>
                         <img src="https://img.freepik.com/premium-vector/handshake-vector-concept_171919-1131.jpg" alt="" className='w-full h-full object-contain mix-blend-darken' />
                     </div>
                 </section>
 
-                <section className='my-16'>
+                {/* <section className='my-16'>
                     <div>
                         <h2 className='text-center text-4xl font-bold text-gray-700 mb-2'>Fill Up The Contact Info.</h2>
                     </div>
                     <div className='flex items-center justify-center text-gray-700'>
                         <div className='max-w-xl w-full'>
-                            <form onSubmit={(e)=>{e.preventDefault()}} className='space-y-3'>
+                            <form onSubmit={(e) => { e.preventDefault() }} className='space-y-3'>
                                 <div className='flex max-md:flex-col justify-between max-md:space-y-3 md:space-x-8'>
                                     <label htmlFor="name" className='w-full'>
                                         Name
@@ -70,16 +70,26 @@ const Contact = () => {
                             </form>
                         </div>
                     </div>
-                </section>
+                </section> */}
 
                 <section>
                     <h1 className='mb-4 text-4xl font-bold md:text-5xl'>Benifites of being with us!</h1>
 
-                    <div className='max-md:flex-wrap flex items-center justify-center max-md:space-y-4 md:space-x-4'>
-                        <div className='border border-black rounded-lg p-2 text-justify'>This is to show all the benifites. Proper guidence for the opening a library. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam reprehenderit nostrum saepe omnis delectus commodi, eum distinctio culpa quas, soluta rem assumenda vitae illo. Consequuntur itaque corrupti voluptatum cupiditate tempore culpa consequatur illum quisquam consectetur ab, quae doloribus quos vitae commodi voluptates quis esse qui harum reiciendis!</div>
-                        <div className='border border-black rounded-lg p-2 text-justify'>This is to show all the benifites. Get reach to the students how want to join library. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam reprehenderit nostrum saepe omnis delectus commodi, eum distinctio culpa quas, soluta rem assumenda vitae illo. Consequuntur itaque corrupti voluptatum cupiditate tempore culpa consequatur illum quisquam consectetur ab, quae doloribus quos vitae commodi voluptates quis esse qui harum reiciendis perspiciatis facere saepe!</div>
-                        <div className='border border-black rounded-lg p-2 text-justify'>This is to show all the benifites. Management of library, properly manage all the studen at your library. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam reprehenderit nostrum saepe omnis delectus commodi, eum distinctio culpa quas, soluta rem assumenda vitae illo. Consequuntur itaque corrupti voluptatum cupiditate tempore culpa consequatur illum quisquam consectetur ab, quae doloribus quos vitae commodi voluptates quis esse qui harum reiciendis perspiciatis facere saepe!</div>
-                        
+                    <div className='grid lg:grid-cols-3 gap-6'>
+                        <div className='border rounded-lg overflow-hidden text-justify bg-gradient-to-tl from-blue-50 to-gray-50'>
+                            <h1 className='text-center font-semibold text-xl bg-blue-500 text-white p-1'>Empowering Libraries</h1>
+                            <p className='p-1.5'>We facilitate direct connections between library owners and students, ensuring that subscription details are easily accessible. Our platform allows libraries to effectively communicate their offerings, helping students understand their options and fostering a stronger community around shared knowledge and resources.</p>
+                        </div>
+
+                        <div className='border rounded-lg overflow-hidden text-justify bg-gradient-to-tl from-blue-50 to-gray-50'>
+                            <h1 className='text-center font-semibold text-xl bg-blue-500 text-white p-1'>Expand Your Reach</h1>
+                            <p className='p-1.5'>Connect with a wider audience of students who are actively looking for library subscriptions by leveraging our marketing tools and promotional features to boost your visibility. Showcase the unique resources and offerings of your library to effectively attract new members and create a vibrant community around your services.</p>
+                        </div>
+                        <div className='border rounded-lg overflow-hidden text-justify bg-gradient-to-tl from-blue-50 to-gray-50'>
+                            <h1 className='text-center font-semibold text-xl bg-blue-500 text-white p-1'>Effortless Management</h1>
+                            <p className='p-1.5'>Streamlined management tools to oversee student subscriptions and library resources effortlessly. Easy tracking of student engagement and feedback to improve your services. Automated billing and subscription management, allowing you to focus more on your library’s growth and less on administrative tasks.</p>
+                        </div>
+
                     </div>
                 </section>
 
@@ -93,7 +103,7 @@ const Contact = () => {
                             <h1 className='text-4xl font-bold text-blue-700'>Contact Us On</h1>
                             <p className='mb-10 font-semibold text-justify'>You can directly contect us on following platforms. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, rem!</p>
                             <ul className='flex max-lg:justify-center flex-wrap text-white'>
-                                <Link className='flex items-center justify-center space-x-4 border border-green-300 p-2 rounded-lg bg-green-500 hover:bg-green-600 w-28 m-2'>WhatsApp <FaWhatsapp className='ml-2' /></Link>
+                                <Link to="tel:+916306805527" className='flex items-center justify-center space-x-4 border border-green-300 p-2 rounded-lg bg-green-500 hover:bg-green-600 w-28 m-2'>WhatsApp <FaWhatsapp className='ml-2' /></Link>
                                 <Link className='flex items-center justify-center space-x-4 border border-yellow-300 p-2 rounded-lg bg-yellow-400 hover:bg-yellow-500 w-28 m-2'>Gmail <BiLogoGmail className='ml-2' /></Link>
                                 <Link className='flex items-center justify-center space-x-4 border bordergra4border-gray-300 p-2 rounded-lg bg-gray-500 hover:bg-gray-600 w-28 m-2'>Call <BiSolidPhoneCall className='ml-2' /></Link>
                             </ul>
