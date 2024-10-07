@@ -29,6 +29,16 @@ const isValidContact = (value) => {
     return false;
 };
 
+const isValidPIN = (value) => {
+    const emailRegex = /^\d{6}$/;
+    if (!emailRegex.test(value)) {
+        toast.warn("Please enter a valid 6 digits PIN Code");
+        return true;
+    }
+
+    return false;
+};
+
 export const libownerProfileValidation = (ProfileDet) => {
     if (isEmpty(ProfileDet.name, "name")) { return false; }
     if (isEmpty(ProfileDet.firmname, "Library Name")) { return false; }
@@ -88,6 +98,13 @@ export const loginValidation = (loginDet) => {
 
 const signupValidation = (signupDet) => {
     if (isEmpty(signupDet.name, "name")) { return false; }
+    if (isEmpty(signupDet.contactnum, "contact number")) { return false; }
+    if (isValidContact(signupDet.contactnum)) { return false; }
+    if (isEmpty(signupDet.localarea, "local area")) { return false; }
+    if (isEmpty(signupDet.city, "city")) { return false; }
+    if (isEmpty(signupDet.state, "state")) { return false; }
+    if (isEmpty(signupDet.pin, "PIN")) { return false; }
+    if (isValidPIN(signupDet.pin)) { return false; }
     if (isEmpty(signupDet.email, "email")) { return false; }
     if (isValidEmail(signupDet.email)) { return false; }
     if (isEmpty(signupDet.password, "password")) { return false; }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import apiList from '../../libs/apiLists';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -10,11 +10,16 @@ const OwnerSignup = () => {
 
     const [signupDetails, setSignupDetails] = useState({
         name: "",
+        contactnum: "",
+        localarea: "",
+        city: "",
+        state: "",
+        pin: "",
         email: "",
         password: "",
         confPassword: "",
         otp: "",
-        type: "stduser"
+        type: "libowner"
     });
 
     let navigate = useNavigate();
@@ -104,9 +109,9 @@ const OwnerSignup = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-            <div className={`max-w-sm w-full space-y-2 shadow-lg shadow-gray-400 rounded-xl p-4 pb-8 bg-gray-200 relative`}>
-                <div className='space-y-1' data-aos="zoom-in" data-aos-duration="500">
+        <div className="min-h-screen flex items-center justify-center py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
+            <div className={`w-full max-lg:max-w-sm lg:w-9/12 space-y-4 shadow-lg shadow-gray-400 rounded-xl p-2 pb-8 bg-gray-200 relative flex items-center justify-center max-lg:flex-col flex-row`}>
+                <div className='space-y-1 w-full flex items-center justify-center flex-col' data-aos="zoom-in" data-aos-duration="500">
                     <div className="flex justify-center">
                         <div className="w-14 h-14 overflow-hidden rounded-full shadow-lg shadow-gray-600">
                             <img
@@ -116,14 +121,19 @@ const OwnerSignup = () => {
                             />
                         </div>
                     </div>
-                    <h2 className={`text-center text-2xl font-extrabold`}>Sign up for an account</h2>
+                    <h2 className={`text-center text-2xl font-extrabold pt-2`}>Sign up as Library Owner</h2>
+                    <div className='text-sm lg:hidden'>Already have an account? <Link to="/login" className='text-blue-700 underline'>Login</Link> </div>
+                    <div className='hidden lg:flex flex-col w-full h-60 items-center justify-center'>
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/016/717/556/small/man-reading-book-beside-bookshelf-free-png.png" alt="" className='w-full h-full object-contain' />
+                        <div className='text-sm'>Already have an account? <Link to="/login" className='text-blue-700 underline'>Login</Link> </div>
+                    </div>
                 </div>
 
-                <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                <form className="space-y-6 w-full" onSubmit={(e) => e.preventDefault()}>
                     <div className={`space-y-1`}>
 
                         <div>
-                            <label htmlFor="name" className="block ml-1">
+                            <label htmlFor="name" className="px-1 text-sm">
                                 Name
                             </label>
                             <input
@@ -132,15 +142,102 @@ const OwnerSignup = () => {
                                 type="text"
                                 autoComplete="name"
                                 required
-                                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Enter Your Name"
+                                className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                placeholder="Enter your name"
                                 value={signupDetails.name}
                                 onChange={(event) => { handleOnChange("name", event.target.value) }}
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="phone" className="block ml-1">Email</label>
+                            <label htmlFor="contactnum" className="px-1 text-sm">
+                                Contact Number
+                            </label>
+                            <input
+                                id="contactnum"
+                                name="contactnum"
+                                type="text"
+                                autoComplete="contactnum"
+                                required
+                                className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                placeholder="Enter your contact number"
+                                value={signupDetails.contactnum}
+                                onChange={(event) => { handleOnChange("contactnum", event.target.value) }}
+                            />
+                        </div>
+
+                        <div className='flex items-center justify-center space-x-1.5'>
+                            <div className='w-full'>
+                                <label htmlFor="localarea" className="px-1 text-sm">
+                                    Local Area
+                                </label>
+                                <input
+                                    id="localarea"
+                                    name="localarea"
+                                    type="text"
+                                    autoComplete="localarea"
+                                    required
+                                    className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                    placeholder="Metion your local area"
+                                    value={signupDetails.localarea}
+                                    onChange={(event) => { handleOnChange("localarea", event.target.value) }}
+                                />
+                            </div>
+                            <div className='w-full'>
+                                <label htmlFor="city" className="px-1 text-sm">
+                                    City
+                                </label>
+                                <input
+                                    id="city"
+                                    name="city"
+                                    type="text"
+                                    autoComplete="city"
+                                    required
+                                    className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                    placeholder="Enter your City"
+                                    value={signupDetails.city}
+                                    onChange={(event) => { handleOnChange("city", event.target.value) }}
+                                />
+                            </div>
+                        </div>
+
+                        <div className='flex items-center justify-center space-x-1.5'>
+                            <div className='w-full'>
+                                <label htmlFor="state" className="px-1 text-sm">
+                                    State
+                                </label>
+                                <input
+                                    id="state"
+                                    name="state"
+                                    type="text"
+                                    autoComplete="state"
+                                    required
+                                    className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                    placeholder="Enter your state"
+                                    value={signupDetails.state}
+                                    onChange={(event) => { handleOnChange("state", event.target.value) }}
+                                />
+                            </div>
+                            <div className='w-full'>
+                                <label htmlFor="pin" className="px-1 text-sm">
+                                    PIN
+                                </label>
+                                <input
+                                    id="pin"
+                                    name="pin"
+                                    type="text"
+                                    autoComplete="pin"
+                                    required
+                                    className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                    placeholder="PIN Code of your area"
+                                    value={signupDetails.pin}
+                                    onChange={(event) => { handleOnChange("pin", event.target.value) }}
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label htmlFor="phone" className="px-1 text-sm">Email</label>
                             <div className='flex'>
                                 <input
                                     type="email"
@@ -149,7 +246,7 @@ const OwnerSignup = () => {
                                     autoComplete="email"
                                     required
                                     placeholder="Enter your email address"
-                                    className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
+                                    className={`appearance-none rounded-md relative flex-1 block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
                                     value={signupDetails.email}
                                     onChange={(event) => { handleOnChange("email", event.target.value) }}
                                 />
@@ -157,7 +254,7 @@ const OwnerSignup = () => {
                         </div>
 
                         <div className='relative'>
-                            <label htmlFor="password" className="block ml-1">
+                            <label htmlFor="password" className="px-1 text-sm">
                                 Password
                             </label>
                             <input
@@ -166,8 +263,8 @@ const OwnerSignup = () => {
                                 type={showPassword ? 'text' : 'password'}
                                 autoComplete="current-password"
                                 required
-                                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Enter Password"
+                                className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                placeholder="Enter password"
                                 value={signupDetails.password}
                                 onChange={(event) => { handleOnChange("password", event.target.value) }}
                             />
@@ -182,7 +279,7 @@ const OwnerSignup = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="confirmPassword" className="block ml-1">
+                            <label htmlFor="confirmPassword" className="px-1 text-sm">
                                 Confirm Password
                             </label>
                             <input
@@ -191,7 +288,7 @@ const OwnerSignup = () => {
                                 type="password"
                                 autoComplete="new-password"
                                 required
-                                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Re-enter the password"
                                 value={signupDetails.confPassword}
                                 onChange={(event) => { handleOnChange("confPassword", event.target.value) }}
@@ -199,7 +296,7 @@ const OwnerSignup = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="otp" className="block ml-1">
+                            <label htmlFor="otp" className="px-1 text-sm">
                                 OTP Verification
                             </label>
                             <input
@@ -209,7 +306,7 @@ const OwnerSignup = () => {
                                 autoComplete="otp"
                                 required
                                 disabled={!isOTPSend}
-                                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="****"
                                 value={signupDetails.otp}
                                 onChange={(event) => { handleOnChange("otp", event.target.value) }}
@@ -224,15 +321,15 @@ const OwnerSignup = () => {
                             className={`group relative w-full flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 space-x-2`}
                             onClick={handleLogin}
                         >
-                            {spinSingUpLoading && <AiOutlineLoading3Quarters className="animate-spin" />}
                             {
                                 isOTPSend ? <span>Verify and Create Account</span> : <span>Send OTP</span>
                             }
+                            {spinSingUpLoading && <AiOutlineLoading3Quarters className="animate-spin" />}
                         </button>
                     </div>
                 </form>
 
-                <div className='absolute -bottom-6 -left-8'>
+                <div className='absolute -bottom-6 -left-8 lg:hidden'>
                     <div className='w-28 h-28'>
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/016/717/556/small/man-reading-book-beside-bookshelf-free-png.png" alt="" className='w-full h-full' />
                     </div>
