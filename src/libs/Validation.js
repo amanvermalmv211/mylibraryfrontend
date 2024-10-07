@@ -22,7 +22,7 @@ const isValidEmail = (value) => {
 const isValidContact = (value) => {
     const emailRegex = /^\d{10}$/;
     if (!emailRegex.test(value)) {
-        toast.warn("Please enter a valid contact number");
+        toast.warn("Please enter a valid 10 digits contact number");
         return true;
     }
 
@@ -33,16 +33,8 @@ export const libownerProfileValidation = (ProfileDet) => {
     if (isEmpty(ProfileDet.name, "name")) { return false; }
     if (isEmpty(ProfileDet.firmname, "Library Name")) { return false; }
     if (isEmpty(ProfileDet.contactnum, "contact number")) { return false; }
-    if (ProfileDet.contactnum.length !== 10) {
-        toast.warn("Please enter the 10 digit phone number");
-        return false;
-    }
     if (isValidContact(ProfileDet.contactnum)) { return false; }
     if (ProfileDet.emgcontactnum) {
-        if (ProfileDet.emgcontactnum.length !== 10) {
-            toast.warn("Please enter the 10 digit secondary phone number");
-            return false;
-        }
         if (isValidContact(ProfileDet.emgcontactnum)) { return false; }
     }
 
@@ -52,14 +44,13 @@ export const libownerProfileValidation = (ProfileDet) => {
     return true;
 };
 
-export const loginValidation = (loginDet) => {
-    if (isEmpty(loginDet.email, "email")) { return false; }
-    if (isValidEmail(loginDet.email)) { return false; }
-    if (isEmpty(loginDet.password, "password")) { return false; }
-    if (loginDet.password.length < 8) {
-        toast.warn("Password should be at least 8 characters long");
-        return false;
-    }
+export const contactValidation = (contactDetails) => {
+    if (isEmpty(contactDetails.name, "name")) { return false; }
+    if (isEmpty(contactDetails.contactnum, "contact number")) { return false; }
+    if (isValidContact(contactDetails.contactnum)) { return false; }
+    if (isEmpty(contactDetails.email, "email")) { return false; }
+    if (isValidEmail(contactDetails.email)) { return false; }
+    if (isEmpty(contactDetails.message, "message")) { return false; }
 
     return true;
 };
@@ -79,6 +70,18 @@ export const resultsValidation = (appDetails) => {
     if (isEmpty(appDetails.youtubelink, "youtube link")) { return false; }
     if (isEmpty(appDetails.endformdate, "last date")) { return false; }
     if (isEmpty(appDetails.expirydate, "expiry date")) { return false; }
+
+    return true;
+};
+
+export const loginValidation = (loginDet) => {
+    if (isEmpty(loginDet.email, "email")) { return false; }
+    if (isValidEmail(loginDet.email)) { return false; }
+    if (isEmpty(loginDet.password, "password")) { return false; }
+    if (loginDet.password.length < 8) {
+        toast.warn("Password should be at least 8 characters long");
+        return false;
+    }
 
     return true;
 };

@@ -16,6 +16,7 @@ const apiList = {
   deleteapp: `${server}/editor/deleteapp`,
   updateapp: `${server}/editor/updateapp`,
   getadmin: `${server}/superadmin/getadmin`,
+  savecontactdetails: `${server}/user/save/contactdetails`,
 };
 
 export default apiList;
