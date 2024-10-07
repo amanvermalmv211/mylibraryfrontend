@@ -110,7 +110,7 @@ const OwnerSignup = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
-            <div className={`w-full max-lg:max-w-sm lg:w-9/12 space-y-4 shadow-lg shadow-gray-400 rounded-xl p-2 pb-8 bg-gray-200 relative flex items-center justify-center max-lg:flex-col flex-row`}>
+            <div className={`w-full max-lg:max-w-sm lg:w-10/12 space-y-4 shadow-lg shadow-gray-400 rounded-xl p-2 pb-8 bg-gray-200 relative flex items-center justify-center max-lg:flex-col flex-row`}>
                 <div className='space-y-1 w-full flex items-center justify-center flex-col' data-aos="zoom-in" data-aos-duration="500">
                     <div className="flex justify-center">
                         <div className="w-14 h-14 overflow-hidden rounded-full shadow-lg shadow-gray-600">
@@ -122,10 +122,10 @@ const OwnerSignup = () => {
                         </div>
                     </div>
                     <h2 className={`text-center text-2xl font-extrabold pt-2`}>Sign up as Library Owner</h2>
-                    <div className='text-sm lg:hidden'>Already have an account? <Link to="/login" className='text-blue-700 underline'>Login</Link> </div>
+                    <div className='text-sm lg:hidden'>Already have an account? <Link to="/login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
                     <div className='hidden lg:flex flex-col w-full h-60 items-center justify-center'>
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/016/717/556/small/man-reading-book-beside-bookshelf-free-png.png" alt="" className='w-full h-full object-contain' />
-                        <div className='text-sm'>Already have an account? <Link to="/login" className='text-blue-700 underline'>Login</Link> </div>
+                        <div className='text-sm'>Already have an account? <Link to="/login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
                     </div>
                 </div>
 
