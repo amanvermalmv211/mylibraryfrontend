@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RequestLibAnim } from '../notificationmessage/SkeletonAnim';
 
 const Request = () => {
@@ -8,9 +8,12 @@ const Request = () => {
         window.scrollTo(0, 0);
         document.title = "Request - ML";
         setLoading(false);
-        // getEbooks();
-        setAllLib();
+        // getRequests();
+        setAllLib(allLib);
+        // eslint-disable-next-line
     }, []);
+
+    const navigate = useNavigate(null);
 
     // const [open, setOpen] = useState(false);
     // const [openDel, setOpenDel] = useState(false);
@@ -25,31 +28,35 @@ const Request = () => {
             address: "Tedhi Bazar Ghazipur"
         },
         {
-            name: "Aman Verma",
-            libName: "Buddha Library",
+            name: "Aman",
+            libName: "Sarda Library",
             contacNum: "6306805527",
             emgcontactnum: "9455333762",
             address: "Tedhi Bazar Ghazipur"
         },
         {
             name: "Aman Verma",
-            libName: "Buddha Library",
+            libName: "Bhawani Library",
             contacNum: "6306805527",
             emgcontactnum: "9455333762",
             address: "Tedhi Bazar Ghazipur"
         },
         {
-            name: "Aman Verma",
-            libName: "Buddha Library",
+            name: "Aman",
+            libName: "Sarswati Library",
             contacNum: "6306805527",
             emgcontactnum: "9455333762",
             address: "Tedhi Bazar Ghazipur"
         }
     ]);
 
-    // const getEbooks = async () => {
+    const handleInitLib = () =>{
+        navigate("/initlib");
+    }
+
+    // const getRequests = async () => {
     //     try {
-    //         const response = await fetch(apiList.getebooks, {
+    //         const response = await fetch(apiList.gerequests, {
     //             method: 'GET',
     //             headers: {
     //                 'Content-Type': 'application/json'
@@ -81,11 +88,11 @@ const Request = () => {
                             <div className='grid md:grid-cols-3 gap-4'>
                                 {
                                     allLib.map((data, idx) => {
-                                        return <div key={idx} className='rounded-md overflow-hidden border border-gray-300'>
+                                        return <div key={idx} className='rounded-md overflow-hidden border border-gray-300 cursor-pointer' onClick={handleInitLib}>
                                             <div className='text-center lg:text-xl font-semibold bg-blue-600 text-white'>{data.name}</div>
                                             <div className='max-lg:text-sm p-1'>
                                                 <div>{data.libName}</div>
-                                                <div>Contact No : <Link to={`tel:+91${data.contacNum}`}>{data.contacNum}</Link>, <Link to={`tel:+91${data.emgcontactnum}`}>{data.emgcontactnum}</Link></div>
+                                                <div>Contact No: <Link to={`tel:+91${data.contacNum}`}>{data.contacNum}</Link>, <Link to={`tel:+91${data.emgcontactnum}`}>{data.emgcontactnum}</Link></div>
                                                 <div>{data.address}</div>
                                             </div>
                                         </div>

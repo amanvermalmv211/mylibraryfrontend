@@ -7,6 +7,7 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { FormModal } from '../notificationmessage/Modal';
 import { libownerProfileValidation } from '../../libs/Validation';
 import { LibownerProfileAnim } from '../notificationmessage/SkeletonAnim';
+import InputBox from '../notificationmessage/InputBox';
 
 const LibOwnerProfile = () => {
 
@@ -42,12 +43,12 @@ const LibOwnerProfile = () => {
   }, [open]);
 
   const [libownerProfile, setLibownerProfile] = useState({
-    name: "",
-    firmname: "",
-    contactnum: "",
-    emgcontactnum: "",
-    address: "",
-    maplink: ""
+    name: "Library Owner Name",
+    firmname: "Here We will display the name of the library",
+    contactnum: "6306805527",
+    emgcontactnum: "9455333762",
+    address: "Tedhi Bazar Post: Markeenganj Ghazipur 233001",
+    maplink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14791.430570874723!2d83.55957323380159!3d25.571753342118296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3991ff08605d2193%3A0x71b090d70df7402!2sMount%20Litera%20Zee%20School!5e0!3m2!1sen!2sin!4v1727185211467!5m2!1sen!2sin"
   });
 
   const handleOnChange = (key, value) => {
@@ -56,7 +57,7 @@ const LibOwnerProfile = () => {
       [key]: value
     })
   };
-  
+
   const handleUpdateProfile = () => {
     if (!libownerProfileValidation(libownerProfile)) { return }
     setLoading(false);
@@ -68,102 +69,18 @@ const LibOwnerProfile = () => {
     return (
       <form className="space-y-4 pb-4 overflow-y-auto nobar" onSubmit={(e) => e.preventDefault()}>
         <div className={`space-y-2`}>
-          {/* <div>
-            Select Profile Picture
-            <div className='w-14 h-14 rounded-full'>
-              <img src='https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg' alt='Profile' className='rounded-full w-full h-full'/>
-            </div>
-          </div> */}
 
-          <div>
-            <label htmlFor="name" className="block ml-1">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              autoComplete="name"
-              required
-              placeholder="Enter your name"
-              className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-              value={libownerProfile.name}
-              onChange={(event) => { handleOnChange("name", event.target.value) }}
-            />
-          </div>
+          <InputBox name="Name" id="name" type="text" value={libownerProfile.name} placeholder="Enter your name" handleOnChange={handleOnChange} />
 
-          <div>
-            <label htmlFor="firmname" className="block ml-1">Library Name</label>
-            <input
-              type="text"
-              id="firmname"
-              name="firmname"
-              autoComplete="firmname"
-              required
-              placeholder="Enter name of the library"
-              className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-              value={libownerProfile.firmname}
-              onChange={(event) => { handleOnChange("firmname", event.target.value) }}
-            />
-          </div>
+          <InputBox name="Library Name" id="firmname" type="text" value={libownerProfile.firmname} placeholder="Enter name of the library" handleOnChange={handleOnChange} />
 
-          <div>
-            <label htmlFor="contactnum" className="block ml-1">Contact No.</label>
-            <input
-              type="text"
-              id="contactnum"
-              name="contactnum"
-              autoComplete="contactnum"
-              required
-              placeholder="Enter your contact number"
-              className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-              value={libownerProfile.contnum}
-              onChange={(event) => { handleOnChange("contactnum", event.target.value) }}
-            />
-          </div>
+          <InputBox name="Contact No." id="contactnum" type="text" value={libownerProfile.contactnum} placeholder="Enter your contact number" handleOnChange={handleOnChange} />
 
-          <div>
-            <label htmlFor="emgcontactnum" className="block ml-1">Secondary Contact No.</label>
-            <input
-              type="text"
-              id="emgcontactnum"
-              name="emgcontactnum"
-              autoComplete="emgcontactnum"
-              required
-              placeholder="Enter another contact number for emergency"
-              className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-              value={libownerProfile.emgcontactnum}
-              onChange={(event) => { handleOnChange("emgcontactnum", event.target.value) }}
-            />
-          </div>
+          <InputBox name="Secondary Contact No." id="emgcontactnum" type="text" value={libownerProfile.emgcontactnum} placeholder="Enter another contact number" handleOnChange={handleOnChange} />
 
-          <div>
-            <label htmlFor="address" className="block ml-1">Address</label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              autoComplete="address"
-              required
-              placeholder="Enter the library address"
-              className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-              value={libownerProfile.address}
-              onChange={(event) => { handleOnChange("address", event.target.value) }}
-            />
-          </div>
+          <InputBox name="Address" id="address" type="text" value={libownerProfile.address} placeholder="Enter the library address" handleOnChange={handleOnChange} />
 
-          <div>
-            <label htmlFor="maplink" className="block ml-1">Google Map Link</label>
-            <input
-              type="text"
-              id="maplink"
-              name="maplink"
-              autoComplete="maplink"
-              required
-              placeholder="Enter embed google map link"
-              className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-              value={libownerProfile.maplink}
-              onChange={(event) => { handleOnChange("maplink", event.target.value) }}
-            />
-          </div>
+          <InputBox name="Google Map Link" id="maplink" type="text" value={libownerProfile.maplink} placeholder="Enter embed google map link" handleOnChange={handleOnChange} />
 
         </div>
         <div className='flex justify-around items-center space-x-4 text-white font-semibold text-sm'>
@@ -212,12 +129,12 @@ const LibOwnerProfile = () => {
 
                 <div className='w-full py-4'>
                   <div className='flex items-center justify-center flex-col max-lg:pt-12 text-center mb-4'>
-                    <h1 className='text-xl lg:text-2xl font-semibold'>Library Owner Name</h1>
-                    <h2 className='text-lg lg:text-xl font-semibold'>Here We will display the nameof the library</h2>
+                    <h1 className='text-xl lg:text-2xl font-semibold'>{libownerProfile.name}</h1>
+                    <h2 className='text-lg lg:text-xl font-semibold'>{libownerProfile.firmname}</h2>
                   </div>
 
                   <div className='text-center'>
-                    <div><span className='font-semibold'>Contact Number : </span><span>6306805527, 9795544677</span></div>
+                    <div><span className='font-semibold'>Contact Number : </span><span>{libownerProfile.contactnum}, {libownerProfile.emgcontactnum}</span></div>
                     <div><span className='font-semibold'>Active Students : </span><span>200</span></div>
                   </div>
                 </div>
@@ -228,10 +145,10 @@ const LibOwnerProfile = () => {
             <div className='my-8 flex flex-col items-center justify-center'>
               <div className='text-center pb-4'>
                 <h1 className='text-2xl md:text-3xl font-bold'>Location Info.</h1>
-                <p className='md:text-xl'>Tedhi Bazar Post: Markeengang Ghazipur 233001</p>
+                <p className='md:text-xl'>{libownerProfile.address}</p>
               </div>
               <div className='w-full lg:px-20'>
-                <iframe title='map' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14791.430570874723!2d83.55957323380159!3d25.571753342118296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3991ff08605d2193%3A0x71b090d70df7402!2sMount%20Litera%20Zee%20School!5e0!3m2!1sen!2sin!4v1727185211467!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade" className='w-full h-[26rem]'></iframe>
+                <iframe title='map' src={libownerProfile.maplink} loading="lazy" referrerpolicy="no-referrer-when-downgrade" className='w-full h-[26rem]'></iframe>
               </div>
             </div>
           </>

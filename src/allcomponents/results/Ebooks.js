@@ -8,6 +8,7 @@ import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBack2Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { EbookAnim } from '../notificationmessage/SkeletonAnim';
+import InputBox from '../notificationmessage/InputBox';
 
 const Ebooks = () => {
 
@@ -215,75 +216,15 @@ const Ebooks = () => {
             <form className="space-y-4 pb-4" onSubmit={(e) => e.preventDefault()}>
                 <div className={`space-y-2`}>
 
-                    <div>
-                        <label htmlFor="name" className="block ml-1">Book Name</label>
-                        <div className='flex'>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                autoComplete="name"
-                                required
-                                placeholder="Enter the name of book"
-                                className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
-                                value={ebookDetails.name}
-                                onChange={(event) => { handleOnChange("name", event.target.value) }}
-                            />
-                        </div>
-                    </div>
+                    <InputBox name="Book Name" id="name" type="text" value={ebookDetails.name} placeholder="Enter the name of book" handleOnChange={handleOnChange} />
 
-                    <div>
-                        <label htmlFor="author" className="block ml-1">Author Name</label>
-                        <div className='flex'>
-                            <input
-                                type="text"
-                                id="author"
-                                name="author"
-                                autoComplete="author"
-                                required
-                                placeholder="Enter the name of author"
-                                className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
-                                value={ebookDetails.authname}
-                                onChange={(event) => { handleOnChange("authname", event.target.value) }}
-                            />
-                        </div>
-                    </div>
+                    <InputBox name="Author Name" id="authname" type="text" value={ebookDetails.authname} placeholder="Enter the name of author" handleOnChange={handleOnChange} />
 
-                    <div>
-                        <label htmlFor="published" className="block ml-1">Published Date</label>
-                        <div className='flex'>
-                            <input
-                                type="date"
-                                id="published"
-                                name="published"
-                                autoComplete="published"
-                                required
-                                placeholder="Enter published date"
-                                className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
-                                value={ebookDetails.published}
-                                onChange={(event) => { handleOnChange("published", event.target.value) }}
-                            />
-                        </div>
-                    </div>
+                    <InputBox name="Published Date" id="published" type="date" value={ebookDetails.published} placeholder="Enter the published date" handleOnChange={handleOnChange} />
 
-                    <div>
-                        <label htmlFor="ebooklink" className="block ml-1">E-book Link</label>
-                        <div className='flex'>
-                            <input
-                                type="text"
-                                id="ebooklink"
-                                name="ebooklink"
-                                autoComplete="ebooklink"
-                                required
-                                placeholder="Enter the link of ebook"
-                                className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
-                                value={ebookDetails.ebooklink}
-                                onChange={(event) => { handleOnChange("ebooklink", event.target.value) }}
-                            />
-                        </div>
-                    </div>
-
+                    <InputBox name="E-book Link" id="ebooklink" type="text" value={ebookDetails.ebooklink} placeholder="Enter the link of ebook" handleOnChange={handleOnChange} />
                 </div>
+
                 <div className='flex justify-around items-center space-x-4 text-white font-semibold text-sm'>
                     <div
                         className={`w-full text-center py-2 px-4 border rounded-md bg-gray-400 hover:bg-gray-500 cursor-pointer`}
@@ -342,7 +283,7 @@ const Ebooks = () => {
 
                     <div className='flex flex-wrap items-center justify-center gap-6'>
 
-                        {loading ? <EbookAnim/> : 
+                        {loading ? <EbookAnim /> :
                             ebooks.map((ebook, idx) => {
                                 return <div key={idx} className='border border-gray-300 rounded-lg overflow-hidden w-full md:w-72 bg-gray-200 text-gray-700 relative'>
 

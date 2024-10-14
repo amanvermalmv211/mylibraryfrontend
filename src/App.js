@@ -19,6 +19,7 @@ import EditorProfile from './allcomponents/results/EditorProfile';
 import AdminProfile from './allcomponents/admin/AdminProfile';
 import AllLibraries from './allcomponents/admin/AllLibraries';
 import Request from './allcomponents/admin/Request';
+import InitLibrary from './allcomponents/admin/InitLibrary';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route exact path="/searchlibrary" element={<SearchLibrary />}></Route>
             <Route exact path="/libowner" element={<LibOwner />}></Route>
             <Route exact path="/admin/profile" element={<AdminProfile />}></Route>
+            <Route exact path="/initlib" element={<InitLibrary />}></Route>
             <Route exact path="/alllibraries" element={<AllLibraries />}></Route>
             <Route exact path="/request" element={<Request />}></Route>
             <Route exact path="/libowner/profile" element={<LibOwnerProfile />}></Route>

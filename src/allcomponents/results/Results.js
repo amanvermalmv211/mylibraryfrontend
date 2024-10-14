@@ -8,6 +8,7 @@ import apiList from '../../libs/apiLists';
 import { resultsValidation } from '../../libs/Validation';
 import { toast } from 'react-toastify';
 import ResultAnim from '../notificationmessage/SkeletonAnim';
+import InputBox from '../notificationmessage/InputBox';
 
 const Results = () => {
 
@@ -63,8 +64,7 @@ const Results = () => {
         appname: "",
         formlink: "",
         youtubelink: "",
-        endformdate: "",
-        expirydate: ""
+        endformdate: ""
     });
 
     const handleOnChange = (key, value) => {
@@ -284,80 +284,13 @@ const Results = () => {
                         </select>
                     </div>
 
-                    <div>
-                        <label htmlFor="appname" className="block ml-1">Application Name</label>
-                        <input
-                            type="text"
-                            id="appname"
-                            name="appname"
-                            autoComplete="appname"
-                            required
-                            placeholder="Enter the application name"
-                            className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-                            value={appDetails.appname}
-                            onChange={(event) => { handleOnChange("appname", event.target.value) }}
-                        />
-                    </div>
+                    <InputBox name="Application Name" id="appname" type="text" value={appDetails.appname} placeholder="Enter the application name" handleOnChange={handleOnChange}/>
 
-                    <div>
-                        <label htmlFor="formlink" className="block ml-1">Application form link</label>
-                        <input
-                            type="text"
-                            id="formlink"
-                            name="formlink"
-                            autoComplete="formlink"
-                            required
-                            placeholder="Enter the link for application"
-                            className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-                            value={appDetails.formlink}
-                            onChange={(event) => { handleOnChange("formlink", event.target.value) }}
-                        />
-                    </div>
+                    <InputBox name="Application form link" id="formlink" type="text" value={appDetails.formlink} placeholder="Enter the link for application" handleOnChange={handleOnChange}/>
 
-                    <div>
-                        <label htmlFor="youtubelink" className="block ml-1">Youtube link</label>
-                        <input
-                            type="text"
-                            id="youtubelink"
-                            name="youtubelink"
-                            autoComplete="youtubelink"
-                            required
-                            placeholder="Enter the youtube video link for application"
-                            className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-                            value={appDetails.youtubelink}
-                            onChange={(event) => { handleOnChange("youtubelink", event.target.value) }}
-                        />
-                    </div>
+                    <InputBox name="Youtube link" id="youtubelink" type="text" value={appDetails.youtubelink} placeholder="Enter the youtube video link for application" handleOnChange={handleOnChange}/>
 
-                    <div>
-                        <label htmlFor="endformdate" className="block ml-1">Form end date</label>
-                        <input
-                            type="date"
-                            id="endformdate"
-                            name="endformdate"
-                            autoComplete="endformdate"
-                            required
-                            placeholder="Enter end date for form submition"
-                            className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-                            value={appDetails.endformdate}
-                            onChange={(event) => { handleOnChange("endformdate", event.target.value) }}
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="expirydate" className="block ml-1">Form expiry date</label>
-                        <input
-                            type="date"
-                            id="expirydate"
-                            name="expirydate"
-                            autoComplete="expirydate"
-                            required
-                            placeholder="Enter end date for form deletion"
-                            className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-                            value={appDetails.expirydate}
-                            onChange={(event) => { handleOnChange("expirydate", event.target.value) }}
-                        />
-                    </div>
+                    <InputBox name="Form end date" id="endformdate" type="date" value={appDetails.endformdate} placeholder="Enter end date for form submition" handleOnChange={handleOnChange}/>
 
                 </div>
                 <div className='flex justify-around items-center space-x-4 text-white font-semibold text-sm'>
