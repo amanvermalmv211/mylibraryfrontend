@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import apiList from '../../libs/apiLists';
@@ -6,11 +6,15 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import signupValidation from '../../libs/Validation';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import InputBox from '../notificationmessage/InputBox';
+import authContext from '../../context/auth/authContext';
 
 const OwnerSignup = () => {
 
+    const context = useContext(authContext);
+    const { setIsloggedin, setLinks, setUserProfile } = context;
+
     const [signupDetails, setSignupDetails] = useState({
-        name: "",
+        ownername: "",
         contactnum: "",
         localarea: "",
         city: "",
@@ -83,28 +87,43 @@ const OwnerSignup = () => {
         else if (isOTPSend && signupDetails.otp !== "") {
             try {
                 setSpinSingUpLoading(true);
-                const response = await fetch(apiList.verifyotp, {
+                const verifyResponse = await fetch(apiList.verifyotp, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email: signupDetails.email, otp: signupDetails.otp })
+                    body: JSON.stringify({email: signupDetails.email, otp: signupDetails.otp, ownername: signupDetails.ownername, contactnum: signupDetails.contactnum, localarea: signupDetails.localarea, city: signupDetails.city, state: signupDetails.state, pin: signupDetails.pin })
                 });
-
-                const json = await response.json();
-                if (json.success) {
-                    toast.success("Otp verified successfully");
+                
+                const verifyJson = await verifyResponse.json();
+                console.log(verifyJson);
+                toast("Code is here 3")
+                if (verifyJson.success) {
+                    toast("Code is here 4")
+                    toast("Resques accepted")
+                    localStorage.setItem("authtoken", verifyJson.authtoken);
+                    localStorage.setItem("type", verifyJson.type);
+                    localStorage.setItem("isallowed", verifyJson.isallowed);
+                    toast.success(verifyJson.message);
+                    setLinks(verifyJson.type);
+                    setUserProfile(verifyJson.type + "/profile")
+                    setIsloggedin(true);
                     setSpinSingUpLoading(false);
-                    navigate("/")
+                    navigate("/");
                 }
                 else {
-                    toast.warn(json.message);
+                    toast("Resques is here")
+                    toast.warn(verifyJson.message);
                     setSpinSingUpLoading(false);
                 }
 
             }
             catch (err) {
                 setSpinSingUpLoading(false);
+                toast.error(err.message)
+                console.log(err.message)
+                console.log(err)
+                toast.error(err)
             }
         }
     };
@@ -134,11 +153,10 @@ const OwnerSignup = () => {
                     <div className={`space-y-1`}>
 
                         <div className='flex flex-col lg:flex-row items-center justify-center lg:space-x-1.5'>
-                            <InputBox name="Name" id="name" type="text" value={signupDetails.name} placeholder="Enter your name" handleOnChange={handleOnChange} />
+                            <InputBox name="Name" id="ownername" type="text" value={signupDetails.ownername} placeholder="Enter your name" handleOnChange={handleOnChange} />
 
                             <InputBox name="Contact Number" id="contactnum" type="text" value={signupDetails.contactnum} placeholder="Enter your contact number" handleOnChange={handleOnChange} />
                         </div>
-
 
                         <div className='flex items-center justify-center space-x-1.5'>
                             <InputBox name="Local Area" id="localarea" type="text" value={signupDetails.localarea} placeholder="Mention your local area" handleOnChange={handleOnChange} />
@@ -190,9 +208,7 @@ const OwnerSignup = () => {
                                 />
                             </div>
                         </div>
-
-
-
+                        
                     </div>
 
                     <div>

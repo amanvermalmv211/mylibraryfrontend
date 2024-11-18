@@ -58,8 +58,9 @@ const Login = () => {
 
                 const json = await response.json();
                 if (json.success) {
-                    localStorage.setItem("authtoken", json.authtoken);
                     localStorage.setItem("type", json.type);
+                    localStorage.setItem("authtoken", json.authtoken);
+                    localStorage.setItem("isallowed", json.isallowed);
                     toast.success(json.message);
                     setLinks(json.type);
                     setUserProfile(json.type + "/profile")

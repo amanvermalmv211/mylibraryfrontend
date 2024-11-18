@@ -8,8 +8,13 @@ import { FormModal } from '../notificationmessage/Modal';
 import { libownerProfileValidation } from '../../libs/Validation';
 import { LibownerProfileAnim } from '../notificationmessage/SkeletonAnim';
 import InputBox from '../notificationmessage/InputBox';
+import apiList from '../../libs/apiLists';
+import { toast } from 'react-toastify';
 
 const LibOwnerProfile = () => {
+
+  const context = useContext(authContext);
+  const { invalidUser, loading, libraryDetails, setLibraryDetails, getLibOwner } = context;
 
   useEffect(() => {
     if (userType() !== "libowner") {
@@ -17,18 +22,19 @@ const LibOwnerProfile = () => {
       navigate("/login")
       return;
     }
+    if (!libraryDetails.ownername) {
+      getLibOwner();
+    }
     // eslint-disable-next-line
   }, [])
 
-  const context = useContext(authContext);
-  const { invalidUser } = context;
   const navigate = useNavigate(null);
 
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [spinLoading, setSpinLoading] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (open) {
       document.body.classList.add('modal-open');
     } else {
@@ -42,14 +48,7 @@ const LibOwnerProfile = () => {
 
   }, [open]);
 
-  const [libownerProfile, setLibownerProfile] = useState({
-    name: "Library Owner Name",
-    firmname: "Here We will display the name of the library",
-    contactnum: "6306805527",
-    emgcontactnum: "9455333762",
-    address: "Tedhi Bazar Post: Markeenganj Ghazipur 233001",
-    maplink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14791.430570874723!2d83.55957323380159!3d25.571753342118296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3991ff08605d2193%3A0x71b090d70df7402!2sMount%20Litera%20Zee%20School!5e0!3m2!1sen!2sin!4v1727185211467!5m2!1sen!2sin"
-  });
+  const [libownerProfile, setLibownerProfile] = useState(libraryDetails);
 
   const handleOnChange = (key, value) => {
     setLibownerProfile({
@@ -58,29 +57,94 @@ const LibOwnerProfile = () => {
     })
   };
 
-  const handleUpdateProfile = () => {
+  const handleUpdateProfile = async () => {
     if (!libownerProfileValidation(libownerProfile)) { return }
-    setLoading(false);
-    setOpen(false)
+    try {
+      setSpinLoading(true);
+      const response = await fetch(apiList.updatelibandprofile, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'authtoken': localStorage.getItem("authtoken")
+        },
+        body: JSON.stringify({profileImg: libownerProfile.profileImg, ownername: libownerProfile.ownername, libname: libownerProfile.libname, contactnum: libownerProfile.contactnum, libcontactnum: libownerProfile.libcontactnum, localarea: libownerProfile.localarea, city: libownerProfile.city, state: libownerProfile.state, pin: libownerProfile.pin, googlemap: libownerProfile.googlemap})
+      });
 
+      const json = await response.json();
+      if (json.success) {
+        setLibraryDetails(json.data);
+        toast.success(json.message)
+        setOpen(false);
+        setSpinLoading(false);
+      }
+      else {
+        toast.warn(json.message);
+        setOpen(false);
+        setSpinLoading(false);
+      }
+    }
+    catch (err) {
+      toast.warn(`E-book : ${err.message}`);
+      setSpinLoading(false);
+      setOpen(false);
+    }
   };
 
-  const formTemplate = (buttonText) => {
+  const profilePic = ["https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
+    "https://static.vecteezy.com/system/resources/previews/027/224/407/original/girl-hugs-stack-of-books-standing-in-library-or-bookstore-and-rejoicing-at-opportunity-to-read-lot-png.png",
+    "https://www.pngkey.com/png/detail/204-2049354_ic-account-box-48px-profile-picture-icon-square.png",
+    "https://images.pexels.com/photos/1926404/pexels-photo-1926404.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkVPTu0F-CIhbqDMFkcatqHGb2UeAVFgPOCw&s",
+    "https://img.freepik.com/free-vector/icons-with-empty-square-templates_1308-85393.jpg",
+    "https://img.freepik.com/premium-vector/line-art-diamonds-squares-brush-vector-illustration_756957-1433.jpg",
+    "https://i.pinimg.com/564x/76/f0/11/76f0117bcced04cba3d2910007070b0d.jpg",
+    "https://images.pexels.com/photos/25626523/pexels-photo-25626523.jpeg?cs=srgb&dl=pexels-googledeepmind-25626523.jpg&fm=jpg",
+    "https://media.istockphoto.com/id/1216124671/photo/square-tubes.jpg?s=612x612&w=0&k=20&c=rJ2fybTzpiUK9LrPJ1ZRBKDp41Hpb5et1HvmkbJ1BkU=",
+    "https://plus.unsplash.com/premium_photo-1676299910876-747eeb0c11dc?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c3F1YXJlfGVufDB8fDB8fHww",
+    "https://png.pngtree.com/background/20230610/original/pngtree-profile-of-an-image-of-a-man-in-a-square-design-picture-image_3098265.jpg",
+    "https://st.depositphotos.com/46542440/55684/i/450/depositphotos_556849354-stock-illustration-square-face-character-stiff-art.jpg"
+  ]
+
+  const formTemplate = () => {
     return (
-      <form className="space-y-4 pb-4 overflow-y-auto nobar" onSubmit={(e) => e.preventDefault()}>
+      <form className="space-y-4 pb-1" onSubmit={(e) => e.preventDefault()}>
         <div className={`space-y-2`}>
 
-          <InputBox name="Name" id="name" type="text" value={libownerProfile.name} placeholder="Enter your name" handleOnChange={handleOnChange} />
+          <div className="nobar grid grid-row-1 grid-flow-col gap-3 overflow-x-auto">
+            {
+              profilePic.map((data, idx) => {
+                return <div className={`h-10 md:h-14 w-10 md:w-14 ${libownerProfile.profileImg === idx ? "border-2 border-blue-600" : "hover:border-2 hover:border-blue-500"} border rounded-md overflow-hidden cursor-pointer`} onClick={() => { handleOnChange("profileImg", idx) }}>
+                  <img src={data} alt='Profile Pic' className='w-full h-full object-cover' />
+                </div>
+              })
+            }
+          </div>
 
-          <InputBox name="Library Name" id="firmname" type="text" value={libownerProfile.firmname} placeholder="Enter name of the library" handleOnChange={handleOnChange} />
+          <div className='flex space-x-1.5'>
+            <InputBox name="Name" id="ownername" type="text" value={libownerProfile.ownername} placeholder="Enter your name" handleOnChange={handleOnChange} />
 
-          <InputBox name="Contact No." id="contactnum" type="text" value={libownerProfile.contactnum} placeholder="Enter your contact number" handleOnChange={handleOnChange} />
+            <InputBox name="Library Name" id="libname" type="text" value={libownerProfile.libname} placeholder="Enter name of the library" handleOnChange={handleOnChange} />
+          </div>
 
-          <InputBox name="Secondary Contact No." id="emgcontactnum" type="text" value={libownerProfile.emgcontactnum} placeholder="Enter another contact number" handleOnChange={handleOnChange} />
+          <div className='flex space-x-1.5'>
+            <InputBox name="Contact No." id="contactnum" type="text" value={libownerProfile.contactnum} placeholder="Enter your contact number" handleOnChange={handleOnChange} />
 
-          <InputBox name="Address" id="address" type="text" value={libownerProfile.address} placeholder="Enter the library address" handleOnChange={handleOnChange} />
+            <InputBox name="Another Contact No." id="libcontactnum" type="text" value={libownerProfile.libcontactnum} placeholder="Enter another contact number" handleOnChange={handleOnChange} />
+          </div>
 
-          <InputBox name="Google Map Link" id="maplink" type="text" value={libownerProfile.maplink} placeholder="Enter embed google map link" handleOnChange={handleOnChange} />
+          <div className='flex space-x-1.5'>
+            <InputBox name="Local Area" id="localarea" type="text" value={libownerProfile.localarea} placeholder="Enter your Local area" handleOnChange={handleOnChange} />
+
+            <InputBox name="City" id="city" type="text" value={libownerProfile.city} placeholder="Enter your city" handleOnChange={handleOnChange} />
+          </div>
+
+          <div className='flex space-x-1.5'>
+            <InputBox name="State" id="state" type="text" value={libownerProfile.state} placeholder="Enter your state" handleOnChange={handleOnChange} />
+
+            <InputBox name="PIN" id="pin" type="text" value={libownerProfile.pin} placeholder="Enter your area's pin" handleOnChange={handleOnChange} />
+          </div>
+
+          <InputBox name="Google Map Link" id="googlemap" type="text" value={libownerProfile.googlemap} placeholder="Enter embed google map link" handleOnChange={handleOnChange} />
 
         </div>
         <div className='flex justify-around items-center space-x-4 text-white font-semibold text-sm'>
@@ -96,7 +160,7 @@ const LibOwnerProfile = () => {
             className={`w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md bg-blue-700 hover:bg-blue-800 space-x-2`}
             onClick={() => { handleUpdateProfile() }}
           >
-            <span>{buttonText}</span>
+            <span>Update Profile</span>
             {spinLoading && <AiOutlineLoading3Quarters className="animate-spin" aria-hidden="true" />}
           </button>
         </div>
@@ -115,26 +179,26 @@ const LibOwnerProfile = () => {
 
                 <FormModal open={open} setOpen={setOpen} fromHeading={"Library owner profile updation"}>
                   {
-                    formTemplate("Update Profile")
+                    formTemplate()
                   }
                 </FormModal>
 
                 <div className='absolute top-0 right-0 p-2'>
-                  <BiEdit size={20} onClick={() => { setOpen(!open) }} className='cursor-pointer' />
+                  <BiEdit size={20} onClick={() => { setOpen(!open); setLibownerProfile(libraryDetails); }} className='cursor-pointer' />
                 </div>
 
-                <div className='absolute max-lg:-top-14 lg:-left-14 h-28 w-28 overflow-hidden rounded-md border border-black bg-gray-200'>
-                  <img src='https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg' alt='Profile Pic' className='w-full h-full object-cover' />
+                <div className='absolute max-lg:-top-14 lg:-left-14 h-28 w-28 overflow-hidden rounded-md border bg-gray-200'>
+                  <img src={profilePic[libraryDetails.profileImg]} alt='Profile Pic' className='w-full h-full object-cover' />
                 </div>
 
                 <div className='w-full py-4'>
                   <div className='flex items-center justify-center flex-col max-lg:pt-12 text-center mb-4'>
-                    <h1 className='text-xl lg:text-2xl font-semibold'>{libownerProfile.name}</h1>
-                    <h2 className='text-lg lg:text-xl font-semibold'>{libownerProfile.firmname}</h2>
+                    <h1 className='text-xl lg:text-2xl font-semibold'>{libraryDetails.ownername}</h1>
+                    <h2 className='text-lg lg:text-xl font-semibold'>{libraryDetails.libname}</h2>
                   </div>
 
                   <div className='text-center'>
-                    <div><span className='font-semibold'>Contact Number : </span><span>{libownerProfile.contactnum}, {libownerProfile.emgcontactnum}</span></div>
+                    <div><span className='font-semibold'>Contact Number : </span><span>{libraryDetails.contactnum}, {libraryDetails.libcontactnum}</span></div>
                     <div><span className='font-semibold'>Active Students : </span><span>200</span></div>
                   </div>
                 </div>
@@ -145,10 +209,10 @@ const LibOwnerProfile = () => {
             <div className='my-8 flex flex-col items-center justify-center'>
               <div className='text-center pb-4'>
                 <h1 className='text-2xl md:text-3xl font-bold'>Location Info.</h1>
-                <p className='md:text-xl'>{libownerProfile.address}</p>
+                <p className='md:text-xl'>{libraryDetails.address}</p>
               </div>
               <div className='w-full lg:px-20'>
-                <iframe title='map' src={libownerProfile.maplink} loading="lazy" referrerpolicy="no-referrer-when-downgrade" className='w-full h-[26rem]'></iframe>
+                <iframe title='map' src={libraryDetails.googlemap} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className='w-full h-[26rem]'></iframe>
               </div>
             </div>
           </>

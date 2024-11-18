@@ -1,34 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import InputBox from '../notificationmessage/InputBox';
+import React, { useState } from 'react';
+import InputBox, { SelectBox, ShiftInputBox } from '../notificationmessage/InputBox';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { toast } from 'react-toastify';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { RiDeleteBack2Line } from 'react-icons/ri';
+import LibSeats from '../library/LibSeats';
+import apiList from '../../libs/apiLists';
 
 const InitLibrary = () => {
 
     const { state } = useLocation();
+    const navigate = useNavigate(null);
 
+    const [isClicked, setIsClicked] = useState(false);
     const [libDetails, setLibDetails] = useState(state);
     const [spinLoading, setSpinLoading] = useState(false);
-
-    useEffect(()=>{
-        console.log(state.shifts)
-        console.log(typeof(libDetails.shifts))
-    }, []);
+    const [idxSeatSelector, setIdxSeatSelector] = useState(0);
+    const [actSeats, setactSeats] = useState(libDetails.shifts[0].numberOfSeats);
 
     const handleOnChange = (key, value) => {
         setLibDetails((prevData) => ({ ...prevData, [key]: value }));
-        // setLibDetails({
-        //     ...libDetails,
-        //     [key]: value
-        // })
     }
 
     const handleAddShift = () => {
         const newShift = {
-            shiftTime: '7:00 PM to 11:00 AM',
-            bookingPrice: 500,
-            numberOfSeats: []
+            stTime: '',
+            endTime: '',
+            price: undefined,
+            discountPrice: undefined,
+            numberOfSeats: Array(100).fill({
+                student: null,
+                gender: 'boy',
+                isBooked: false
+            })
         };
         setLibDetails((prevData) => ({
             ...prevData,
@@ -36,10 +40,101 @@ const InitLibrary = () => {
         }));
     };
 
-    const handleInitLibrary = () => {
-        setSpinLoading(true);
-        toast("Clicked on handle init library");
-        // setSpinLoading(false);
+    const handleDeleteShift = (idx) => {
+        if (libDetails.shifts.length <= 3) {
+            return toast.warn("There should be atleast three shifts");
+        }
+        const updatedShifts = libDetails.shifts.filter((_, i) => i !== idx);
+        setLibDetails((prevData) => ({ ...prevData, shifts: updatedShifts }));
+    };
+
+    const handleSeatSectorChange = (e) => {
+        setIdxSeatSelector(e.target.value);
+        setactSeats(libDetails.shifts[e.target.value].numberOfSeats);
+    };
+
+    const handleShiftChange = (index, e) => {
+        const { name, value } = e.target;
+        const updatedShifts = [...libDetails.shifts];
+        updatedShifts[index] = { ...updatedShifts[index], [name]: value };
+        setLibDetails((prevData) => ({ ...prevData, shifts: updatedShifts }));
+    };
+
+    const handleShiftSeatChange = (index, e) => {
+        if (e.target.value > 100) {
+            return toast.error("Number of seats cannot be more than 100");
+        }
+        const updatedShifts = [...libDetails.shifts];
+        const updatedNumberOfSeats = Array(Number(e.target.value)).fill({
+            student: null,
+            gender: "boy",
+            isBooked: false
+        })
+        updatedShifts[index] = { ...updatedShifts[index], numberOfSeats: updatedNumberOfSeats };
+        setLibDetails((prevData) => ({ ...prevData, shifts: updatedShifts }));
+        if (Number(idxSeatSelector) === index) {
+            setactSeats(updatedNumberOfSeats);
+        }
+    };
+
+    const hadleSeatGender = (index) => {
+        const updatedShifts = [...libDetails.shifts];
+        const updatedSeats = [...updatedShifts[idxSeatSelector].numberOfSeats];
+
+        // Ensure the seat exists and update the gender
+        if (!updatedSeats[index]) {
+            // updatedSeats[seatIndex] = { gender: '' }; // Create new seat if it doesn't exist
+            toast("Seat is not present!");
+        }
+
+        const updatedSeat = { ...updatedSeats[index] };
+        // Toggle gender
+        updatedSeat.gender = updatedSeat.gender === "boy" ? "girl" : "boy";
+
+        // Update the cloned seats array and then the shifts array
+        updatedSeats[index] = updatedSeat;
+        updatedShifts[idxSeatSelector] = { ...updatedShifts[idxSeatSelector], numberOfSeats: updatedSeats };
+
+        // Update the state with the new shifts array
+        setLibDetails((prevData) => ({ ...prevData, shifts: updatedShifts }));
+        setactSeats(updatedSeats);
+    };
+
+    const handleInitLibrary = async () => {
+        if (!isClicked) {
+            setIsClicked(true);
+            try {
+                setSpinLoading(true);
+                const response = await fetch(apiList.adminupdatelibrary + `/${libDetails._id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authtoken': localStorage.getItem("authtoken")
+                    },
+                    body: JSON.stringify(libDetails)
+                });
+
+                const json = await response.json();
+                if (json.success) {
+                    toast.success(json.message);
+                    navigate("/request");
+                    setSpinLoading(false);
+                }
+                else {
+                    toast.error(json.message);
+                    setIsClicked(false);
+                    setSpinLoading(false);
+                    console.log(json.message);
+                }
+            }
+            catch (err) {
+                toast.error(err.message);
+                setIsClicked(false);
+                setSpinLoading(false);
+                console.log(err.message);
+            }
+
+        }
     }
 
     return (
@@ -63,7 +158,6 @@ const InitLibrary = () => {
                                 <InputBox name="Library Contact No" id="libcontactnum" type="text" value={libDetails.libcontactnum} placeholder="Library contact number" handleOnChange={handleOnChange} />
                             </div>
 
-
                             <div className='flex max-md:flex-col md:space-x-2'>
                                 <InputBox name="Local Area" id="localarea" type="text" value={libDetails.localarea} placeholder="Mention your local area" handleOnChange={handleOnChange} />
 
@@ -86,45 +180,75 @@ const InitLibrary = () => {
                                 <InputBox name="Embaded Google Map Link" id="googlemap" type="text" value={libDetails.googlemap} placeholder="Enter embaded google map link" handleOnChange={handleOnChange} />
 
                                 {
-                                    libDetails.googlemap ? <iframe title='map' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14791.430570874723!2d83.55957323380159!3d25.571753342118296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3991ff08605d2193%3A0x71b090d70df7402!2sMount%20Litera%20Zee%20School!5e0!3m2!1sen!2sin!4v1727185211467!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade" className='w-full h-96'></iframe> : <div className='border w-full flex items-center justify-center bg-gray-300 font-semibold h-32'>There is no any google map link</div>
+                                    libDetails.googlemap ? <iframe title='map' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14791.430570874723!2d83.55957323380159!3d25.571753342118296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3991ff08605d2193%3A0x71b090d70df7402!2sMount%20Litera%20Zee%20School!5e0!3m2!1sen!2sin!4v1727185211467!5m2!1sen!2sin" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className='w-full h-96'></iframe> : <div className='border w-full flex items-center justify-center bg-gray-300 font-semibold h-32'>There is no any google map link</div>
                                 }
                             </div>
 
-                            <div className='text-center py-4'>
-                                <button
-                                    type="submit"
-                                    className={`group mx-auto w-32 py-2 px-4 text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 space-x-2`}
-                                    onClick={handleAddShift}
-                                >
-                                    <span>Add Shift</span>
-                                </button>
-
-                                <div>
-                                    This is for checking the things
-                                    {/* <div>
-                                        {
-                                            typeof(libDetails.shifts)
-                                        }
-                                    </div> */}
+                            <div className='py-4'>
+                                <div className='text-center'>
+                                    <button
+                                        type="button"
+                                        className={`group w-32 py-2 px-4 text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 space-x-2`}
+                                        onClick={handleAddShift}
+                                    >
+                                        <span>Add Shift</span>
+                                    </button>
                                 </div>
 
                                 {
-                                    Object.keys(libDetails.shifts).map((data, idx) => {
-                                        return <div className='pt-4'>
-                                            <div className={`border rounded-md ${idx % 2 === 0 ? "bg-gray-200" : "bg-gray-300"} p-1`}>
-                                                <div className='text-center font-semibold'>Slot No. {data}</div>
-                                                <div key={idx} className='flex items-center justify-center space-x-1'>
+                                    libDetails.shifts.map((data, idx) => {
+                                        return <div key={idx} className='pt-4'>
+                                            <div className={`border rounded-md ${idx % 2 === 0 ? "bg-gray-200" : "bg-gray-300"} p-1 relative`}>
+                                                <RiDeleteBack2Line size={19} className='absolute top-0 right-0 m-1 cursor-pointer' onClick={() => { handleDeleteShift(idx) }} />
 
-                                                    <InputBox name="Start time" id="shifts" type="text" value={libDetails.time} placeholder="Slot starting time" handleOnChange={handleOnChange} />
+                                                <div className='font-semibold text-center'>Slot No. {idx + 1}</div>
+                                                <div className='flex flex-col md:flex-row max-md:space-y-1.5 md:space-x-1.5 items-center justify-center'>
+                                                    <div className='flex items-center justify-center space-x-1.5 w-full'>
+                                                        <SelectBox name="Start time" id="stTime" value={data.stTime} idx={idx} handleOnChange={handleShiftChange} />
 
-                                                    <InputBox name="Finish time" id="pin" type="text" value={libDetails.pin} placeholder="Slot ending time" handleOnChange={handleOnChange} />
+                                                        <SelectBox name="End time" id="endTime" value={data.endTime} idx={idx} handleOnChange={handleShiftChange} />
+                                                    </div>
+                                                    <div className='flex items-center justify-center space-x-1.5 w-full'>
+                                                        <ShiftInputBox idx={idx} name="Price" id="price" type="text" value={data.price} placeholder="Price for the shift" handleOnChange={handleShiftChange} />
 
-                                                    <InputBox name="Max Students" id="pin" type="text" value={libDetails.pin} placeholder="Max number of students" handleOnChange={handleOnChange} />
+                                                        <ShiftInputBox idx={idx} name="Discounted Price" id="discountPrice" type="text" value={data.discountPrice} placeholder="Price after discount" handleOnChange={handleShiftChange} />
+                                                    </div>
+                                                    <div className='flex items-center justify-center space-x-1.5 w-full'>
+                                                        <ShiftInputBox idx={idx} name="Max Student" id="pin" type="text" value={data.numberOfSeats.length} placeholder="Enter the price for the shift" handleOnChange={handleShiftSeatChange} />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     })
                                 }
+                            </div>
+
+                            <div>
+                                <div className='text-center text-xl font-semibold'>Mark sheets for the girls</div>
+
+                                <div className='w-full'>
+                                    <label htmlFor="shifts" className="px-1 text-sm">Select shift</label>
+                                    <select name="shifts" id="shifts" className='rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
+                                        onChange={(e) => { handleSeatSectorChange(e) }}
+                                        value={idxSeatSelector}
+                                    >
+                                        {
+                                            libDetails.shifts.map((data, idx) => {
+                                                return <option key={idx} value={idx}>Slot {idx + 1} Price {data.discountPrice}</option>
+                                            })
+                                        }
+                                    </select>
+
+                                    <div className='my-4'>
+                                        <div className='text-center my-2'>
+                                            <div><span className='border bg-blue-500 w-5 px-4 rounded-md text-white'>B</span> is for the boys and <span className='border bg-pink-500 w-5 px-4 rounded-md text-white'>G</span> is for girls</div>
+                                            <div>Click on seats to toggle the gender</div>
+                                        </div>
+                                        <LibSeats actSeats={actSeats} hadleSeatGender={hadleSeatGender} />
+                                    </div>
+
+                                </div>
+
                             </div>
 
                         </div>

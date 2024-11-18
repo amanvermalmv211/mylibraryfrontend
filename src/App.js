@@ -39,9 +39,9 @@ function App() {
             <Route exact path="/searchlibrary" element={<SearchLibrary />}></Route>
             <Route exact path="/libowner" element={<LibOwner />}></Route>
             <Route exact path="/admin/profile" element={<AdminProfile />}></Route>
+            <Route exact path="/request" element={<Request />}></Route>
             <Route exact path="/initlib" element={<InitLibrary />}></Route>
             <Route exact path="/alllibraries" element={<AllLibraries />}></Route>
-            <Route exact path="/request" element={<Request />}></Route>
             <Route exact path="/libowner/profile" element={<LibOwnerProfile />}></Route>
             <Route exact path="/editor/profile" element={<EditorProfile />}></Route>
             <Route exact path="/results" element={<Results />}></Route>

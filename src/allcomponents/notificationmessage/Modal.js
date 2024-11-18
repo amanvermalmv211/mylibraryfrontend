@@ -5,7 +5,7 @@ import { TiTick } from 'react-icons/ti';
 export const SuccessModal = ({ open, setOpen, fromHeading, children }) => {
     return (
         <div onClick={() => { setOpen(!open) }} className={`fixed inset-0 w-full h-full flex items-center justify-center z-50 px-4 transition-all duration-500 text-gray-700 ${open ? "bg-black/50 pointer-events-auto" : "invisible pointer-events-none"}`}>
-            <div onClick={(e) => { e.stopPropagation() }} className={`w-full md:w-96 bg-gray-200 rounded-lg transition-all ${open ? "scale-100" : "scale-0"} overflow-hidden`}>
+            <div onClick={(e) => { e.stopPropagation() }} className={`w-full md:w-96 max-h-screen overflow-y-auto nobar bg-gray-200 rounded-lg transition-all ${open ? "scale-100" : "scale-0"} overflow-hidden`}>
                 <div className='h-40 flex w-80 -mt-20 mx-auto rounded-ee-full rounded-es-full bg-green-300'>
                     <div className='place-content-end mb-6 mx-auto'><TiTick className='text-black bg-white rounded-full' size={40} /></div>
                 </div>
@@ -28,8 +28,8 @@ export const SuccessModal = ({ open, setOpen, fromHeading, children }) => {
 export const FormModal = ({ open, setOpen, fromHeading, children }) => {
     return (
         <div onClick={() => { setOpen(!open) }} className={`fixed inset-0 w-full h-full flex items-center justify-center z-50 px-4 transition-all duration-500 text-gray-700 ${open ? "bg-black/50 pointer-events-auto" : "invisible pointer-events-none"}`}>
-            <div onClick={(e) => { e.stopPropagation() }} className={`w-full md:w-96 bg-gray-200 p-3 rounded-lg transition-all ${open ? "scale-100" : "scale-0"}`}>
-                <div className=''>
+            <div onClick={(e) => { e.stopPropagation() }} className={`w-full max-w-screen-sm max-h-screen overflow-y-auto nobar bg-gray-200 p-3 rounded-lg transition-all ${open ? "scale-100" : "scale-0"}`}>
+                <div className='pb-0.5'>
                     <h1 className='text-xl text-center font-semibold'>
                         {fromHeading}
                     </h1>
@@ -47,7 +47,7 @@ export const FormModal = ({ open, setOpen, fromHeading, children }) => {
 const DeleteModal = ({ open, setOpen, handleDeleteEbook, children }) => {
     return (
         <div onClick={() => { setOpen(!open) }} className={`fixed inset-0 w-full h-full flex items-center justify-center z-50 px-4 transition-all duration-500 text-gray-700 ${open ? "bg-black/50 pointer-events-auto" : "invisible pointer-events-none"}`}>
-            <div onClick={(e) => { e.stopPropagation() }} className={`w-full md:w-96 bg-gray-200 p-3 rounded-lg transition-all ${open ? "scale-100" : "scale-0"}`}>
+            <div onClick={(e) => { e.stopPropagation() }} className={`w-full md:w-96 max-h-screen overflow-y-auto nobar bg-gray-200 p-3 rounded-lg transition-all ${open ? "scale-100" : "scale-0"}`}>
                 <div className=''>
                     <h2 className='text-center font-semibold'>Are you sure</h2>
                     <h1 className='text-xl text-center font-semibold'>You wanna delete this item?</h1>

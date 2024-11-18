@@ -16,7 +16,10 @@ const apiList = {
   deleteapp: `${server}/editor/deleteapp`,
   updateapp: `${server}/editor/updateapp`,
   getadmin: `${server}/superadmin/getadmin`,
+  adminupdatelibrary: `${server}/superadmin/updatelibrary`,
   gerequests: `${server}/superadmin/getrequest/library`,
+  getlibowner: `${server}/libowner/getlibowner`,
+  updatelibandprofile: `${server}/libowner/updateprofile`,
   savecontactdetails: `${server}/user/save/contactdetails`,
 };
 

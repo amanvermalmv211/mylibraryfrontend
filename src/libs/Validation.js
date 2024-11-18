@@ -40,16 +40,18 @@ const isValidPIN = (value) => {
 };
 
 export const libownerProfileValidation = (ProfileDet) => {
-    if (isEmpty(ProfileDet.name, "name")) { return false; }
-    if (isEmpty(ProfileDet.firmname, "Library Name")) { return false; }
+    if (isEmpty(ProfileDet.ownername, "name")) { return false; }
+    if (isEmpty(ProfileDet.libname, "Library Name")) { return false; }
     if (isEmpty(ProfileDet.contactnum, "contact number")) { return false; }
     if (isValidContact(ProfileDet.contactnum)) { return false; }
-    if (ProfileDet.emgcontactnum) {
-        if (isValidContact(ProfileDet.emgcontactnum)) { return false; }
-    }
-
-    if (isEmpty(ProfileDet.address, "address")) { return false; }
-    if (isEmpty(ProfileDet.maplink, "embed map link")) { return false; }
+    if (isEmpty(ProfileDet.libcontactnum, "another contact number")) { return false; }
+    if (isValidContact(ProfileDet.libcontactnum)) { return false; }
+    if (isEmpty(ProfileDet.localarea, "local area")) { return false; }
+    if (isEmpty(ProfileDet.city, "city")) { return false; }
+    if (isEmpty(ProfileDet.state, "state")) { return false; }
+    if (isEmpty(ProfileDet.pin, "pin")) { return false; }
+    if (isValidPIN(ProfileDet.pin)) { return false; }
+    if (isEmpty(ProfileDet.googlemap, "embed map link")) { return false; }
 
     return true;
 };
@@ -96,7 +98,7 @@ export const loginValidation = (loginDet) => {
 };
 
 const signupValidation = (signupDet) => {
-    if (isEmpty(signupDet.name, "name")) { return false; }
+    if (isEmpty(signupDet.ownername, "name")) { return false; }
     if (isEmpty(signupDet.contactnum, "contact number")) { return false; }
     if (isValidContact(signupDet.contactnum)) { return false; }
     if (isEmpty(signupDet.localarea, "local area")) { return false; }
