@@ -9,6 +9,7 @@ const AuthState = (props) => {
     const [islogedin, setIsloggedin] = useState(localStorage.getItem("authtoken"));
     const [userProfile, setUserProfile] = useState("login");
     const [loading, setLoading] = useState(true);
+    const [activeStd, setActiveStd] = useState(100);
     const [libraryDetails, setLibraryDetails] = useState({});
     const [allLinks, setAllLinks] = useState(genLinks);
 
@@ -41,6 +42,9 @@ const AuthState = (props) => {
 
     const getLibOwner = async () => {
         setLoading(true);
+        if (localStorage.getItem("isallowed") !== "true") {
+            return;
+        }
         try {
             const response = await fetch(apiList.getlibowner, {
                 method: 'GET',
@@ -53,6 +57,17 @@ const AuthState = (props) => {
             const json = await response.json();
             if (json.success) {
                 setLibraryDetails(json.data);
+                let count = 0;
+                for (let i = 0; i < json.data.shifts.length; i++) {
+                    let shifts = json.data.shifts[i];
+                    for (let j = 0; j < shifts.numberOfSeats.length; j++) {
+                        let seatData = shifts.numberOfSeats[j];
+                        if (seatData.isBooked) {
+                            count += 1;
+                        }
+                    }
+                }
+                setActiveStd(count);
                 setLoading(false);
             }
             else {
@@ -69,6 +84,7 @@ const AuthState = (props) => {
             allLinks, setLinks,
             loading, setLoading,
             islogedin, setIsloggedin,
+            activeStd, setActiveStd,
             userProfile, setUserProfile, invalidUser,
             libraryDetails, setLibraryDetails, getLibOwner
         }}>

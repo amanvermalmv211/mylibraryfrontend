@@ -1,5 +1,5 @@
-// export const server = "https://mylibrary-kw5s.onrender.com";
-export const server = "http://localhost:5000";
+export const server = "https://mylibrary-kw5s.onrender.com";
+// export const server = "http://localhost:5000";
 
 const apiList = {
   login: `${server}/user/userauth/loginuser`,
@@ -18,8 +18,11 @@ const apiList = {
   getadmin: `${server}/superadmin/getadmin`,
   adminupdatelibrary: `${server}/superadmin/updatelibrary`,
   gerequests: `${server}/superadmin/getrequest/library`,
+  getalllibrary: `${server}/superadmin/getalllibrary`,
   getlibowner: `${server}/libowner/getlibowner`,
   updatelibandprofile: `${server}/libowner/updateprofile`,
+  getstudent: `${server}/student/getstudent`,
+  updateStdProfile: `${server}/student/updateprofile`,
   savecontactdetails: `${server}/user/save/contactdetails`,
 };
 

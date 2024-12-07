@@ -1,20 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import apiList from '../../libs/apiLists';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import signupValidation from '../../libs/Validation';
+import { stdSignupValidation } from '../../libs/Validation';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import InputBox from '../notificationmessage/InputBox';
+import authContext from '../../context/auth/authContext';
 
 const StdSignup = () => {
 
+    const context = useContext(authContext);
+    const { setIsloggedin, setLinks, setUserProfile } = context;
+
     const [signupDetails, setSignupDetails] = useState({
         name: "",
+        address: "",
+        gender: "boy",
+        contactnum: "",
         email: "",
         password: "",
         confPassword: "",
         otp: "",
-        type: "stduser"
+        type: "student"
     });
 
     let navigate = useNavigate();
@@ -25,7 +33,7 @@ const StdSignup = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "User Sign up - ML";
+        document.title = "Student's SignUp - ML";
     }, []);
 
 
@@ -42,7 +50,7 @@ const StdSignup = () => {
 
     const handleLogin = async () => {
 
-        if (!signupValidation(signupDetails)) { return }
+        if (!stdSignupValidation(signupDetails)) { return }
 
         if (!isOTPSend) {
             try {
@@ -76,36 +84,45 @@ const StdSignup = () => {
         else if (isOTPSend && signupDetails.otp !== "") {
             try {
                 setSpinSingUpLoading(true);
-                const response = await fetch(apiList.verifyotp, {
+                const verifyResponse = await fetch(apiList.verifyotp, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email: signupDetails.email, otp: signupDetails.otp })
+                    body: JSON.stringify({ email: signupDetails.email, otp: signupDetails.otp, name: signupDetails.name, contactnum: signupDetails.contactnum, address: signupDetails.address, gender: signupDetails.gender })
                 });
 
-                const json = await response.json();
-                if (json.success) {
-                    toast.success("Otp verified successfully");
+                const verifyJson = await verifyResponse.json();
+                console.log(verifyJson);
+                if (verifyJson.success) {
+                    localStorage.setItem("authtoken", verifyJson.authtoken);
+                    localStorage.setItem("type", verifyJson.type);
+                    // localStorage.setItem("isallowed", verifyJson.isallowed);
+                    toast.success(verifyJson.message);
+                    setLinks(verifyJson.type);
+                    setUserProfile(verifyJson.type + "/profile")
+                    setIsloggedin(true);
                     setSpinSingUpLoading(false);
-                    navigate("/")
+                    navigate("/");
                 }
                 else {
-                    toast.warn(json.message);
+                    toast("Resques is here")
+                    toast.warn(verifyJson.message);
                     setSpinSingUpLoading(false);
                 }
 
             }
             catch (err) {
                 setSpinSingUpLoading(false);
+                toast.error(err.message)
             }
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-            <div className={`max-w-sm w-full space-y-2 shadow-lg shadow-gray-400 rounded-xl p-4 pb-8 bg-gray-200 relative`}>
-                <div className='space-y-1' data-aos="zoom-in" data-aos-duration="500">
+        <div className="min-h-screen flex items-center justify-center py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
+            <div className={`w-full max-lg:max-w-sm lg:w-10/12 space-y-4 shadow-lg shadow-gray-400 rounded-xl p-2 pb-8 bg-gray-200 relative flex items-center justify-center max-lg:flex-col flex-row`}>
+                <div className='space-y-1 w-full lg:w-2/5 flex items-center justify-center flex-col' data-aos="zoom-in" data-aos-duration="500">
                     <div className="flex justify-center">
                         <div className="w-14 h-14 overflow-hidden rounded-full shadow-lg shadow-gray-600">
                             <img
@@ -115,104 +132,77 @@ const StdSignup = () => {
                             />
                         </div>
                     </div>
-                    <h2 className={`text-center text-2xl font-extrabold`}>Sign up for an account</h2>
+                    <h2 className={`text-center text-2xl font-extrabold pt-2`}>Sign up as Library Owner</h2>
+                    <div className='text-sm lg:hidden'>Already have an account? <Link to="/login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
+                    <div className='hidden lg:flex flex-col w-full h-60 items-center justify-center'>
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/016/717/556/small/man-reading-book-beside-bookshelf-free-png.png" alt="" className='w-full h-full object-contain' />
+                        <div className='text-sm'>Already have an account? <Link to="/login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
+                    </div>
                 </div>
 
-                <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                <form className="space-y-6 w-full lg:w-3/5" onSubmit={(e) => e.preventDefault()}>
                     <div className={`space-y-1`}>
 
-                        <div>
-                            <label htmlFor="name" className="block ml-1">
-                                Name
-                            </label>
-                            <input
-                                id="name"
-                                name="name"
-                                type="text"
-                                autoComplete="name"
-                                required
-                                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Enter Your Name"
-                                value={signupDetails.name}
-                                onChange={(event) => { handleOnChange("name", event.target.value) }}
-                            />
+                        <div className='flex flex-col lg:flex-row items-center justify-center lg:space-x-1.5'>
+                            <InputBox name="Name" id="name" type="text" value={signupDetails.name} placeholder="Enter your name" handleOnChange={handleOnChange} />
+
+                            <InputBox name="Address" id="address" type="text" value={signupDetails.address} placeholder="Enter your address" handleOnChange={handleOnChange} />
                         </div>
 
-                        <div>
-                            <label htmlFor="phone" className="block ml-1">Email</label>
-                            <div className='flex'>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    autoComplete="email"
-                                    required
-                                    placeholder="Enter your email address"
-                                    className={`appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
-                                    value={signupDetails.email}
-                                    onChange={(event) => { handleOnChange("email", event.target.value) }}
-                                />
+
+                        <div className='flex items-center justify-center space-x-1.5'>
+                            <div className='w-full'>
+                                <label htmlFor="gender" className="px-1 text-sm">Gender</label>
+                                <select name="gender" id="gender" className='rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
+                                    onChange={(e) => { handleOnChange("gender", e.target.value) }}
+                                    value={signupDetails.gender}
+                                >
+                                    <option value="boy">Male</option>
+                                    <option value="girl">Femal</option>
+
+                                </select>
+                            </div>
+
+                            <InputBox name="Contact Number" id="contactnum" type="text" value={signupDetails.contactnum} placeholder="Enter your phone number" handleOnChange={handleOnChange} />
+                        </div>
+
+                        <div className='flex flex-col lg:flex-row items-center justify-center lg:space-x-1.5'>
+                            <InputBox name="E-mail" id="email" type="email" value={signupDetails.email} placeholder="Enter your email address" handleOnChange={handleOnChange} />
+
+                            <div className='relative w-full'>
+                                <InputBox name="Password" id="password" type={showPassword ? 'text' : 'password'} value={signupDetails.password} placeholder="Enter password" handleOnChange={handleOnChange} />
+                                <button
+                                    type="button"
+                                    className="absolute inset-y-0 top-6 right-5 flex items-center focus:outline-none z-10 text-black"
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {showPassword ? <FaEye /> : <FaEyeSlash />
+                                    }
+                                </button>
                             </div>
                         </div>
 
-                        <div className='relative'>
-                            <label htmlFor="password" className="block ml-1">
-                                Password
-                            </label>
-                            <input
-                                id="password"
-                                name="password"
-                                type={showPassword ? 'text' : 'password'}
-                                autoComplete="current-password"
-                                required
-                                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Enter Password"
-                                value={signupDetails.password}
-                                onChange={(event) => { handleOnChange("password", event.target.value) }}
-                            />
-                            <button
-                                type="button"
-                                className="absolute inset-y-0 top-6 right-5 flex items-center focus:outline-none z-10 text-black"
-                                onClick={togglePasswordVisibility}
-                            >
-                                {showPassword ? <FaEye /> : <FaEyeSlash />
-                                }
-                            </button>
-                        </div>
+                        <div className='flex flex-col lg:flex-row items-center justify-center lg:space-x-1.5'>
 
-                        <div>
-                            <label htmlFor="confirmPassword" className="block ml-1">
-                                Confirm Password
-                            </label>
-                            <input
-                                id="confirmPassword"
-                                name="confirmPassword"
-                                type="password"
-                                autoComplete="new-password"
-                                required
-                                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Re-enter the password"
-                                value={signupDetails.confPassword}
-                                onChange={(event) => { handleOnChange("confPassword", event.target.value) }}
-                            />
-                        </div>
+                            <InputBox name="Confirm Password" id="confPassword" type="password" value={signupDetails.confPassword} placeholder="Re-enter the password" handleOnChange={handleOnChange} />
 
-                        <div>
-                            <label htmlFor="otp" className="block ml-1">
-                                OTP Verification
-                            </label>
-                            <input
-                                id="otp"
-                                name="otp"
-                                type="number"
-                                autoComplete="otp"
-                                required
-                                disabled={!isOTPSend}
-                                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="****"
-                                value={signupDetails.otp}
-                                onChange={(event) => { handleOnChange("otp", event.target.value) }}
-                            />
+                            <div className='w-full'>
+                                <label htmlFor="otp" className="px-1 text-sm">
+                                    OTP Verification
+                                </label>
+                                <input
+                                    id="otp"
+                                    name="otp"
+                                    type="number"
+                                    autoComplete="otp"
+                                    required
+                                    disabled={!isOTPSend}
+                                    className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                    placeholder="****"
+                                    value={signupDetails.otp}
+                                    onChange={(event) => { handleOnChange("otp", event.target.value) }}
+                                />
+                            </div>
                         </div>
 
                     </div>
@@ -220,18 +210,18 @@ const StdSignup = () => {
                     <div>
                         <button
                             type="submit"
-                            className={`group relative w-full flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 space-x-2`}
+                            className={`group mx-auto relative w-full lg:w-4/6 flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 space-x-2`}
                             onClick={handleLogin}
                         >
-                            {spinSingUpLoading && <AiOutlineLoading3Quarters className="animate-spin" />}
                             {
                                 isOTPSend ? <span>Verify and Create Account</span> : <span>Send OTP</span>
                             }
+                            {spinSingUpLoading && <AiOutlineLoading3Quarters className="animate-spin" />}
                         </button>
                     </div>
                 </form>
 
-                <div className='absolute -bottom-6 -left-8'>
+                <div className='absolute -bottom-6 -left-8 lg:hidden'>
                     <div className='w-28 h-28'>
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/016/717/556/small/man-reading-book-beside-bookshelf-free-png.png" alt="" className='w-full h-full' />
                     </div>

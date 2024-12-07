@@ -31,6 +31,7 @@ const Navbar = () => {
     const handleLogout = ()=>{
         localStorage.removeItem("type");
         localStorage.removeItem("authtoken");
+        localStorage.removeItem("isallowed");
         setLinks();
         setUserProfile("login")
         setIsloggedin(false);

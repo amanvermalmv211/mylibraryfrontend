@@ -1,11 +1,55 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 import { TiTick } from 'react-icons/ti';
+import authContext from '../../context/auth/authContext';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { CiWarning } from 'react-icons/ci';
+
+export const NotAllowed = ({ open, fromHeading, children }) => {
+
+    const context = useContext(authContext);
+    const { setIsloggedin, setLinks, setUserProfile } = context;
+
+    const navigate = useNavigate(null);
+
+    const handleLogout = () => {
+        localStorage.removeItem("type");
+        localStorage.removeItem("authtoken");
+        localStorage.removeItem("isallowed");
+        setLinks();
+        setUserProfile("login");
+        setIsloggedin(false);
+        toast("User logout successfully!");
+        navigate("/login");
+    }
+
+    return (
+        <div onClick={() => { handleLogout() }} className={`fixed inset-0 w-full h-full flex items-center justify-center z-50 px-4 transition-all duration-500 text-gray-700 ${open ? "bg-black/50 pointer-events-auto" : "invisible pointer-events-none"}`}>
+            <div onClick={(e) => { e.stopPropagation() }} className={`w-full md:w-96 max-h-screen overflow-y-auto nobar bg-gray-200 rounded-lg transition-all ${open ? "scale-100" : "scale-0"} overflow-hidden py-1.5`}>
+                <div className='text-center p-2'>
+                    <div className=''>
+                        <CiWarning size={40} className='mx-auto border rounded-md bg-yellow-400 p-0.5'/>
+                    </div>
+                    <h1 className='text-lg font-semibold'>
+                        {fromHeading}
+                    </h1>
+                    {
+                        children
+                    }
+                    <button onClick={() => { handleLogout() }} className='rounded-lg bg-blue-600 px-8 py-1 font-semibold text-white hover:bg-blue-700 mt-2'>Logout</button>
+                </div>
+
+
+            </div>
+        </div>
+    )
+}
 
 export const SuccessModal = ({ open, setOpen, fromHeading, children }) => {
     return (
         <div onClick={() => { setOpen(!open) }} className={`fixed inset-0 w-full h-full flex items-center justify-center z-50 px-4 transition-all duration-500 text-gray-700 ${open ? "bg-black/50 pointer-events-auto" : "invisible pointer-events-none"}`}>
-            <div onClick={(e) => { e.stopPropagation() }} className={`w-full md:w-96 max-h-screen overflow-y-auto nobar bg-gray-200 rounded-lg transition-all ${open ? "scale-100" : "scale-0"} overflow-hidden`}>
+            <div onClick={(e) => { e.stopPropagation() }} className={`w-full md:w-96 max-h-screen overflow-y-auto nobar bg-gray-200 rounded-lg transition-all ${open ? "scale-100" : "scale-0"} overflow-hidden py-1.5`}>
                 <div className='h-40 flex w-80 -mt-20 mx-auto rounded-ee-full rounded-es-full bg-green-300'>
                     <div className='place-content-end mb-6 mx-auto'><TiTick className='text-black bg-white rounded-full' size={40} /></div>
                 </div>

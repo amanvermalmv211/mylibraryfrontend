@@ -39,6 +39,15 @@ const isValidPIN = (value) => {
     return false;
 };
 
+export const stdProfileValidation = (ProfileDet) => {
+    if (isEmpty(ProfileDet.name, "name")) { return false; }
+    if (isEmpty(ProfileDet.contactnum, "contact number")) { return false; }
+    if (isValidContact(ProfileDet.contactnum)) { return false; }
+    if (isEmpty(ProfileDet.address, "address")) { return false; }
+
+    return true;
+};
+
 export const libownerProfileValidation = (ProfileDet) => {
     if (isEmpty(ProfileDet.ownername, "name")) { return false; }
     if (isEmpty(ProfileDet.libname, "Library Name")) { return false; }
@@ -91,6 +100,26 @@ export const loginValidation = (loginDet) => {
     if (isEmpty(loginDet.password, "password")) { return false; }
     if (loginDet.password.length < 8) {
         toast.warn("Password should be at least 8 characters long");
+        return false;
+    }
+
+    return true;
+};
+
+export const stdSignupValidation = (signupDet) => {
+    if (isEmpty(signupDet.name, "name")) { return false; }
+    if (isEmpty(signupDet.contactnum, "contact number")) { return false; }
+    if (isValidContact(signupDet.contactnum)) { return false; }
+    if (isEmpty(signupDet.email, "email")) { return false; }
+    if (isValidEmail(signupDet.email)) { return false; }
+    if (isEmpty(signupDet.password, "password")) { return false; }
+    if (signupDet.password.length < 8) {
+        toast.warn("Password should be at least 8 characters long");
+        return false;
+    }
+    if (isEmpty(signupDet.confPassword, "confirm password")) { return false; }
+    if (signupDet.password !== signupDet.confPassword) {
+        toast.warn("Confirm password do not match!");
         return false;
     }
 

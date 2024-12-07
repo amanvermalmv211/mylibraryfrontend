@@ -43,7 +43,7 @@ const Request = () => {
             }
         }
         catch (err) {
-            toast.warn(`E-book : ${err.message}`);
+            toast.warn(`Admin Req. Lib: ${err.message}`);
         }
     }
 
@@ -71,7 +71,7 @@ const Request = () => {
                             </div>
                     }
                     {
-                        allLib.length === 0 && <>
+                        !loading && allLib.length === 0 && <>
                             <div className='h-96 flex items-center justify-center'>
                                 <div className='font-bold text-2xl md:text-4xl text-center'>There is no requests for the approval!</div>
                             </div>

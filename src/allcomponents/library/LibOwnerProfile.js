@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import authContext from '../../context/auth/authContext';
 import { BiEdit } from 'react-icons/bi';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { FormModal } from '../notificationmessage/Modal';
+import { FormModal, NotAllowed } from '../notificationmessage/Modal';
 import { libownerProfileValidation } from '../../libs/Validation';
 import { LibownerProfileAnim } from '../notificationmessage/SkeletonAnim';
 import InputBox from '../notificationmessage/InputBox';
@@ -14,12 +14,16 @@ import { toast } from 'react-toastify';
 const LibOwnerProfile = () => {
 
   const context = useContext(authContext);
-  const { invalidUser, loading, libraryDetails, setLibraryDetails, getLibOwner } = context;
+  const { invalidUser, loading, libraryDetails, setLibraryDetails, getLibOwner, activeStd } = context;
 
   useEffect(() => {
     if (userType() !== "libowner") {
       invalidUser()
       navigate("/login")
+      return;
+    }
+    if (localStorage.getItem("isallowed") !== "true") {
+      setOpen(true);
       return;
     }
     if (!libraryDetails.ownername) {
@@ -67,7 +71,7 @@ const LibOwnerProfile = () => {
           'Content-Type': 'application/json',
           'authtoken': localStorage.getItem("authtoken")
         },
-        body: JSON.stringify({profileImg: libownerProfile.profileImg, ownername: libownerProfile.ownername, libname: libownerProfile.libname, contactnum: libownerProfile.contactnum, libcontactnum: libownerProfile.libcontactnum, localarea: libownerProfile.localarea, city: libownerProfile.city, state: libownerProfile.state, pin: libownerProfile.pin, googlemap: libownerProfile.googlemap})
+        body: JSON.stringify({ profileImg: libownerProfile.profileImg, ownername: libownerProfile.ownername, libname: libownerProfile.libname, contactnum: libownerProfile.contactnum, libcontactnum: libownerProfile.libcontactnum, localarea: libownerProfile.localarea, city: libownerProfile.city, state: libownerProfile.state, pin: libownerProfile.pin, googlemap: libownerProfile.googlemap })
       });
 
       const json = await response.json();
@@ -147,9 +151,9 @@ const LibOwnerProfile = () => {
           <InputBox name="Google Map Link" id="googlemap" type="text" value={libownerProfile.googlemap} placeholder="Enter embed google map link" handleOnChange={handleOnChange} />
 
         </div>
-        <div className='flex justify-around items-center space-x-4 text-white font-semibold text-sm'>
+        <div className='flex justify-around items-center space-x-8 text-white font-semibold text-sm'>
           <div
-            className={`w-full text-center py-2 px-4 border rounded-md bg-gray-400 hover:bg-gray-500 cursor-pointer`}
+            className={`w-full text-center py-2 border rounded-md bg-gray-400 hover:bg-gray-500 cursor-pointer`}
             onClick={() => { setOpen(false) }}
           >
             Cancel
@@ -157,10 +161,10 @@ const LibOwnerProfile = () => {
 
           <button
             type="submit"
-            className={`w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md bg-blue-700 hover:bg-blue-800 space-x-2`}
+            className={`w-full flex justify-center items-center py-2 border border-transparent rounded-md bg-blue-700 hover:bg-blue-800 space-x-2`}
             onClick={() => { handleUpdateProfile() }}
           >
-            <span>Update Profile</span>
+            <span>Update</span>
             {spinLoading && <AiOutlineLoading3Quarters className="animate-spin" aria-hidden="true" />}
           </button>
         </div>
@@ -175,7 +179,7 @@ const LibOwnerProfile = () => {
         {
           loading ? <LibownerProfileAnim /> : <>
             <div className='pt-28 max-lg:pt-40'>
-              <div className='border bg-blue-100 max-w-screen-sm lg:h-48 mx-auto rounded-lg flex items-center justify-center p-2 relative'>
+              <div className='border bg-blue-100 max-w-screen-sm lg:h-56 mx-auto rounded-lg flex items-center justify-center p-2 relative'>
 
                 <FormModal open={open} setOpen={setOpen} fromHeading={"Library owner profile updation"}>
                   {
@@ -184,7 +188,7 @@ const LibOwnerProfile = () => {
                 </FormModal>
 
                 <div className='absolute top-0 right-0 p-2'>
-                  <BiEdit size={20} onClick={() => { setOpen(!open); setLibownerProfile(libraryDetails); }} className='cursor-pointer' />
+                  <BiEdit size={25} onClick={() => { setOpen(!open); setLibownerProfile(libraryDetails); }} className='cursor-pointer' />
                 </div>
 
                 <div className='absolute max-lg:-top-14 lg:-left-14 h-28 w-28 overflow-hidden rounded-md border bg-gray-200'>
@@ -195,11 +199,13 @@ const LibOwnerProfile = () => {
                   <div className='flex items-center justify-center flex-col max-lg:pt-12 text-center mb-4'>
                     <h1 className='text-xl lg:text-2xl font-semibold'>{libraryDetails.ownername}</h1>
                     <h2 className='text-lg lg:text-xl font-semibold'>{libraryDetails.libname}</h2>
+                    <h2 className='text-lg lg:text-xl'>{libraryDetails.localarea}</h2>
+                    <h2 className='text-lg lg:text-xl'>{libraryDetails.city} {libraryDetails.state} {libraryDetails.pin}</h2>
                   </div>
 
                   <div className='text-center'>
                     <div><span className='font-semibold'>Contact Number : </span><span>{libraryDetails.contactnum}, {libraryDetails.libcontactnum}</span></div>
-                    <div><span className='font-semibold'>Active Students : </span><span>200</span></div>
+                    <div><span className='font-semibold'>Active Students : </span><span>{activeStd}</span></div>
                   </div>
                 </div>
 
@@ -216,6 +222,13 @@ const LibOwnerProfile = () => {
               </div>
             </div>
           </>
+        }
+
+        {
+          localStorage.getItem("isallowed") !== "true" && <NotAllowed open={open} fromHeading="Currently you are not allowed!">
+            <p>May be you do not got verified by the admin</p>
+            <p>Our team will soon repond you as soon as you are get verified.</p>
+          </NotAllowed>
         }
 
       </div>

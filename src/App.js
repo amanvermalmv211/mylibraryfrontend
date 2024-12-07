@@ -20,6 +20,8 @@ import AdminProfile from './allcomponents/admin/AdminProfile';
 import AllLibraries from './allcomponents/admin/AllLibraries';
 import Request from './allcomponents/admin/Request';
 import InitLibrary from './allcomponents/admin/InitLibrary';
+import EditLibrary from './allcomponents/library/EditLibrary';
+import StudentProfile from './allcomponents/student/StudentProfile';
 
 function App() {
   return (
@@ -37,12 +39,14 @@ function App() {
             <Route exact path="/owner/signup" element={<OwnerSignup />}></Route>
             <Route exact path="/login" element={<Login />}></Route>
             <Route exact path="/searchlibrary" element={<SearchLibrary />}></Route>
-            <Route exact path="/libowner" element={<LibOwner />}></Route>
             <Route exact path="/admin/profile" element={<AdminProfile />}></Route>
             <Route exact path="/request" element={<Request />}></Route>
             <Route exact path="/initlib" element={<InitLibrary />}></Route>
             <Route exact path="/alllibraries" element={<AllLibraries />}></Route>
             <Route exact path="/libowner/profile" element={<LibOwnerProfile />}></Route>
+            <Route exact path="/libowner" element={<LibOwner />}></Route>
+            <Route exact path="/editlibrary" element={<EditLibrary />}></Route>
+            <Route exact path="/student/profile" element={<StudentProfile />}></Route>
             <Route exact path="/editor/profile" element={<EditorProfile />}></Route>
             <Route exact path="/results" element={<Results />}></Route>
             <Route exact path="/ebooks" element={<Ebooks />}></Route>

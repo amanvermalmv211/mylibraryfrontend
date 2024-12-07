@@ -30,13 +30,13 @@ export const editor = () => {
 export const superadmin = () => {
     return [
         { name: "Libraries", link: "/alllibraries" },
-        { name: "Dashboard", link: "/" },
-        { name: "Requests", link: "/request" }
+        { name: "Requests", link: "/request" },
+        { name: "Dashboard", link: "/" }
     ]
 };
 
 const genLinks = [
-    { name: "About", link: "/libowner" },
+    { name: "About", link: "/" },
     { name: "Result", link: "/results" },
     { name: "E-Books", link: "/ebooks" },
     { name: "Contact Us", link: "/contactus" }

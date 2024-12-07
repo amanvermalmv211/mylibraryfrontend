@@ -97,10 +97,7 @@ const OwnerSignup = () => {
                 
                 const verifyJson = await verifyResponse.json();
                 console.log(verifyJson);
-                toast("Code is here 3")
                 if (verifyJson.success) {
-                    toast("Code is here 4")
-                    toast("Resques accepted")
                     localStorage.setItem("authtoken", verifyJson.authtoken);
                     localStorage.setItem("type", verifyJson.type);
                     localStorage.setItem("isallowed", verifyJson.isallowed);
