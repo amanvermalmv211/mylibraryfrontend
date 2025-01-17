@@ -3,31 +3,26 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import apiList from '../../libs/apiLists';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import signupValidation from '../../libs/Validation';
+import { stdSignupValidation } from '../../libs/Validation';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import InputBox from '../notificationmessage/InputBox';
 import authContext from '../../context/auth/authContext';
 import { PreviewModal } from '../notificationmessage/Modal';
 import TermsConditions from '../notificationmessage/TermsConditions';
 
-const OwnerSignup = () => {
+const EditorSignup = () => {
 
     const context = useContext(authContext);
     const { setIsloggedin, setLinks, setUserProfile } = context;
 
     const [signupDetails, setSignupDetails] = useState({
-        ownername: "",
+        name: "",
         contactnum: "",
-        localarea: "",
-        city: "",
-        state: "",
-        pin: "",
         email: "",
         password: "",
         confPassword: "",
         otp: "",
-        termsAndConditons: false,
-        type: "libowner"
+        type: "editor"
     });
 
     let navigate = useNavigate();
@@ -35,23 +30,14 @@ const OwnerSignup = () => {
     const [spinSingUpLoading, setSpinSingUpLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [isOTPSend, setIsOTPSend] = useState(false);
+    const [isShowTAC, setIsShowTAC] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "User Sign up - ML";
-        if (open) {
-            document.body.classList.add('modal-open');
-        } else {
-            document.body.classList.remove('modal-open');
-        }
-
-        return () => {
-            document.body.classList.remove('modal-open');
-        };
-
-    }, [open]);
+        document.title = "Student's SignUp - ML";
+    }, []);
 
 
     const handleOnChange = (key, value) => {
@@ -66,10 +52,12 @@ const OwnerSignup = () => {
     };
 
     const handleLogin = async () => {
-        if (!signupValidation(signupDetails)) { return }
 
-        if (!signupDetails.termsAndConditons) {
+        if (!stdSignupValidation(signupDetails)) { return }
+
+        if (!isShowTAC) {
             setOpen(true);
+            setIsShowTAC(true);
             return;
         }
         else {
@@ -88,11 +76,13 @@ const OwnerSignup = () => {
                     body: JSON.stringify(signupDetails)
                 });
 
+                toast.error(signupDetails.type);
+
                 const json = await response.json();
                 if (json.success) {
                     toast.success(`OTP send to ${signupDetails.email}`);
                     setSpinSingUpLoading(false);
-                    setIsOTPSend(true);
+                    setIsOTPSend(!isOTPSend);
                     setIsClicked(false);
                 }
                 else {
@@ -104,8 +94,8 @@ const OwnerSignup = () => {
             }
             catch (err) {
                 toast.warn("Internal Server Error");
-                setIsClicked(false);
                 setSpinSingUpLoading(false);
+                setIsClicked(false);
             }
 
         }
@@ -115,21 +105,22 @@ const OwnerSignup = () => {
                 return;
             }
             try {
-                setSpinSingUpLoading(true);
                 setIsClicked(true);
+                setSpinSingUpLoading(true);
                 const verifyResponse = await fetch(apiList.verifyotp, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email: signupDetails.email, otp: signupDetails.otp, ownername: signupDetails.ownername, contactnum: signupDetails.contactnum, localarea: signupDetails.localarea, city: signupDetails.city, state: signupDetails.state, pin: signupDetails.pin })
+                    body: JSON.stringify(signupDetails)
                 });
 
                 const verifyJson = await verifyResponse.json();
+                console.log(verifyJson);
                 if (verifyJson.success) {
                     localStorage.setItem("authtoken", verifyJson.authtoken);
                     localStorage.setItem("type", verifyJson.type);
-                    localStorage.setItem("isallowed", verifyJson.isallowed);
+                    // localStorage.setItem("isallowed", verifyJson.isallowed);
                     toast.success(verifyJson.message);
                     setLinks(verifyJson.type);
                     setUserProfile(verifyJson.type + "/profile")
@@ -140,15 +131,15 @@ const OwnerSignup = () => {
                 }
                 else {
                     toast.warn(verifyJson.message);
-                    setSpinSingUpLoading(false);
                     setIsClicked(false);
+                    setSpinSingUpLoading(false);
                 }
 
             }
             catch (err) {
-                toast.error(err.message)
                 setSpinSingUpLoading(false);
                 setIsClicked(false);
+                toast.error(err.message)
             }
         }
     };
@@ -157,7 +148,7 @@ const OwnerSignup = () => {
         <div className="min-h-screen flex items-center justify-center py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
             <div className={`w-full max-lg:max-w-sm lg:w-10/12 space-y-4 shadow-lg shadow-gray-400 rounded-xl p-2 pb-8 bg-gray-200 relative flex items-center justify-center max-lg:flex-col flex-row`}>
                 <div className='space-y-1 w-full lg:w-2/5 flex items-center justify-center flex-col' data-aos="zoom-in" data-aos-duration="500">
-                    <div className="flex justify-center">
+                    <div className="flex justify-center mt-4">
                         <div className="w-14 h-14 overflow-hidden rounded-full shadow-lg shadow-gray-600">
                             <img
                                 src="https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"
@@ -166,7 +157,7 @@ const OwnerSignup = () => {
                             />
                         </div>
                     </div>
-                    <h2 className={`text-center text-2xl font-extrabold pt-2`}>Sign up as Library Owner</h2>
+                    <h2 className={`text-center text-2xl font-extrabold pt-2`}>Sign as Editor</h2>
                     <div className='text-sm lg:hidden'>Already have an account? <Link to="/login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
                     <div className='hidden lg:flex flex-col w-full h-60 items-center justify-center'>
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/016/717/556/small/man-reading-book-beside-bookshelf-free-png.png" alt="" className='w-full h-full object-contain' />
@@ -177,23 +168,12 @@ const OwnerSignup = () => {
                 <form className="space-y-6 w-full lg:w-3/5" onSubmit={(e) => e.preventDefault()}>
                     <div className={`space-y-1`}>
 
-                        <div className='flex flex-col lg:flex-row items-center justify-center lg:space-x-1.5'>
-                            <InputBox name="Name" id="ownername" type="text" value={signupDetails.ownername} placeholder="Enter your name" handleOnChange={handleOnChange} />
+                        <div className='flex flex-col lg:flex-row items-center justify-center lg:space-x-1.5 max-lg:space-y-1'>
+                            <InputBox name="Name" id="name" type="text" value={signupDetails.name} placeholder="Enter your name" handleOnChange={handleOnChange} />
 
-                            <InputBox name="Contact Number" id="contactnum" type="text" value={signupDetails.contactnum} placeholder="Enter your contact number" handleOnChange={handleOnChange} />
+                            <InputBox name="Contact Number" id="contactnum" type="text" value={signupDetails.contactnum} placeholder="Enter your phone number" handleOnChange={handleOnChange} />
                         </div>
 
-                        <div className='flex items-center justify-center space-x-1.5'>
-                            <InputBox name="Local Area" id="localarea" type="text" value={signupDetails.localarea} placeholder="Mention your local area" handleOnChange={handleOnChange} />
-
-                            <InputBox name="City" id="city" type="text" value={signupDetails.city} placeholder="Enter your city" handleOnChange={handleOnChange} />
-                        </div>
-
-                        <div className='flex items-center justify-center space-x-1.5'>
-                            <InputBox name="State" id="state" type="text" value={signupDetails.state} placeholder="Enter you state" handleOnChange={handleOnChange} />
-
-                            <InputBox name="PIN" id="pin" type="text" value={signupDetails.pin} placeholder="PIN Code of your area" handleOnChange={handleOnChange} />
-                        </div>
 
                         <div className='flex flex-col lg:flex-row items-center justify-center lg:space-x-1.5'>
                             <InputBox name="E-mail" id="email" type="email" value={signupDetails.email} placeholder="Enter your email address" handleOnChange={handleOnChange} />
@@ -255,14 +235,15 @@ const OwnerSignup = () => {
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/016/717/556/small/man-reading-book-beside-bookshelf-free-png.png" alt="" className='w-full h-full' />
                     </div>
                 </div>
+
             </div>
             <PreviewModal open={open} setOpen={setOpen}>
                 <div className='my-4'>
-                    <TermsConditions handleOnChange={handleOnChange} handleLogin={handleLogin} istrue={true} />
+                    <TermsConditions handleLogin={handleLogin} />
                 </div>
             </PreviewModal>
         </div>
     )
 }
 
-export default OwnerSignup;
+export default EditorSignup;

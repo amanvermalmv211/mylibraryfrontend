@@ -7,6 +7,7 @@ const apiList = {
   verifyotp: `${server}/user/userauth/verifyotp`,
   sendotp: `${server}/auth/sendotp`,
   getebooks: `${server}/user/getebooks`,
+  
   addebooks: `${server}/editor/addebooks`,
   deleteebooks: `${server}/editor/deleteebooks`,
   updateebooks: `${server}/editor/updateebooks`,
@@ -15,15 +16,22 @@ const apiList = {
   geteditor: `${server}/editor/profile`,
   deleteapp: `${server}/editor/deleteapp`,
   updateapp: `${server}/editor/updateapp`,
+
   getadmin: `${server}/superadmin/getadmin`,
   adminupdatelibrary: `${server}/superadmin/updatelibrary`,
   gerequests: `${server}/superadmin/getrequest/library`,
   getalllibrary: `${server}/superadmin/getalllibrary`,
+
   getlibowner: `${server}/libowner/getlibowner`,
+  joinrequest: `${server}/libowner/joinrequest`,
+  rejectrequest: `${server}/libowner/rejectrequest`,
   updatelibandprofile: `${server}/libowner/updateprofile`,
+
   getstudent: `${server}/student/getstudent`,
   updateStdProfile: `${server}/student/updateprofile`,
+  requestLibrarySeat: `${server}/student/request-library`,
   savecontactdetails: `${server}/user/save/contactdetails`,
+  searchlib: `${server}/user/searchlib`,
 };
 
 export default apiList;

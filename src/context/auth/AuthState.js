@@ -10,8 +10,10 @@ const AuthState = (props) => {
     const [userProfile, setUserProfile] = useState("login");
     const [loading, setLoading] = useState(true);
     const [activeStd, setActiveStd] = useState(100);
+    const [studentDetails, setStudentDetails] = useState({});
     const [libraryDetails, setLibraryDetails] = useState({});
     const [allLinks, setAllLinks] = useState(genLinks);
+    const [searchLibRes, setSearchLibRes] = useState([]);
 
     const setLinks = () => {
         if (userType() === "admin") {
@@ -58,12 +60,15 @@ const AuthState = (props) => {
             if (json.success) {
                 setLibraryDetails(json.data);
                 let count = 0;
-                for (let i = 0; i < json.data.shifts.length; i++) {
-                    let shifts = json.data.shifts[i];
-                    for (let j = 0; j < shifts.numberOfSeats.length; j++) {
-                        let seatData = shifts.numberOfSeats[j];
-                        if (seatData.isBooked) {
-                            count += 1;
+                for (let i = 0; i < json.data.floors.length; i++) {
+                    let floor = json.data.floors[i];
+                    for (let j = 0; j < floor.shifts.length; j++) {
+                        let shift = floor.shifts[j];
+                        for (let k = 0; k < shift.numberOfSeats.length; k++) {
+                            let seatData = shift.numberOfSeats[k];
+                            if (seatData.isBooked) {
+                                count += 1;
+                            }
                         }
                     }
                 }
@@ -79,14 +84,42 @@ const AuthState = (props) => {
         }
     };
 
+    const getStudent = async () => {
+        setLoading(true);
+        
+        try {
+            const response = await fetch(apiList.getstudent, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authtoken': localStorage.getItem("authtoken")
+                }
+            });
+
+            const json = await response.json();
+            if (json.success) {
+                setStudentDetails(json.data);
+                setLoading(false);
+            }
+            else {
+                toast.warn(json.message);
+            }
+        }
+        catch (err) {
+            toast.warn(`StudentProfile : ${err.message}`);
+        }
+    };
+
     return (
         <AuthContext.Provider value={{
             allLinks, setLinks,
             loading, setLoading,
-            islogedin, setIsloggedin,
             activeStd, setActiveStd,
+            islogedin, setIsloggedin,
+            searchLibRes, setSearchLibRes,
             userProfile, setUserProfile, invalidUser,
-            libraryDetails, setLibraryDetails, getLibOwner
+            libraryDetails, setLibraryDetails, getLibOwner,
+            studentDetails, setStudentDetails, getStudent
         }}>
             {props.children}
         </AuthContext.Provider>

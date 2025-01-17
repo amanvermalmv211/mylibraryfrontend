@@ -2,13 +2,13 @@ import React from 'react';
 
 export const SelectBox = (props) => {
 
-    const { name, id, value, idx, handleOnChange } = props;
+    const { name, id, value, handleOnChange } = props;
 
     return (
         <div className='w-full'>
             <label htmlFor={id} className="px-1 text-sm">{name}</label>
             <select name={id} id={id} className='appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
-                onChange={(e) => { handleOnChange(idx, e) }}
+                onChange={(e) => { handleOnChange(e) }}
                 value={value}
             >
                 {
@@ -21,9 +21,9 @@ export const SelectBox = (props) => {
     )
 }
 
-export const ShiftInputBox = (props) => {
+export const PriceOptionInputBox = (props) => {
 
-    const { name, idx, id, type, value, placeholder, handleOnChange } = props;
+    const { name, id, type, value, idx, placeholder, handleOnChange } = props;
 
     return (
         <div className='w-full'>
@@ -39,7 +39,7 @@ export const ShiftInputBox = (props) => {
                 className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder={placeholder}
                 value={value}
-                onChange={(event) => { handleOnChange(idx, event) }}
+                onChange={(event) => { handleOnChange(id, event.target.value, idx) }}
             />
         </div>
     )

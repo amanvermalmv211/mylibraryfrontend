@@ -29,7 +29,7 @@ export const NotAllowed = ({ open, fromHeading, children }) => {
             <div onClick={(e) => { e.stopPropagation() }} className={`w-full md:w-96 max-h-screen overflow-y-auto nobar bg-gray-200 rounded-lg transition-all ${open ? "scale-100" : "scale-0"} overflow-hidden py-1.5`}>
                 <div className='text-center p-2'>
                     <div className=''>
-                        <CiWarning size={40} className='mx-auto border rounded-md bg-yellow-400 p-0.5'/>
+                        <CiWarning size={40} className='mx-auto border rounded-md bg-yellow-400 p-0.5' />
                     </div>
                     <h1 className='text-lg font-semibold'>
                         {fromHeading}
@@ -41,6 +41,18 @@ export const NotAllowed = ({ open, fromHeading, children }) => {
                 </div>
 
 
+            </div>
+        </div>
+    )
+}
+
+export const PreviewModal = ({ open, setOpen, children }) => {
+    return (
+        <div onClick={() => { setOpen(!open) }} className={`fixed inset-0 w-full h-full flex items-center justify-center z-50 px-8 md:px-12 transition-all duration-500 text-gray-700 ${open ? "bg-black/50 pointer-events-auto" : "invisible pointer-events-none"}`}>
+            <div onClick={(e) => { e.stopPropagation() }} className={`w-[48rem] max-h-screen overflow-y-auto nobar rounded-lg transition-all ${open ? "scale-100" : "scale-0"} overflow-hidden py-1.5`}>
+                {
+                    children
+                }
             </div>
         </div>
     )

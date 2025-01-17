@@ -63,7 +63,7 @@ const Request = () => {
                                             <div className='max-lg:text-sm p-1'>
                                                 <div>{data.libname}</div>
                                                 <div onClick={(e) => (e.stopPropagation())} className='inline-block'>Contact No: <Link to={`tel:+91${data.contactnum}`}>{data.contactnum}</Link></div>
-                                                <div>{data.localarea}</div>
+                                                <div>{data.localarea} {data.city}, {data.state} {data.pin}</div>
                                             </div>
                                         </div>
                                     })

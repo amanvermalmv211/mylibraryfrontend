@@ -7,6 +7,8 @@ import { stdSignupValidation } from '../../libs/Validation';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import InputBox from '../notificationmessage/InputBox';
 import authContext from '../../context/auth/authContext';
+import { PreviewModal } from '../notificationmessage/Modal';
+import TermsConditions from '../notificationmessage/TermsConditions';
 
 const StdSignup = () => {
 
@@ -15,13 +17,15 @@ const StdSignup = () => {
 
     const [signupDetails, setSignupDetails] = useState({
         name: "",
-        address: "",
+        city: "",
+        pin: "",
         gender: "boy",
         contactnum: "",
         email: "",
         password: "",
         confPassword: "",
         otp: "",
+        termsAndConditons: false,
         type: "student"
     });
 
@@ -30,6 +34,8 @@ const StdSignup = () => {
     const [spinSingUpLoading, setSpinSingUpLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [isOTPSend, setIsOTPSend] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -52,8 +58,17 @@ const StdSignup = () => {
 
         if (!stdSignupValidation(signupDetails)) { return }
 
-        if (!isOTPSend) {
+        if (!signupDetails.termsAndConditons) {
+            setOpen(true);
+            return;
+        }
+        else {
+            setOpen(false);
+        }
+
+        if (!isOTPSend && !isClicked) {
             try {
+                setIsClicked(true);
                 setSpinSingUpLoading(true);
                 const response = await fetch(apiList.usersignup, {
                     method: 'POST',
@@ -68,28 +83,36 @@ const StdSignup = () => {
                     toast.success(`OTP send to ${signupDetails.email}`);
                     setSpinSingUpLoading(false);
                     setIsOTPSend(!isOTPSend);
+                    setIsClicked(false);
                 }
                 else {
                     toast.error(json.message);
                     setSpinSingUpLoading(false);
+                    setIsClicked(false);
                 }
 
             }
             catch (err) {
                 toast.warn("Internal Server Error");
                 setSpinSingUpLoading(false);
+                setIsClicked(false);
             }
 
         }
-        else if (isOTPSend && signupDetails.otp !== "") {
+        else if (isOTPSend && !isClicked) {
+            if (!signupDetails.otp) {
+                toast.warn("Please enter otp!");
+                return;
+            }
             try {
+                setIsClicked(true);
                 setSpinSingUpLoading(true);
                 const verifyResponse = await fetch(apiList.verifyotp, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email: signupDetails.email, otp: signupDetails.otp, name: signupDetails.name, contactnum: signupDetails.contactnum, address: signupDetails.address, gender: signupDetails.gender })
+                    body: JSON.stringify(signupDetails)
                 });
 
                 const verifyJson = await verifyResponse.json();
@@ -103,17 +126,19 @@ const StdSignup = () => {
                     setUserProfile(verifyJson.type + "/profile")
                     setIsloggedin(true);
                     setSpinSingUpLoading(false);
+                    setIsClicked(false);
                     navigate("/");
                 }
                 else {
-                    toast("Resques is here")
                     toast.warn(verifyJson.message);
+                    setIsClicked(false);
                     setSpinSingUpLoading(false);
                 }
 
             }
             catch (err) {
                 setSpinSingUpLoading(false);
+                setIsClicked(false);
                 toast.error(err.message)
             }
         }
@@ -132,7 +157,7 @@ const StdSignup = () => {
                             />
                         </div>
                     </div>
-                    <h2 className={`text-center text-2xl font-extrabold pt-2`}>Sign up as Library Owner</h2>
+                    <h2 className={`text-center text-2xl font-extrabold pt-2`}>Sign up for Student</h2>
                     <div className='text-sm lg:hidden'>Already have an account? <Link to="/login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
                     <div className='hidden lg:flex flex-col w-full h-60 items-center justify-center'>
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/016/717/556/small/man-reading-book-beside-bookshelf-free-png.png" alt="" className='w-full h-full object-contain' />
@@ -143,14 +168,11 @@ const StdSignup = () => {
                 <form className="space-y-6 w-full lg:w-3/5" onSubmit={(e) => e.preventDefault()}>
                     <div className={`space-y-1`}>
 
-                        <div className='flex flex-col lg:flex-row items-center justify-center lg:space-x-1.5'>
+                        <div className='flex flex-col lg:flex-row items-center justify-center lg:space-x-1.5 max-lg:space-y-1'>
                             <InputBox name="Name" id="name" type="text" value={signupDetails.name} placeholder="Enter your name" handleOnChange={handleOnChange} />
 
-                            <InputBox name="Address" id="address" type="text" value={signupDetails.address} placeholder="Enter your address" handleOnChange={handleOnChange} />
-                        </div>
+                            <InputBox name="Contact Number" id="contactnum" type="text" value={signupDetails.contactnum} placeholder="Enter your phone number" handleOnChange={handleOnChange} />
 
-
-                        <div className='flex items-center justify-center space-x-1.5'>
                             <div className='w-full'>
                                 <label htmlFor="gender" className="px-1 text-sm">Gender</label>
                                 <select name="gender" id="gender" className='rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
@@ -162,9 +184,17 @@ const StdSignup = () => {
 
                                 </select>
                             </div>
-
-                            <InputBox name="Contact Number" id="contactnum" type="text" value={signupDetails.contactnum} placeholder="Enter your phone number" handleOnChange={handleOnChange} />
                         </div>
+
+
+                        <div className='flex items-center justify-center space-x-1.5'>
+
+                            <InputBox name="City" id="city" type="text" value={signupDetails.city} placeholder="Enter your city" handleOnChange={handleOnChange} />
+
+                            <InputBox name="PIN" id="pin" type="text" value={signupDetails.pin} placeholder="Enter your pin" handleOnChange={handleOnChange} />
+
+                        </div>
+
 
                         <div className='flex flex-col lg:flex-row items-center justify-center lg:space-x-1.5'>
                             <InputBox name="E-mail" id="email" type="email" value={signupDetails.email} placeholder="Enter your email address" handleOnChange={handleOnChange} />
@@ -228,6 +258,11 @@ const StdSignup = () => {
                 </div>
 
             </div>
+            <PreviewModal open={open} setOpen={setOpen}>
+                <div className='my-4'>
+                    <TermsConditions handleOnChange={handleOnChange} handleLogin={handleLogin} istrue={true} />
+                </div>
+            </PreviewModal>
         </div>
     )
 }

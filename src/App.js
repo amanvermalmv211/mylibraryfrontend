@@ -22,6 +22,10 @@ import Request from './allcomponents/admin/Request';
 import InitLibrary from './allcomponents/admin/InitLibrary';
 import EditLibrary from './allcomponents/library/EditLibrary';
 import StudentProfile from './allcomponents/student/StudentProfile';
+import LibraryRequest from './allcomponents/home/LibraryRequest';
+import EditorSignup from './allcomponents/results/EditorSignup';
+import TermsConditions from './allcomponents/notificationmessage/TermsConditions';
+import LibraryRequestSubs from './allcomponents/library/LibraryRequestSubs';
 
 function App() {
   return (
@@ -43,14 +47,20 @@ function App() {
             <Route exact path="/request" element={<Request />}></Route>
             <Route exact path="/initlib" element={<InitLibrary />}></Route>
             <Route exact path="/alllibraries" element={<AllLibraries />}></Route>
+
             <Route exact path="/libowner/profile" element={<LibOwnerProfile />}></Route>
             <Route exact path="/libowner" element={<LibOwner />}></Route>
             <Route exact path="/editlibrary" element={<EditLibrary />}></Route>
+            <Route exact path="/libraryreqsub" element={<LibraryRequestSubs />}></Route>
+            
             <Route exact path="/student/profile" element={<StudentProfile />}></Route>
-            <Route exact path="/editor/profile" element={<EditorProfile />}></Route>
+            <Route exact path="/details/library" element={<LibraryRequest />}></Route>
+            <Route exact path="/signup/editor" element={<EditorSignup />}></Route>
+            <Route exact path="/editor/profile" element={<EditorProfile istrue={false}/>}></Route>
             <Route exact path="/results" element={<Results />}></Route>
             <Route exact path="/ebooks" element={<Ebooks />}></Route>
             <Route exact path="/contactus" element={<Contact />}></Route>
+            <Route exact path="/termsandconditions" element={<TermsConditions />}></Route>
           </Routes>
 
           <Footer />

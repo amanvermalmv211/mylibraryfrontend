@@ -39,11 +39,29 @@ const isValidPIN = (value) => {
     return false;
 };
 
+export const initLibraryValidation = (libDetails) => {
+    if (isEmpty(libDetails.ownername, "owner name")) { return false; }
+    if (isEmpty(libDetails.libname, "library name")) { return false; }
+    if (isEmpty(libDetails.contactnum, "contact no.")) { return false; }
+    if (isValidContact(libDetails.contactnum)) { return false; }
+    if (isEmpty(libDetails.libcontactnum, "library contact no.")) { return false; }
+    if (isValidContact(libDetails.libcontactnum)) { return false; }
+    if (isEmpty(libDetails.localarea, "local area")) { return false; }
+    if (isEmpty(libDetails.city, "city")) { return false; }
+    if (isEmpty(libDetails.state, "state")) { return false; }
+    if (isEmpty(libDetails.pin, "pin")) { return false; }
+    if (isEmpty(libDetails.aadharnum, "aadhar no.")) { return false; }
+    if (isEmpty(libDetails.googlemap, "location link")) { return false; }
+
+    return true;
+};
+
 export const stdProfileValidation = (ProfileDet) => {
     if (isEmpty(ProfileDet.name, "name")) { return false; }
+    if (isEmpty(ProfileDet.city, "city")) { return false; }
+    if (isEmpty(ProfileDet.pin, "pin")) { return false; }
     if (isEmpty(ProfileDet.contactnum, "contact number")) { return false; }
     if (isValidContact(ProfileDet.contactnum)) { return false; }
-    if (isEmpty(ProfileDet.address, "address")) { return false; }
 
     return true;
 };
@@ -93,6 +111,15 @@ export const resultsValidation = (appDetails) => {
 
     return true;
 };
+
+// export const searchValidation = (searchDet) => {
+//     if (!searchDet.libname && !searchDet.localarea && !searchDet.city && !searchDet.pin){
+//         toast.warn("Please enter any one detail")
+//         return false;
+//     }
+
+//     return true;
+// };
 
 export const loginValidation = (loginDet) => {
     if (isEmpty(loginDet.email, "email")) { return false; }

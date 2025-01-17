@@ -9,11 +9,12 @@ import InputBox from '../notificationmessage/InputBox';
 import apiList from '../../libs/apiLists';
 import { toast } from 'react-toastify';
 import { stdProfileValidation } from '../../libs/Validation';
+import { LibownerProfileAnim } from '../notificationmessage/SkeletonAnim';
 
 const StudentProfile = () => {
 
     const context = useContext(authContext);
-    const { invalidUser } = context;
+    const { invalidUser, loading, studentDetails, setStudentDetails, getStudent } = context;
 
     useEffect(() => {
         if (userType() !== "student") {
@@ -21,15 +22,15 @@ const StudentProfile = () => {
             navigate("/login")
             return;
         }
-        getStudent();
+        if(!studentDetails.name){
+            getStudent();
+        }
         // eslint-disable-next-line
     }, [])
 
     const navigate = useNavigate(null);
 
     const [open, setOpen] = useState(false);
-    const [student, setStudent] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [spinLoading, setSpinLoading] = useState(false);
 
     useEffect(() => {
@@ -47,7 +48,7 @@ const StudentProfile = () => {
 
     }, [open]);
 
-    const [stdProfile, setStdProfileDet] = useState(student);
+    const [stdProfile, setStdProfileDet] = useState(studentDetails);
 
     const handleOnChange = (key, value) => {
         setStdProfileDet({
@@ -55,33 +56,6 @@ const StudentProfile = () => {
             [key]: value
         })
     };
-
-    const getStudent = async () => {
-        setLoading(true);
-        try {
-            const response = await fetch(apiList.getstudent, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authtoken': localStorage.getItem("authtoken")
-                }
-            });
-
-            const json = await response.json();
-            if (json.success) {
-                setStudent(json.data);
-                setStdProfileDet(json.data);
-                setLoading(false);
-            }
-            else {
-                toast.warn(json.message);
-            }
-        }
-        catch (err) {
-            toast.warn(`studentProfile :  ${err.message}`);
-        }
-
-    }
 
     const handleUpdateProfile = async () => {
         if (!stdProfileValidation(stdProfile)) { return }
@@ -93,27 +67,23 @@ const StudentProfile = () => {
                     'Content-Type': 'application/json',
                     'authtoken': localStorage.getItem("authtoken")
                 },
-                body: JSON.stringify({ profileImg: stdProfile.profileImg, name: stdProfile.name, contactnum: stdProfile.contactnum, address: stdProfile.address, gender: stdProfile.gender })
+                body: JSON.stringify({ profileImg: stdProfile.profileImg, name: stdProfile.name, contactnum: stdProfile.contactnum, city: stdProfile.city, pin: stdProfile.pin, gender: stdProfile.gender })
             });
 
             const json = await response.json();
             if (json.success) {
-                setStudent(json.data);
+                setStudentDetails(json.data);
                 toast.success(json.message)
-                setOpen(false);
-                setSpinLoading(false);
             }
             else {
                 toast.warn(json.message);
-                setOpen(false);
-                setSpinLoading(false);
             }
         }
         catch (err) {
-            toast.warn(`E-book : ${err.message}`);
-            setSpinLoading(false);
-            setOpen(false);
+            toast.warn(`StdProfile : ${err.message}`);
         }
+        setOpen(false);
+        setSpinLoading(false);
     };
 
     const profilePic = ["https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
@@ -162,10 +132,13 @@ const StudentProfile = () => {
 
                     </div>
 
+                    <div className='flex space-x-1.5'>
+                        <InputBox name="City" id="city" type="text" value={stdProfile.city} placeholder="Enter your city" handleOnChange={handleOnChange} />
+
+                        <InputBox name="PIN" id="pin" type="text" value={stdProfile.pin} placeholder="Enter your pin" handleOnChange={handleOnChange} />
+                    </div>
+
                     <InputBox name="Contact No." id="contactnum" type="text" value={stdProfile.contactnum} placeholder="Enter your contact number" handleOnChange={handleOnChange} />
-
-                    <InputBox name="Adress" id="address" type="text" value={stdProfile.address} placeholder="Enter your address" handleOnChange={handleOnChange} />
-
                 </div>
                 <div className='flex justify-around items-center space-x-8 text-white font-semibold text-sm'>
                     <div
@@ -193,7 +166,7 @@ const StudentProfile = () => {
             <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
 
                 {
-                    loading ? <stdProfileAnim /> : <>
+                    loading ? <LibownerProfileAnim /> : <>
                         <div className='pt-28 max-lg:pt-40'>
                             <div className='border bg-blue-100 max-w-screen-sm lg:h-56 mx-auto rounded-lg flex items-center justify-center p-2 relative'>
 
@@ -204,21 +177,21 @@ const StudentProfile = () => {
                                 </FormModal>
 
                                 <div className='absolute top-0 right-0 p-2'>
-                                    <BiEdit size={25} onClick={() => { setOpen(!open); setStdProfileDet(student); }} className='cursor-pointer' />
+                                    <BiEdit size={25} onClick={() => { setOpen(!open); setStdProfileDet(studentDetails); }} className='cursor-pointer' />
                                 </div>
 
                                 <div className='absolute max-lg:-top-14 lg:-left-14 h-28 w-28 overflow-hidden rounded-md border bg-gray-200'>
-                                    <img src={profilePic[student.profileImg]} alt='Profile Pic' className='w-full h-full object-cover' />
+                                    <img src={profilePic[studentDetails.profileImg]} alt='Profile Pic' className='w-full h-full object-cover' />
                                 </div>
 
                                 <div className='w-full py-4'>
-                                    <div className='flex items-center justify-center flex-col max-lg:pt-12 text-center mb-4'>
-                                        <h1 className='text-xl lg:text-2xl font-semibold'>{student.name}</h1>
-                                        <h2 className='text-lg lg:text-xl font-semibold'>{student.address}</h2>
+                                    <div className='flex items-center justify-center flex-col max-lg:pt-12 text-center mb-2'>
+                                        <h1 className='text-xl lg:text-2xl font-semibold'>{studentDetails.name}</h1>
+                                        <h2 className='text-lg lg:text-xl font-semibold'>{studentDetails.city}, {studentDetails.pin}</h2>
                                     </div>
 
                                     <div className='text-center'>
-                                        <div><span className='font-semibold'>Contact Number : </span><span>{student.contactnum}</span></div>
+                                        <div><span className='font-semibold'>Contact Number : </span><span>{studentDetails.contactnum}</span></div>
                                     </div>
                                 </div>
 
@@ -228,11 +201,11 @@ const StudentProfile = () => {
                         <div className='my-8 flex flex-col items-center justify-center'>
                             <div className='text-center pb-4'>
                                 <h1 className='text-2xl md:text-3xl font-bold'>Location Info.</h1>
-                                <p className='md:text-xl'>{student.address}</p>
+                                <p className='md:text-xl'>{studentDetails.city}, {studentDetails.pin}</p>
                             </div>
                             <div className='w-full lg:px-20'>
                                 {
-                                    student.googlemap ? <iframe title='map' src={student.googlemap} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className='w-full h-[26rem]'></iframe> : <div className='border h-56 rounded-md bg-gray-200 flex items-center justify-center text-xl animate-pulse'>Library address is not found!</div>
+                                    studentDetails.googlemap ? <iframe title='map' src={studentDetails.googlemap} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className='w-full h-[26rem]'></iframe> : <div className='border h-56 rounded-md bg-gray-200 flex items-center justify-center text-xl animate-pulse'>Library address is not found!</div>
                                 }
                             </div>
                         </div>

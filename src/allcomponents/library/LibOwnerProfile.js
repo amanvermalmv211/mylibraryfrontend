@@ -199,8 +199,8 @@ const LibOwnerProfile = () => {
                   <div className='flex items-center justify-center flex-col max-lg:pt-12 text-center mb-4'>
                     <h1 className='text-xl lg:text-2xl font-semibold'>{libraryDetails.ownername}</h1>
                     <h2 className='text-lg lg:text-xl font-semibold'>{libraryDetails.libname}</h2>
-                    <h2 className='text-lg lg:text-xl'>{libraryDetails.localarea}</h2>
-                    <h2 className='text-lg lg:text-xl'>{libraryDetails.city} {libraryDetails.state} {libraryDetails.pin}</h2>
+                    <h2 className='text-lg lg:text-xl'>{libraryDetails.localarea} {libraryDetails.city}</h2>
+                    <h2 className='text-lg lg:text-xl'>{libraryDetails.state} {libraryDetails.pin}</h2>
                   </div>
 
                   <div className='text-center'>

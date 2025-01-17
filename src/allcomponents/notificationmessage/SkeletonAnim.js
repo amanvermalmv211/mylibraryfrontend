@@ -46,22 +46,22 @@ export const RequestLibAnim = () => {
 
 export const AllLibrariesAnim = () => {
     return (
-        <div className='grid md:grid-cols-2 gap-6 animate-pulse'>
+        <div className='grid gap-6 mt-6 md:grid-cols-2 lg:grid-cols-3'>
             {
-                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((data) => {
-                    return <div key={data} className='flex rounded-md overflow-hidden border border-gray-300 h-36'>
-                        <div className='bg-gray-300 w-2/5'></div>
-                        <div className='w-3/5'>
-                            <div className='w-28 p-2.5 rounded-md bg-gray-300 mx-auto m-3'></div>
-                            <div className='w-4/6 p-2 rounded-md bg-gray-300 m-2'></div>
-                            <div className='w-5/6 p-2 rounded-md bg-gray-300 m-2'></div>
-                            <div className='w-6/12 p-2 rounded-md bg-gray-300 m-2'></div>
-                            <div className='w-11/12 p-2 rounded-md bg-gray-300 m-2'></div>
+                [0, 1, 2, 3, 4, 5, 6, 7, 8].map((data) => {
+                    return <div key={data} className='border rounded-md overflow-hidden bg-white shadow-md animate-pulse'>
+                        <div className='bg-gray-300 w-full h-40'></div>
+                        <div className='p-2 space-y-2'>
+                            <div className='bg-gray-300 w-28 p-2.5 rounded-sm'></div>
+                            <div className='bg-gray-300 w-40 p-2.5 rounded-sm'></div>
+                            <div className='bg-gray-300 w-80 p-2.5 rounded-sm'></div>
+                            <div className='bg-gray-300 w-52 p-2.5 rounded-sm'></div>
+                            <div className='bg-blue-300 w-full p-5 rounded-md'></div>
                         </div>
                     </div>
                 })
             }
-        </div>
+        </div >
     )
 }
 

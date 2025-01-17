@@ -51,23 +51,30 @@ const AllLibraries = () => {
 
                     {
                         loading ? <AllLibrariesAnim /> :
-                            <div className='grid md:grid-cols-2 gap-4 lg:gap-8'>
+                            <div className='grid gap-6 mt-6 md:grid-cols-2 lg:grid-cols-3'>
                                 {
                                     allLib.map((data, idx) => {
-                                        return <div key={idx} className='flex rounded-md overflow-hidden border border-gray-300 '>
-                                            <div className='bg-gray-300 w-2/5'>
-                                                <iframe title='addloc' src={data.googlemap} loading="lazy" referrerpolicy="no-referrer-when-downgrade" className='w-full h-full'></iframe>
+                                        return <div key={idx} className='border rounded-md overflow-hidden bg-white shadow-md'>
+                                            <div className='bg-gray-300'>
+                                                <iframe
+                                                    title='addloc'
+                                                    src={data.googlemap}
+                                                    loading="lazy"
+                                                    referrerPolicy="no-referrer-when-downgrade"
+                                                    className='w-full h-40'></iframe>
                                             </div>
-                                            <div className='w-3/5 p-1 lg:p-2 cursor-pointer' onClick={() => { navigate("/initlib", { state: data }); }}>
-                                                <div className='text-center md:text-xl font-semibold'>{data.ownername}</div>
-                                                <div className='max-lg:text-sm'>
-                                                    <div>{data.libname}</div>
-                                                    <div>{data.localarea} {data.city} {data.state} {data.pin}</div>
-                                                    <div onClick={(e) => (e.stopPropagation())}><Link to={`tel:+91${data.contactnum}`}>{data.contactnum}</Link>, <Link to={`tel:+91${data.libcontactnum}`}>{data.libcontactnum}</Link></div>
-                                                    <div>Active Students: {data.activeStd}</div>
-                                                    <div>Last Till: {data.subscription}</div>
-                                                    <div>{data.address}</div>
-                                                </div>
+                                            <div className='p-2 max-md:text-sm'>
+                                                <h2 className='font-semibold text-lg'>{data.libname}</h2>
+                                                <p>{data.ownername}</p>
+                                                <p>{data.localarea}, {data.city}, {data.state}</p>
+                                                <p>
+                                                    <Link to={`tel:+91${data.contactnum}`}>{data.contactnum}</Link>, <Link to={`tel:+91${data.libcontactnum}`}>{data.libcontactnum}</Link>
+                                                </p>
+                                                <button
+                                                    className='block w-full mt-2 py-2 text-center text-white bg-blue-700 rounded-md hover:bg-blue-800'
+                                                    onClick={() => navigate("/initlib", { state: data })}>
+                                                    View Details
+                                                </button>
                                             </div>
                                         </div>
                                     })

@@ -3,15 +3,14 @@ import { Link } from 'react-router-dom';
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { ImLinkedin } from "react-icons/im";
-import genLinks from '../../libs/AllRoutes';
+import { footerLinks } from '../../libs/AllRoutes';
 
 
 const Footer = () => {
-    
-    const [allLinks, setAllLinks] = useState(genLinks);
 
-    useEffect(()=>{
-        setAllLinks(genLinks);
+    const [allLinks, setAllLinks] = useState(footerLinks);
+    useEffect(() => {
+        setAllLinks(footerLinks);
     }, []);
 
     return (
