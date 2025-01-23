@@ -5,7 +5,7 @@ import LibraryPreview from '../notificationmessage/LibraryPreview';
 import { PreviewModal } from '../notificationmessage/Modal';
 import { TbLibrary } from 'react-icons/tb';
 import { toast } from 'react-toastify';
-import { userType } from '../../libs/AllRoutes';
+import { getEndTime, getStTime, userType } from '../../libs/AllRoutes';
 import authContext from '../../context/auth/authContext';
 import { BiSolidBookmark } from 'react-icons/bi';
 import { TiCancel } from 'react-icons/ti';
@@ -235,7 +235,7 @@ const LibraryRequest = () => {
                                     </tr>
                                     <tr>
                                         <th className="py-2 px-4 text-gray-700 font-semibold border">Time Slot</th>
-                                        <td className="py-2 px-4 border">{Number(libDetails.floors[idxFloor].shifts[idxShift].stTime) === 0 ? `12 AM` : Number(libDetails.floors[idxFloor].shifts[idxShift].stTime) < 12 ? `${libDetails.floors[idxFloor].shifts[idxShift].stTime} AM` : Number(libDetails.floors[idxFloor].shifts[idxShift].stTime) === 12 ? `${libDetails.floors[idxFloor].shifts[idxShift].stTime} PM` : `${Number(libDetails.floors[idxFloor].shifts[idxShift].stTime) - 12} PM`} - {Number(libDetails.floors[idxFloor].shifts[idxShift].endTime) === 0 ? `12 AM` : Number(libDetails.floors[idxFloor].shifts[idxShift].endTime) < 12 ? `${libDetails.floors[idxFloor].shifts[idxShift].endTime} AM` : Number(libDetails.floors[idxFloor].shifts[idxShift].endTime) === 12 ? `${libDetails.floors[idxFloor].shifts[idxShift].endTime} PM` : `${Number(libDetails.floors[idxFloor].shifts[idxShift].endTime) - 12} PM`}</td>
+                                        <td className="py-2 px-4 border">{getStTime(libDetails.floors[idxFloor].shifts[idxShift])} - {getEndTime(libDetails.floors[idxFloor].shifts[idxShift])}</td>
                                     </tr>
                                     <tr className='bg-gray-100'>
                                         <th className="py-2 px-4 text-gray-700 font-semibold border">Boy's Seats</th>
@@ -304,7 +304,7 @@ const LibraryRequest = () => {
                         <h1 className='text-xl md:text-2xl font-bold'>Seat Reservation's Details</h1>
 
                         <div className=''>
-                            <p>You have selected seat number {idxSeatSelected + 1} in shift {idxShift + 1} of floor {idxFloor} with time slot {Number(libDetails.floors[idxFloor].shifts[idxShift].stTime) === 0 ? `12 AM` : Number(libDetails.floors[idxFloor].shifts[idxShift].stTime) < 12 ? `${libDetails.floors[idxFloor].shifts[idxShift].stTime} AM` : Number(libDetails.floors[idxFloor].shifts[idxShift].stTime) === 12 ? `${libDetails.floors[idxFloor].shifts[idxShift].stTime} PM` : `${Number(libDetails.floors[idxFloor].shifts[idxShift].stTime) - 12} PM`} - {Number(libDetails.floors[idxFloor].shifts[idxShift].endTime) === 0 ? `12 AM` : Number(libDetails.floors[idxFloor].shifts[idxShift].endTime) < 12 ? `${libDetails.floors[idxFloor].shifts[idxShift].endTime} AM` : Number(libDetails.floors[idxFloor].shifts[idxShift].endTime) === 12 ? `${libDetails.floors[idxFloor].shifts[idxShift].endTime} PM` : `${Number(libDetails.floors[idxFloor].shifts[idxShift].endTime) - 12} PM`}. Request for this seat will be send to the library owner and he will soon contact you!</p>
+                            <p>You have selected seat number {idxSeatSelected + 1} in shift {idxShift + 1} of floor {idxFloor} with time slot {getStTime(libDetails.floors[idxFloor].shifts[idxShift])} - {getEndTime(libDetails.floors[idxFloor].shifts[idxShift])}. Request for this seat will be send to the library owner and he will soon contact you!</p>
                         </div>
 
                         <div className='flex items-center justify-around space-x-4 w-full'>

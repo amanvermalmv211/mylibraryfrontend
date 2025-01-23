@@ -1,4 +1,5 @@
 import React from "react";
+import { getEndTime, getStTime } from "../../libs/AllRoutes";
 
 const LibraryPreview = ({ library }) => {
   if (!library) {
@@ -36,24 +37,7 @@ const LibraryPreview = ({ library }) => {
             {floor.shifts.map((shift, idxShift) => (
               <div key={idxShift} className="mt-2 border-t pt-2">
                 <h4 className="text-lg font-semibold text-blue-500">Shift {idxShift + 1}</h4>
-                <p className="text-gray-600">
-                  Time Slot:{" "}
-                  {Number(shift.stTime) === 0
-                    ? `12 AM`
-                    : Number(shift.stTime) < 12
-                      ? `${shift.stTime} AM`
-                      : Number(shift.stTime) === 12
-                        ? `${shift.stTime} PM`
-                        : `${Number(shift.stTime) - 12} PM`}{" "}
-                  -{" "}
-                  {Number(shift.endTime) === 0
-                    ? `12 AM`
-                    : Number(shift.endTime) < 12
-                      ? `${shift.endTime} AM`
-                      : Number(shift.endTime) === 12
-                        ? `${shift.endTime} PM`
-                        : `${Number(shift.endTime) - 12} PM`}
-                </p>
+                <p className="text-gray-600">Time Slot: {getStTime(shift)} - {getEndTime(shift)}</p>
                 <p className="text-gray-600">Seats: Boys - {shift.numberOfSeats.filter(seat => seat.gender === "boy").length}, Girls - {shift.numberOfSeats.filter(seat => seat.gender === "girl").length}</p>
                 <ul className="list-disc list-inside mt-2">
                   <p className="font-semibold text-gray-600">Price Options:</p>

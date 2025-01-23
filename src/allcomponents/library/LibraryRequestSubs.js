@@ -11,6 +11,9 @@ import LibraryPreview from '../notificationmessage/LibraryPreview';
 import { TbLibrary } from 'react-icons/tb';
 import LibSeats from './LibSeats';
 import { GiCrossMark } from 'react-icons/gi';
+import { MdVerifiedUser } from 'react-icons/md';
+import InputBox from '../notificationmessage/InputBox';
+import { TiCancel } from 'react-icons/ti';
 
 const LibraryRequestSubs = () => {
 
@@ -21,6 +24,7 @@ const LibraryRequestSubs = () => {
   const [openPreview, setOpenPreview] = useState(false);
   const [openReject, setOpenReject] = useState(false);
   const [openCheckSeat, setOpenCheckSeat] = useState(false);
+  const [openApprove, setOpenApprove] = useState(false);
   const [actSeats, setActSeats] = useState([]);
 
   useEffect(() => {
@@ -62,6 +66,8 @@ const LibraryRequestSubs = () => {
   const [loading, setLoading] = useState(false);
   const [allRequests, setAllRequests] = useState([]);
   const [selectedData, setSelectedData] = useState({});
+  const [subsDays, setSubsDays] = useState("");
+  const priceOpt = ["30 Days", "60 Days", "90 Days", "180 Days", "365 Days"];
 
   const handleReject = async (data) => {
     setSelectedData(data);
@@ -76,12 +82,12 @@ const LibraryRequestSubs = () => {
             'Content-Type': 'application/json',
             'authtoken': localStorage.getItem("authtoken")
           },
-          body: JSON.stringify({data: selectedData})
+          body: JSON.stringify({ data: selectedData })
         });
 
         const json = await response.json();
         if (json.success) {
-          setAllRequests(allRequests.filter((request)=>{return request._id !== data._id}))
+          setAllRequests(allRequests.filter((request) => { return request._id !== data._id }))
           toast.success(json.message);
         }
         else {
@@ -106,6 +112,88 @@ const LibraryRequestSubs = () => {
     }
     setOpenCheckSeat(true);
   }
+
+  const handleApprove = async (data) => {
+    setSelectedData(data);
+    if (!openApprove) {
+      setOpenApprove(true);
+      setSubsDays("");
+      document.getElementById("priceopt").selectedIndex = 0;
+      return;
+    }
+    if (!subsDays) {
+      return toast.warn("Please select the subscription duration.");
+    }
+
+    const selectedDate = new Date(subsDays);
+    const currentDate = new Date();
+
+    // Remove time part from both dates to compare only the dates
+    currentDate.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate <= currentDate) {
+      return toast.warn("The selected date must be in the future.");
+    }
+
+    try {
+      const response = await fetch(apiList.approverequest, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'authtoken': localStorage.getItem("authtoken"),
+        },
+        body: JSON.stringify({
+          requestId: selectedData._id,
+          subsDays: selectedDate
+        }),
+      });
+
+      const json = await response.json();
+      if (json.success) {
+        setAllRequests(allRequests.filter((request) => request._id !== data._id));
+        toast.success(json.message);
+      } else {
+        toast.error(json.message);
+      }
+    } catch (err) {
+      toast.error(`Approval Error: ${err.message}`);
+    }
+
+    setOpenApprove(false);
+  }
+
+  const handleDateChange = async (_, value) => {
+    setSubsDays(value);
+    document.getElementById("priceopt").selectedIndex = 0;
+  }
+
+  const handleDateSelect = (e) => {
+    const selectedDuration = priceOpt[e.target.value];
+    setSubsDays("");
+
+    const currentDate = new Date();
+    let daysToAdd = 0;
+
+    if (selectedDuration === "30 Days") {
+      daysToAdd = 30;
+    }
+    else if (selectedDuration === "60 Days") {
+      daysToAdd = 60;
+    }
+    else if (selectedDuration === "90 Days") {
+      daysToAdd = 90;
+    }
+    else if (selectedDuration === "180 Days") {
+      daysToAdd = 180;
+    }
+    else if (selectedDuration === "365 Days") {
+      daysToAdd = 365;
+    }
+
+    const newDate = new Date(currentDate.setDate(currentDate.getDate() + daysToAdd));
+    setSubsDays(newDate.toISOString().split("T")[0]);
+  };
 
   const getRequests = async () => {
     setLoading(true);
@@ -165,13 +253,65 @@ const LibraryRequestSubs = () => {
                       type="button" className={`w-full p-1 rounded-md text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}
                       onClick={() => { setOpenReject(false) }}
                     >
-                      <span>Cancel</span>
+                      <span>Cancel <TiCancel size={18} className='inline-block mb-0.5' /></span>
                     </button>
                     <button
                       type="button" className={`w-full p-1 rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500`}
                       onClick={() => { handleReject(selectedData) }}
                     >
                       <span>Reject Request <GiCrossMark size={18} className='inline-block' /></span>
+                    </button>
+                  </div>
+
+                </div>
+              </PreviewModal>
+
+              <PreviewModal open={openApprove} setOpen={setOpenApprove}>
+                <div className='border bg-gray-100 rounded-md text-center'>
+                  <h1 className='text-lg mt-1 -mb-2'>Are you sure?</h1>
+                  <h2 className='text-lg mb-1'>You want to approve this request!</h2>
+                  {selectedData.studentId &&
+                    <>
+                      <p className='text-lg'>Approve request from <span className='font-semibold'>{selectedData.studentId.name}</span> for seat number {Number(selectedData.idxSeatSelected) + 1} in shift {Number(selectedData.idxShift) + 1} of floor {selectedData.idxFloor}</p>
+                      <p><span className='font-semibold'>From:</span> {new Date().getDate()}/{new Date().getMonth() + 1}/{new Date().getFullYear()} <span className='font-semibold'>to:</span> {subsDays ? <>{new Date(subsDays).getDate()}/{new Date(subsDays).getMonth() + 1}/{new Date(subsDays).getFullYear()}</> : "_ _ _ _ _ _ _ _"}</p>
+                    </>
+                  }
+
+                  <div className='flex max-md:flex-col items-center justify-around md:space-x-4 text-start my-3 mb-4'>
+                    <div className='w-60'>
+                      <InputBox name="Choose Date" id="date" type="date" value={subsDays} placeholder="Select date" handleOnChange={handleDateChange} />
+                    </div>
+
+                    <p className='font-bold text-lg'>OR</p>
+
+                    <div className='w-60'>
+                      <label htmlFor="priceopt" className="px-1 text-sm">Select Duration</label>
+                      <select name="priceopt" id="priceopt" className='rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
+                        onChange={(e) => { handleDateSelect(e) }}
+                        defaultValue=""
+                      >
+                        <option value="" disabled>Select duration</option>
+                        {
+                          priceOpt.map((duration, idx) => {
+                            return <option key={idx} value={idx}>{duration}</option>
+                          })
+                        }
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className='flex items-center justify-around space-x-4 px-2 my-2'>
+                    <button
+                      type="button" className={`w-full p-1 rounded-md text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}
+                      onClick={() => { setOpenApprove(false) }}
+                    >
+                      <span>Cancel <TiCancel size={18} className='inline-block mb-0.5' /></span>
+                    </button>
+                    <button
+                      type="button" className={`w-full p-1 rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500`}
+                      onClick={() => { handleApprove(selectedData) }}
+                    >
+                      <span>Approve <MdVerifiedUser size={18} className='inline-block mb-0.5' /></span>
                     </button>
                   </div>
 
@@ -223,7 +363,7 @@ const LibraryRequestSubs = () => {
                           <button
                             type="button"
                             className={`w-full p-1 rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500`}
-                            onClick={() => { toast("Hello") }}
+                            onClick={() => { handleApprove(data) }}
                           >
                             <span>Approve</span>
                           </button>

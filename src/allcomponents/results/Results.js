@@ -364,11 +364,11 @@ const Results = () => {
                                                         <div className={`p-1.5 ${idx % 2 === 0 ? "bg-gray-200" : "bg-gray-300"}`}>
                                                             <div className='flex items-center justify-between'>
                                                                 {idx + 1}. {appData.appname}
-                                                                <Link to="/" className='pr-1 text-blue-600 underline'>Link</Link>
+                                                                <Link to={appData.formlink} target='_blank' className='pr-1 text-blue-600 underline'>Link</Link>
                                                             </div>
                                                             <div className='flex items-center justify-between text-xs md:text-sm'>
                                                                 <div className='flex items-center space-x-2'>
-                                                                    <Link to="/" className='underline'>YouTube Video Link</Link>
+                                                                    <Link to={appData.youtubelink} target='_blank' className='underline'>YouTube Video Link</Link>
                                                                     {
                                                                         localStorage.getItem("type") === "editor" && <div className='flex items-center space-x-2'>
                                                                             <div> <BiEdit size={17} className='hover:scale-110 cursor-pointer transition-all duration-200' onClick={() => { handleOpen(appData, true) }} /> </div>

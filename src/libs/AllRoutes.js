@@ -24,7 +24,7 @@ export const student = () => {
     return [
         { name: "Result", link: "/results" },
         { name: "E-Books", link: "/ebooks" },
-        { name: "Library", link: "/" }
+        { name: "Library", link: "/std-library" }
     ]
 };
 

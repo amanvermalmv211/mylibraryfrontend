@@ -83,7 +83,7 @@ const LibOwner = () => {
 
     return (
         <div className="bg-gray-50 text-gray-700 pb-6 sm:pb-8 lg:pb-12">
-            <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+            <div className="mx-auto max-w-screen-2xl px-4 md:px-8 select-none">
                 <div className="pt-28 mb-4">
                     <h1 className="text-2xl md:text-4xl font-bold mb-3 text-center">
                         {libraryDetails.libname || "Library Details"}
@@ -185,7 +185,7 @@ const LibOwner = () => {
 
                         <div className='flex max-md:flex-col max-md:space-y-4 items-center justify-around md:space-x-4 mt-4'>
                             <PreviewModal open={openPreview} setOpen={setOpenPreview}>
-                                <div className='my-4'>
+                                <div className='my-2'>
                                     <LibraryPreview library={libraryDetails} />
                                 </div>
                             </PreviewModal>

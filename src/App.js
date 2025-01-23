@@ -26,6 +26,7 @@ import LibraryRequest from './allcomponents/home/LibraryRequest';
 import EditorSignup from './allcomponents/results/EditorSignup';
 import TermsConditions from './allcomponents/notificationmessage/TermsConditions';
 import LibraryRequestSubs from './allcomponents/library/LibraryRequestSubs';
+import StdLibrary from './allcomponents/student/StdLibrary';
 
 function App() {
   return (
@@ -54,7 +55,9 @@ function App() {
             <Route exact path="/libraryreqsub" element={<LibraryRequestSubs />}></Route>
             
             <Route exact path="/student/profile" element={<StudentProfile />}></Route>
+            <Route exact path="/std-library" element={<StdLibrary />}></Route>
             <Route exact path="/details/library" element={<LibraryRequest />}></Route>
+
             <Route exact path="/signup/editor" element={<EditorSignup />}></Route>
             <Route exact path="/editor/profile" element={<EditorProfile istrue={false}/>}></Route>
             <Route exact path="/results" element={<Results />}></Route>
