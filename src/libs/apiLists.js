@@ -32,6 +32,7 @@ const apiList = {
   updateStdProfile: `${server}/student/updateprofile`,
   requestLibrarySeat: `${server}/student/request-library`,
   getrequest: `${server}/student/getrequest`,
+  deleterequest: `${server}/student/deleterequest`,
 
   savecontactdetails: `${server}/user/save/contactdetails`,
   searchlib: `${server}/user/searchlib`,

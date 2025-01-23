@@ -40,6 +40,8 @@ const AuthState = (props) => {
         setUserProfile("login")
         setIsloggedin(false);
         toast.warn("Invalid User");
+        setStudentDetails({});
+        setLibraryDetails({});
     }
 
     const getLibOwner = async () => {
