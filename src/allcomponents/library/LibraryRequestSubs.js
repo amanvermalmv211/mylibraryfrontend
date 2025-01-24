@@ -76,13 +76,12 @@ const LibraryRequestSubs = () => {
     }
     else {
       try {
-        const response = await fetch(apiList.rejectrequest, {
+        const response = await fetch(apiList.rejectrequest + `/${data._id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
             'authtoken': localStorage.getItem("authtoken")
-          },
-          body: JSON.stringify({ data: selectedData })
+          }
         });
 
         const json = await response.json();

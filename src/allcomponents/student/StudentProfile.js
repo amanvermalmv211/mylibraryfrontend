@@ -10,6 +10,8 @@ import apiList from '../../libs/apiLists';
 import { toast } from 'react-toastify';
 import { stdProfileValidation } from '../../libs/Validation';
 import { LibownerProfileAnim } from '../notificationmessage/SkeletonAnim';
+import RequestView from './RequestView';
+import LibraryDetails from './LibraryDetails';
 
 const StudentProfile = () => {
 
@@ -22,7 +24,7 @@ const StudentProfile = () => {
             navigate("/login")
             return;
         }
-        if(!studentDetails.name){
+        if (!studentDetails.name) {
             getStudent();
         }
         // eslint-disable-next-line
@@ -211,6 +213,12 @@ const StudentProfile = () => {
                         </div>
                     </>
                 }
+
+                <div className="mb-6">
+                    <LibraryDetails />
+                </div>
+
+                <RequestView />
 
             </div>
         </div>

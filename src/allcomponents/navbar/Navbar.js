@@ -11,7 +11,7 @@ import { userType } from '../../libs/AllRoutes';
 const Navbar = () => {
 
     const context = useContext(authContext);
-    const { islogedin, setIsloggedin, allLinks, setLinks, userProfile, setUserProfile } = context;
+    const { islogedin, setIsloggedin, allLinks, setLinks, userProfile, setUserProfile, setLibraryDetails, setStudentDetails } = context;
 
     const [open, setOpen] = useState(false);
     let navigate = useNavigate();
@@ -32,6 +32,8 @@ const Navbar = () => {
         localStorage.removeItem("type");
         localStorage.removeItem("authtoken");
         localStorage.removeItem("isallowed");
+        setLibraryDetails({});
+        setStudentDetails({});
         setLinks();
         setUserProfile("login")
         setIsloggedin(false);
