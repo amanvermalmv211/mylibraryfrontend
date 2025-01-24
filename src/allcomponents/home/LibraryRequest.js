@@ -25,7 +25,7 @@ const LibraryRequest = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         setLibDetails(state);
-        if (!studentDetails.name) {
+        if (!studentDetails.name && islogedin) {
             getStudent();
         }
         // eslint-disable-next-line
@@ -98,6 +98,11 @@ const LibraryRequest = () => {
                 return;
             }
 
+            if (selectedSeat.gender !== studentDetails.gender) {
+                toast.error(`Gender mismatch: Seat is for ${selectedSeat.gender}s only`);
+                return;
+            }
+
             const selectedStartTime = parseInt(selectedShift.stTime, 10);
             const selectedEndTime = parseInt(selectedShift.endTime, 10);
 
@@ -134,6 +139,7 @@ const LibraryRequest = () => {
                 body: JSON.stringify({
                     libraryId: libDetails._id,
                     studentId: studentDetails._id,
+                    gender: studentDetails.gender,
                     idxFloor,
                     idxShift,
                     idxSeatSelected,
