@@ -24,7 +24,8 @@ export const student = () => {
     return [
         { name: "Result", link: "/results" },
         { name: "E-Books", link: "/ebooks" },
-        { name: "Library", link: "/std-library" }
+        { name: "Library", link: "/std-library" },
+        { name: "Notification", link: "/" }
     ]
 };
 
@@ -33,7 +34,7 @@ export const owner = () => {
         { name: "Result", link: "/results" },
         { name: "Library", link: "/libowner" },
         { name: "Requests", link: "/libraryreqsub" },
-        { name: "Management", link: "/" }
+        { name: "Notification", link: "/" }
     ]
 };
 

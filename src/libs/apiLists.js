@@ -19,7 +19,8 @@ const apiList = {
 
   getadmin: `${server}/superadmin/getadmin`,
   adminupdatelibrary: `${server}/superadmin/updatelibrary`,
-  gerequests: `${server}/superadmin/getrequest/library`,
+  getlibrequests: `${server}/superadmin/getrequest/library`,
+  getedtrequests: `${server}/superadmin/getrequest/editors`,
   getalllibrary: `${server}/superadmin/getalllibrary`,
 
   getlibowner: `${server}/libowner/getlibowner`,
