@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { IoIosSearch } from "react-icons/io";
 import GuidePage from './GuidePage';
 import SocialMediaSection from './SocialMediaSection';
+import homepagemainimage from '../images/mainimg.svg';
 
 const HomePage = () => {
 
@@ -16,7 +17,7 @@ const HomePage = () => {
         <>
             <div className="bg-gray-50 pb-6 sm:pb-8 lg:pb-12 relative overflow-hidden">
                 <div className="mx-auto max-w-screen-2xl px-4 md:px-8 text-gray-700">
-                    <section className="mb-8 flex flex-col justify-start gap-6 sm:gap-10 md:mb-16 md:gap-16 lg:flex-row pt-28 lg:pt-36">
+                    <section className="mb-8 flex flex-col justify-around gap-6 sm:gap-10 md:mb-16 md:gap-16 lg:flex-row pt-28 lg:pt-36">
                         <div className="flex flex-col justify-center sm:text-center lg:py-12 lg:text-left xl:w-5/12">
                             <h1 className="mb-4 text-4xl font-bold sm:text-5xl md:mb-6 md:text-6xl">Get Library around you!</h1>
 
@@ -27,8 +28,8 @@ const HomePage = () => {
                             </div>
                         </div>
 
-                        <div className="h-80 overflow-hidden rounded-lg bg-gray-100 xl:w-5/12 items-start xl:ml-16">
-                            <img src="https://static.vecteezy.com/system/resources/previews/027/224/407/original/girl-hugs-stack-of-books-standing-in-library-or-bookstore-and-rejoicing-at-opportunity-to-read-lot-png.png" loading="lazy" alt="myLibrary" className="h-full w-full object-cover mix-blend-darken object-center" />
+                        <div className="">
+                            <img src={homepagemainimage} loading="lazy" alt="myLibrary" className="h-full w-full object-cover object-center" />
                         </div>
                     </section>
 

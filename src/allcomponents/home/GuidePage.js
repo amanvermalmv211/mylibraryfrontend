@@ -1,4 +1,7 @@
 import React from 'react';
+import signup from '../images/signup.svg';
+import libsubs from '../images/libsubs.svg';
+import searchengines from '../images/searchengines.svg';
 
 const GuidePage = () => {
     return (
@@ -14,17 +17,17 @@ const GuidePage = () => {
 
             {/* Main Content Section */}
             <main className="py-2">
-                <div className="max-w-screen-xl mx-auto space-y-10">
+                <div className="max-w-screen-lg mx-auto space-y-10">
 
                     {/* Search for Libraries Section */}
-                    <section className="bg-white rounded-lg shadow-md overflow-hidden">
-                        <div className="flex max-md:flex-col items-center md:space-x-3">
+                    <section className="bg-white rounded-lg shadow-md overflow-hidden p-2">
+                        <div className="flex max-md:flex-col items-center">
                             <img
-                                src="https://wp.penguin.co.uk/wp-content/uploads/2020/11/number-books-main-image-1800x1200-1-768x512.jpg"
+                                src={searchengines}
                                 alt="Search Libraries"
-                                className="w-full h-80 xl:h-60 object-cover md:w-1/3"
+                                className="w-full h-full object-cover md:w-1/3"
                             />
-                            <div className='w-full p-2'>
+                            <div className='w-full px-3'>
                                 <h2 className="text-2xl font-semibold text-blue-600">1. Search for Libraries</h2>
                                 <p className="mt-2 md:text-lg">
                                     Finding a library that suits your needs is easy! Simply follow these steps:
@@ -39,14 +42,14 @@ const GuidePage = () => {
                     </section>
 
                     {/* Subscribe to a Library Section */}
-                    <section className="bg-white rounded-lg shadow-md overflow-hidden">
-                        <div className="flex max-md:flex-col md:flex-row-reverse items-center md:space-x-3">
+                    <section className="bg-white rounded-lg shadow-md overflow-hidden p-2">
+                        <div className="flex max-md:flex-col md:flex-row-reverse  items-center">
                             <img
-                                src="https://wp.penguin.co.uk/wp-content/uploads/2020/11/number-books-main-image-1800x1200-1-768x512.jpg"
+                                src={signup}
                                 alt="Search Libraries"
-                                className="w-full h-80 xl:h-60 object-cover md:w-1/3"
+                                className="w-full h-full object-cover md:w-1/3"
                             />
-                            <div className='w-full p-2'>
+                            <div className='w-full px-3'>
                                 <h2 className="text-2xl font-semibold text-blue-600">2. Subscribe to a Library</h2>
                                 <p className="mt-2 md:text-lg">
                                     Once you've found the perfect library, subscribing is quick and simple:
@@ -60,15 +63,16 @@ const GuidePage = () => {
                         </div>
                     </section>
 
+
                     {/* Access the Facilities Section */}
-                    <section className="bg-white rounded-lg shadow-md overflow-hidden">
-                        <div className="flex max-md:flex-col items-center md:space-x-3">
+                    <section className="bg-white rounded-lg shadow-md overflow-hidden p-2">
+                        <div className="flex max-md:flex-col items-center">
                             <img
-                                src="https://wp.penguin.co.uk/wp-content/uploads/2020/11/number-books-main-image-1800x1200-1-768x512.jpg"
+                                src={libsubs}
                                 alt="Search Libraries"
-                                className="w-full h-80 xl:h-60 object-cover md:w-1/3"
+                                className="w-full h-full object-cover md:w-1/3"
                             />
-                            <div className='w-full p-2'>
+                            <div className='w-full px-3'>
                                 <h2 className="text-2xl font-semibold text-blue-600">3. Access the Facilities</h2>
                                 <p className="mt-2 md:text-lg">
                                     After subscribing, it's time to enjoy the library’s facilities:

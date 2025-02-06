@@ -24,6 +24,32 @@ const Request = () => {
         navigate("/initlib", { state: data });
     }
 
+    const initEditor = async (id) => {
+        setLoading(true);
+        try {
+            const response = await fetch(apiList.initeditor + `/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authtoken': localStorage.getItem("authtoken")
+                }
+            });
+
+            const json = await response.json();
+            if (json.success) {
+                setAllEditors(allEditors.filter((data)=>{return data._id !== id}));
+                toast.success(json.message)
+            }
+            else {
+                toast.warn(json.message);
+            }
+        }
+        catch (err) {
+            toast.warn(`Admin Req. Editor: ${err.message}`);
+        }
+        setLoading(false);
+    }
+
     const getEdtRequests = async () => {
         setEdtLoading(true);
         try {
@@ -123,7 +149,7 @@ const Request = () => {
                                             <div className='max-lg:text-sm p-1'>
                                                 <div onClick={(e) => (e.stopPropagation())} className='inline-block'>Contact No: <Link to={`tel:+91${data.contactnum}`}>{data.contactnum}</Link></div>
 
-                                                <button className='block w-64 m-1 p-1 text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 mx-auto' onClick={() => getEdtRequests()}>Allowed Editor
+                                                <button className='block w-64 m-1 p-1 text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 mx-auto' onClick={() => initEditor(data._id)}>Allowed Editor
                                                     {edtLoading && <AiOutlineLoading3Quarters className="animate-spin inline-block ml-2 mb-1" />}
                                                 </button>
                                             </div>

@@ -8,6 +8,7 @@ import apiList from '../../libs/apiLists';
 import { SuccessModal } from '../notificationmessage/Modal';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import InputBox from '../notificationmessage/InputBox';
+import contact from '../images/contact.svg';
 
 const Contact = () => {
 
@@ -107,7 +108,7 @@ const Contact = () => {
                     </div>
 
                     <div className='lg:w-2/5 h-64 py-2 md:py-4'>
-                        <img src="https://img.freepik.com/premium-vector/handshake-vector-concept_171919-1131.jpg" alt="" className='w-full h-full object-contain mix-blend-darken' />
+                        <img src={contact} alt="" className='w-full h-full object-contain mix-blend-darken' />
                     </div>
                 </section>
 

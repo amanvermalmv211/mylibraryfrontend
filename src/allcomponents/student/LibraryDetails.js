@@ -13,7 +13,7 @@ const LibraryDetails = () => {
                 studentDetails._id &&
                 <div className="mt-4 text-gray-700">
                     <h1 className='text-2xl md:text-4xl font-bold text-center mb-4'>Library Subscriptions</h1>
-                    <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-2">
+                    <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-2 gap-8">
                         {studentDetails.subscriptionDetails.map((studentDetails, idx) => (
                             <div key={idx} className='border rounded-md overflow-hidden bg-white shadow-md'>
                                 <div className='bg-gray-300'>
