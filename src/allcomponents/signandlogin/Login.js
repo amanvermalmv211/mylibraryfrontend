@@ -7,6 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import authContext from '../../context/auth/authContext';
 import { loginValidation } from '../../libs/Validation';
 import InputBox from '../notificationmessage/InputBox';
+import loginsvg from '../images/loginsvg.svg';
 
 const Login = () => {
 
@@ -134,8 +135,8 @@ const Login = () => {
                 </form>
 
                 <div className='absolute -bottom-6 -left-8'>
-                    <div className='w-28 h-28'>
-                        <img src="https://static.vecteezy.com/system/resources/thumbnails/016/717/556/small/man-reading-book-beside-bookshelf-free-png.png" alt="" className='w-full h-full' />
+                    <div className='w-32 h-32'>
+                        <img src={loginsvg} alt="" className='w-full h-full' />
                     </div>
                 </div>
 

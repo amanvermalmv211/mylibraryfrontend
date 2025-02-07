@@ -1,6 +1,5 @@
 import React from "react";
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const SocialMediaSection = () => {
@@ -11,22 +10,22 @@ const SocialMediaSection = () => {
                 <p className="mt-3 text-lg">Join our online community for the latest updates, events, and discussions.</p>
 
                 <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
-                    <Link to="https://facebook.com" target="_blank" rel="noopener noreferrer" className="group relative p-6 rounded-xl bg-blue-100 shadow-md shadow-blue-200 transition-all duration-300 hover:bg-blue-200">
+                    <Link to="https://www.facebook.com/profile.php?id=100011377276805" target="_blank" rel="noopener noreferrer" className="group relative p-6 rounded-xl bg-blue-100 shadow-md shadow-blue-200 transition-all duration-300 hover:bg-blue-200">
                         <FaFacebookF className="text-4xl mx-auto text-blue-700 group-hover:scale-110 transition-all duration-300" />
                         <p className="mt-3 text-lg font-medium group-hover:scale-110 group-hover:text-blue-700 transition-all duration-300">Facebook</p>
                     </Link>
 
-                    <Link to="https://instagram.com" target="_blank" rel="noopener noreferrer" className="group relative p-6 rounded-xl bg-pink-100 shadow-md shadow-pink-200 transition-all duration-300 hover:bg-pink-200">
+                    <Link to="https://www.instagram.com/invites/contact/?i=1ele9i6x7lf2r&utm_content=40gsjzh" target="_blank" rel="noopener noreferrer" className="group relative p-6 rounded-xl bg-pink-100 shadow-md shadow-pink-200 transition-all duration-300 hover:bg-pink-200">
                         <FaInstagram className="text-4xl mx-auto text-pink-500 group-hover:scale-110 transition-all duration-300" />
                         <p className="mt-3 text-lg font-medium group-hover:scale-110 group-hover:text-pink-600 transition-all duration-300">Instagram</p>
                     </Link>
 
-                    <Link to="https://twitter.com" target="_blank" rel="noopener noreferrer" className="group relative p-6 rounded-xl bg-neutral-200 shadow-md group-hover:scale-110 transition-all duration-300 hover:bg-neutral-300">
-                        <FaXTwitter className="text-4xl mx-auto group-hover:scale-110 transition-all duration-300" />
-                        <p className="mt-3 text-lg font-medium text-gray-600 group-hover:scale-110 group-hover:text-gray-800 transition-all duration-300">Twitter</p>
+                    <Link to="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="group relative p-6 rounded-xl bg-red-100 shadow-md shadow-red-200 transition-all duration-300 hover:bg-red-200">
+                        <FaYoutube className="text-4xl mx-auto text-red-600 group-hover:scale-110 transition-all duration-300" />
+                        <p className="mt-3 text-lg font-medium group-hover:scale-110 group-hover:text-red-600 transition-all duration-300">YouTube</p>
                     </Link>
 
-                    <Link to="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="group relative p-6 rounded-xl bg-blue-100 shadow-md shadow-blue-200 transition-all duration-300 hover:bg-blue-200">
+                    <Link to="https://www.linkedin.com/in/aman-verma-770ab5252" target="_blank" rel="noopener noreferrer" className="group relative p-6 rounded-xl bg-blue-100 shadow-md shadow-blue-200 transition-all duration-300 hover:bg-blue-200">
                         <FaLinkedinIn className="text-4xl mx-auto text-blue-800 group-hover:scale-110 transition-all duration-300" />
                         <p className="mt-3 text-lg font-medium group-hover:scale-110 group-hover:text-blue-800 transition-all duration-300">LinkedIn</p>
                     </Link>

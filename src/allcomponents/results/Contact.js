@@ -9,6 +9,7 @@ import { SuccessModal } from '../notificationmessage/Modal';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import InputBox from '../notificationmessage/InputBox';
 import contact from '../images/contact.svg';
+import contactus from '../images/contactus.svg';
 
 const Contact = () => {
 
@@ -98,21 +99,21 @@ const Contact = () => {
         <div className='bg-gray-50 pb-6 sm:pb-8 lg:pb-12'>
             <div className='mx-auto max-w-screen-2xl px-4 md:px-8 pt-28 text-gray-700'>
 
-                <section className="mb-12 flex max-lg:flex-col">
+                <section className="flex max-lg:flex-col justify-around">
 
-                    <div className='lg:w-3/5'>
+                    <div className='lg:w-2/3'>
                         <h2 className='text-xl text-blue-600 font-semibold mb-2'>myLibrary for Enterpreneurs!</h2>
 
                         <h1 className='mb-2 text-4xl font-bold md:text-5xl'>Wanna join us?</h1>
-                        <p className='mb-4 text-gray-700 text-justify'>If you’re planning to start your own library but are still unsure how to proceed, join us! We will guide you in establishing a successful library and help you connect with students. Our mission is to support library owners across the country in joining our platform and enhancing their services. Reach out to learn more!</p>
+                        <p className='text-gray-700 text-justify'>If you’re planning to start your own library but are still unsure how to proceed, join us! We will guide you in establishing a successful library and help you connect with students. Our mission is to support library owners across the country in joining our platform and enhancing their services. Reach out to learn more!</p>
                     </div>
 
-                    <div className='lg:w-2/5 h-64 py-2 md:py-4'>
-                        <img src={contact} alt="" className='w-full h-full object-contain mix-blend-darken' />
+                    <div className='md:h-72'>
+                        <img src={contact} alt="" className='w-full h-full object-cover md:object-contain' />
                     </div>
                 </section>
 
-                <section className='my-16'>
+                <section className='my-12'>
                     <SuccessModal open={open} setOpen={setOpen} fromHeading={message}>
                         <div className='font-semibold'>Our team will contact you soon!</div>
                     </SuccessModal>
@@ -172,19 +173,19 @@ const Contact = () => {
                     </div>
                 </section>
 
-                <section className='border border-gray-300 my-12 rounded-2xl flex items-center justify-center space-x-2 flex-col lg:flex-row bg-gradient-to-tl from-blue-100 to-gray-50 lg:mx-12'>
-                    <div className='lg:w-2/5 h-60 lg:h-80 py-2 md:py-4'>
-                        <img src="https://cdni.iconscout.com/illustration/premium/thumb/contact-us-5795988-4849052.png" alt="" className='w-full h-full object-contain mix-blend-darken' />
+                <section className='border border-gray-300 my-12 rounded-2xl flex items-center flex-col lg:flex-row bg-gradient-to-tl from-blue-100 to-gray-50'>
+                    <div className='lg:w-2/5 h-72'>
+                        <img src={contactus} alt="" className='w-full h-full object-cover max-lg:scale-125' />
                     </div>
 
-                    <div className='flex flex-col lg:w-3/5 p-2'>
-                        <div className='my-4'>
+                    <div className='flex flex-col lg:w-3/5 p-2 max-lg:mb-4'>
+                        <div>
                             <h1 className='text-4xl font-bold text-blue-700'>Contact Us On</h1>
-                            <p className='mb-10 font-semibold text-justify'>You can directly contect us on following platforms for the faster communication!</p>
+                            <p className='mb-4 font-semibold text-justify'>You can directly contect us on following platforms for the faster communication!</p>
                             <ul className='flex max-lg:justify-center flex-wrap text-white'>
                                 {
                                     buttonLinks.map((data, idx) => {
-                                        return <Link key={idx} to={data.link} className={`flex items-center justify-center space-x-1 border ${data.border} p-2 rounded-lg ${data.bg} ${data.hover} w-28 m-1`}><span>{data.name}</span> {data.icon}</Link>
+                                        return <Link key={idx} to={data.link} className={`flex items-center justify-center space-x-1 border ${data.border} p-2 rounded-lg ${data.bg} ${data.hover} w-32 m-1`}><span>{data.name}</span> {data.icon}</Link>
                                     })
                                 }
                             </ul>

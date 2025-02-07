@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { IoIosSearch } from "react-icons/io";
 import GuidePage from './GuidePage';
 import SocialMediaSection from './SocialMediaSection';
-import homepagemainimage from '../images/mainimg.svg';
+import Studying from '../images/Studying.svg';
 
 const HomePage = () => {
 
@@ -29,7 +29,7 @@ const HomePage = () => {
                         </div>
 
                         <div className="">
-                            <img src={homepagemainimage} loading="lazy" alt="myLibrary" className="h-full w-full object-cover object-center" />
+                            <img src={Studying} loading="lazy" alt="myLibrary" className="h-full w-full object-cover object-center" />
                         </div>
                     </section>
 

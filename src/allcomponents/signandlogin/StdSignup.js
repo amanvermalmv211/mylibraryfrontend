@@ -9,6 +9,7 @@ import InputBox from '../notificationmessage/InputBox';
 import authContext from '../../context/auth/authContext';
 import { PreviewModal } from '../notificationmessage/Modal';
 import TermsConditions from '../notificationmessage/TermsConditions';
+import studytable from '../images/studytable.svg';
 
 const StdSignup = () => {
 
@@ -160,7 +161,7 @@ const StdSignup = () => {
                     <h2 className={`text-center text-2xl font-extrabold pt-2`}>Sign up for Student</h2>
                     <div className='text-sm lg:hidden'>Already have an account? <Link to="/login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
                     <div className='hidden lg:flex flex-col w-full h-60 items-center justify-center'>
-                        <img src="https://static.vecteezy.com/system/resources/thumbnails/016/717/556/small/man-reading-book-beside-bookshelf-free-png.png" alt="" className='w-full h-full object-contain' />
+                        <img src={studytable} alt="" className='w-full h-full object-contain' />
                         <div className='text-sm'>Already have an account? <Link to="/login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
                     </div>
                 </div>
@@ -252,8 +253,8 @@ const StdSignup = () => {
                 </form>
 
                 <div className='absolute -bottom-6 -left-8 lg:hidden'>
-                    <div className='w-28 h-28'>
-                        <img src="https://static.vecteezy.com/system/resources/thumbnails/016/717/556/small/man-reading-book-beside-bookshelf-free-png.png" alt="" className='w-full h-full' />
+                    <div className='w-32 h-32'>
+                        <img src={studytable} alt="" className='w-full h-full' />
                     </div>
                 </div>
 

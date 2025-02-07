@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import termsandconditions from '../images/termsandconditions.svg';
 
 const TermsConditions = (props) => {
 
@@ -75,6 +76,11 @@ const TermsConditions = (props) => {
             <p className="text-sm text-gray-500 text-center mb-4">
                 Effective Date: <span className="font-semibold">12 Jan, 2025</span>
             </p>
+
+            <div className='w-full lg:h-80'>
+                <img src={termsandconditions} alt="" className='w-full h-full object-cover lg:object-contain' />
+            </div>
+
             <div className="space-y-8 text-gray-700">
                 {terms.map((section, index) => (
                     <section key={index}>
