@@ -177,6 +177,17 @@ const LibOwner = () => {
                                             </ul>
                                         </td>
                                     </tr>
+                                    {
+                                        libraryDetails.floors[idxFloor].shifts[idxShift].description && <tr className="">
+                                            <div className='py-2 px-4'>
+                                                <span className='font-bold'>Note: </span>
+                                                {
+                                                    libraryDetails.floors[idxFloor].shifts[idxShift].description
+                                                }
+                                            </div>
+                                        </tr>
+                                    }
+
                                 </tbody>
                             </table>
                         </div>

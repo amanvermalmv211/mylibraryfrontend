@@ -5,6 +5,7 @@ import apiList from '../../libs/apiLists';
 import { AllLibrariesAnim } from '../notificationmessage/SkeletonAnim';
 import { Link, useNavigate } from 'react-router-dom';
 import authContext from '../../context/auth/authContext';
+import searchlibrary from '../images/searchlibrary.svg';
 
 const SearchLibrary = () => {
     const context = useContext(authContext);
@@ -119,6 +120,14 @@ const SearchLibrary = () => {
                         ))}
                     </div>
                 )}
+
+                {
+                    !(searchLibRes.length > 0) &&
+                    <div className='w-80 h-80 mx-auto'>
+                        <img src={searchlibrary} alt='Search Library' className='w-full h-full' />
+                    </div>
+                }
+
             </div>
         </div>
     );

@@ -14,6 +14,7 @@ import { GiCrossMark } from 'react-icons/gi';
 import { MdVerifiedUser } from 'react-icons/md';
 import InputBox from '../notificationmessage/InputBox';
 import { TiCancel } from 'react-icons/ti';
+import norequest from '../images/norequest.svg';
 
 const LibraryRequestSubs = () => {
 
@@ -375,7 +376,10 @@ const LibraryRequestSubs = () => {
           }
           {
             !loading && allRequests.length === 0 && <>
-              <div className='h-96 flex items-center justify-center'>
+              <div className='h-96 flex flex-col items-center justify-center'>
+                <div>
+                  <img src={norequest} alt='Not Found' className='w-full h-full' />
+                </div>
                 <div className='font-bold text-2xl md:text-4xl text-center'>There is no requests for the approval!</div>
               </div>
             </>

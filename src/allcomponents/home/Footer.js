@@ -31,19 +31,19 @@ const Footer = () => {
 
                         <div className="flex items-center justify-center gap-8">
 
-                            <Link to="/" target="_blank" className="text-blue-600 bg-white rounded-full transition duration-200 hover:text-blue-700 scale-150">
+                            <Link to="https://www.facebook.com/profile.php?id=100011377276805" target="_blank" className="text-blue-600 bg-white rounded-full transition duration-200 hover:text-blue-700 scale-150">
                                 <FaFacebook />
                             </Link>
 
-                            <Link to="/" target="_blank" className="text-pink-500 transition duration-200 hover:text-pink-600 scale-150">
+                            <Link to="https://www.instagram.com/invites/contact/?i=1ele9i6x7lf2r&utm_content=40gsjzh" target="_blank" className="text-pink-500 transition duration-200 hover:text-pink-600 scale-150">
                                 <FaInstagram />
                             </Link>
 
-                            <Link to="/" target="_blank" className="text-red-500 transition duration-200 hover:text-red-600 scale-150">
+                            <Link to="https://www.youtube.com" target="_blank" className="text-red-500 transition duration-200 hover:text-red-600 scale-150">
                                 <FaYoutube />
                             </Link>
 
-                            <Link to="/" target="_blank" className="text-blue-700 bg-white rounded-lg transition duration-200 hover:text-blue-800 active:text-gray-600 scale-150">
+                            <Link to="https://www.linkedin.com/in/aman-verma-770ab5252" target="_blank" className="text-blue-700 bg-white rounded-lg transition duration-200 hover:text-blue-800 active:text-gray-600 scale-150">
                                 <ImLinkedin />
                             </Link>
 

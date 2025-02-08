@@ -37,7 +37,7 @@ const Request = () => {
 
             const json = await response.json();
             if (json.success) {
-                setAllEditors(allEditors.filter((data)=>{return data._id !== id}));
+                setAllEditors(allEditors.filter((data) => { return data._id !== id }));
                 toast.success(json.message)
             }
             else {
@@ -109,7 +109,7 @@ const Request = () => {
                 <div className='pt-28 text-gray-700'>
                     <h1 className='text-2xl md:text-4xl font-bold text-center mb-8'>Requests To Join Us</h1>
 
-                    <button className='block w-64 mt-2 py-2 text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 mx-auto' onClick={() => getEdtRequests()}>Get Editor's Requests
+                    <button className='block w-64 m-4 py-2 text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 mx-auto' onClick={() => getEdtRequests()}>Get Editor's Requests
                         {edtLoading && <AiOutlineLoading3Quarters className="animate-spin inline-block ml-2 mb-1" />}
                     </button>
 

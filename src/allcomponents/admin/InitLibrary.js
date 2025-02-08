@@ -53,7 +53,7 @@ const InitLibrary = () => {
     const [idxFloor, setIdxFloor] = useState(0);
     const [idxShift, setIdxShift] = useState(0);
     const [actSeats, setactSeats] = useState(libDetails.floors[0].shifts[0].numberOfSeats);
-    const priceOpt = ["1 Month", "2 Months", "3 Months", "6 Months", "1 Years"];
+    const priceOpt = ["30 Days", "60 Days", "90 Days", "180 Days", "365 Days"];
 
     const handleOnChange = (key, value) => {
         setLibDetails((prevData) => ({ ...prevData, [key]: value }));
@@ -63,13 +63,14 @@ const InitLibrary = () => {
         const newFloor = {
             shifts: [
                 {
-                    stTime: '7',
-                    endTime: '12',
+                    stTime: 7,
+                    endTime: 12,
+                    description: '',
                     price: [
                         {
                             actualPrice: 700,
                             discountPrice: 500,
-                            duration: '1 Month'
+                            duration: '30 Days'
                         }
                     ],
                     numberOfSeats: Array(40).fill({
@@ -79,13 +80,14 @@ const InitLibrary = () => {
                     })
                 },
                 {
-                    stTime: '12',
-                    endTime: '17',
+                    stTime: 12,
+                    endTime: 17,
+                    description: '',
                     price: [
                         {
                             actualPrice: 700,
                             discountPrice: 500,
-                            duration: '1 Month'
+                            duration: '30 Days'
                         }
                     ],
                     numberOfSeats: Array(40).fill({
@@ -95,13 +97,14 @@ const InitLibrary = () => {
                     })
                 },
                 {
-                    stTime: '17',
-                    endTime: '21',
+                    stTime: 17,
+                    endTime: 21,
+                    description: '',
                     price: [
                         {
                             actualPrice: 700,
                             discountPrice: 500,
-                            duration: '1 Month'
+                            duration: '30 Days'
                         }
                     ],
                     numberOfSeats: Array(40).fill({
@@ -126,11 +129,12 @@ const InitLibrary = () => {
         const newShift = {
             stTime: 0,
             endTime: 12,
+            description: '',
             price: [
                 {
                     actualPrice: 700,
                     discountPrice: 500,
-                    duration: '1 Month'
+                    duration: '30 Days'
                 }
             ],
             numberOfSeats: Array(40).fill({
@@ -337,7 +341,7 @@ const InitLibrary = () => {
             <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
                 <div className='pt-28 text-center font-bold text-2xl md:text-4xl'>Fill details carefully</div>
 
-                <div className={`my-10`}>
+                <div className={`my-6`}>
                     <form className="mx-auto max-w-screen-md space-y-4" onSubmit={(e) => e.preventDefault()}>
                         <div className={`space-y-1`}>
 
@@ -459,6 +463,23 @@ const InitLibrary = () => {
 
                                                 <SelectBox name="End time" id="endTime" value={libDetails.floors[idxFloor].shifts[idxShift].endTime} handleOnChange={handleShiftChange} />
                                             </div>
+
+                                            <div className='w-full'>
+                                                <label htmlFor="description" className="px-1 text-sm">
+                                                    Description
+                                                </label>
+                                                <textarea
+                                                    id="description"
+                                                    name="description"
+                                                    type="text"
+                                                    autoComplete="description"
+                                                    className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                                    placeholder="Enter descriptioin for this shift if any!"
+                                                    value={libDetails.floors[idxFloor].shifts[idxShift].description}
+                                                    onChange={(e) => {handleShiftChange(e) }}
+                                                />
+                                            </div>
+
                                             <div className='flex items-center justify-center space-x-1.5 w-full'>
                                                 <InputBox name="Max Student" id="pin" type="text" value={libDetails.floors[idxFloor].shifts[idxShift].numberOfSeats.length} placeholder="Enter the price for the shift" handleOnChange={handleShiftSeatChange} />
 

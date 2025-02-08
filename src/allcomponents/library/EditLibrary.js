@@ -52,7 +52,7 @@ const EditLibrary = () => {
     const [idxFloor, setIdxFloor] = useState(0);
     const [idxShift, setIdxShift] = useState(0);
     const [actSeats, setactSeats] = useState(libDetails.floors[0].shifts[0].numberOfSeats);
-    const priceOpt = ["1 Month", "2 Months", "3 Months", "6 Months", "1 Years"];
+    const priceOpt = ["30 Days", "60 Days", "90 Days", "180 Days", "365 Days"];
 
     const handleFloorSectorChange = (e) => {
         setIdxFloor(e.target.value);
@@ -147,6 +147,16 @@ const EditLibrary = () => {
 
         setLibDetails((prevData) => ({ ...prevData, floors: updatedFloors }));
         setactSeats(updatedSeats);
+    };
+
+    const handleShiftChange = (e) => {
+        const { name, value } = e.target;
+        const updatedFloors = [...libDetails.floors];
+        updatedFloors[idxFloor].shifts[idxShift] = {
+            ...updatedFloors[idxFloor].shifts[idxShift],
+            [name]: value,
+        };
+        setLibDetails((prevData) => ({ ...prevData, floors: updatedFloors }));
     };
 
     const handleEditLibrary = async () => {
@@ -247,6 +257,23 @@ const EditLibrary = () => {
                         <div className={`space-y-1`}>
                             <div className='border border-gray-400 rounded-md bg-gray-200 p-1 relative'>
                                 <div className='font-semibold text-center'>Shift No. {Number(idxShift) + 1} of Floor {Number(idxFloor)}</div>
+
+                                <div className='w-full'>
+                                    <label htmlFor="description" className="px-1 text-sm">
+                                        Description
+                                    </label>
+                                    <textarea
+                                        id="description"
+                                        name="description"
+                                        type="text"
+                                        autoComplete="description"
+                                        className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                        placeholder="Enter a description for this shift, if applicable. Provide all relevant details in a single line."
+                                        value={libDetails.floors[idxFloor].shifts[idxShift].description}
+                                        onChange={(e) => { handleShiftChange(e) }}
+                                    />
+                                </div>
+
                                 <div className='flex flex-col items-center justify-center w-full'>
                                     {
                                         libDetails.floors[idxFloor].shifts[idxShift].price.map((price, idx) => {
