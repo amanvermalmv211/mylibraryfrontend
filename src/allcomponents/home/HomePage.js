@@ -5,6 +5,7 @@ import { IoIosSearch } from "react-icons/io";
 import GuidePage from './GuidePage';
 import SocialMediaSection from './SocialMediaSection';
 import Studying from '../images/Studying.svg';
+import CallToAction from './CallToAction';
 
 const HomePage = () => {
 
@@ -61,6 +62,8 @@ const HomePage = () => {
                     <Services />
 
                     <GuidePage />
+
+                    <CallToAction />
 
                     <SocialMediaSection />
 

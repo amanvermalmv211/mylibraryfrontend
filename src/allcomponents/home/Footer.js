@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { FaInstagram, FaFacebook } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
 import { ImLinkedin } from "react-icons/im";
 import { footerLinks } from '../../libs/AllRoutes';
 
@@ -40,8 +39,8 @@ const Footer = () => {
                                 <FaInstagram />
                             </Link>
 
-                            <Link to="/" target="_blank" className="text-gray-900 transition duration-200 hover:text-black scale-150">
-                                <FaXTwitter />
+                            <Link to="/" target="_blank" className="text-red-500 transition duration-200 hover:text-red-600 scale-150">
+                                <FaYoutube />
                             </Link>
 
                             <Link to="/" target="_blank" className="text-blue-700 bg-white rounded-lg transition duration-200 hover:text-blue-800 active:text-gray-600 scale-150">

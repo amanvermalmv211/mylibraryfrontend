@@ -35,7 +35,7 @@ const GuidePage = () => {
                                 <ul className="mt-2 list-disc space-y-2 ml-4 md:text-lg">
                                     <li><strong>Use the Search Bar</strong>: Enter your desired location, or library name.</li>
                                     <li><strong>Explore the Libraries</strong>: Browse the list of libraries with descriptions, and near by location.</li>
-                                    <li><strong>View more details</strong>: Click on view and request button to get know more about an perticular library.</li>
+                                    <li><strong>View more details</strong>: Click on "View and request" button to get to know more about an particular library.</li>
                                 </ul>
                             </div>
                         </div>

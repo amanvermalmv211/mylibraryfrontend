@@ -26,7 +26,7 @@ const LibraryDetails = () => {
                                 </div>
                                 <div className='p-2 max-md:text-sm'>
                                     <h2 className='font-semibold text-lg'>{studentDetails.libraryId.libname}</h2>
-                                    <p>Subscribed for seat number: {studentDetails.idxSeatSelected} of shift: {studentDetails.idxShift} on floor: {studentDetails.idxFloor}</p>
+                                    <p>Subscribed for seat number: {Number(studentDetails.idxSeatSelected) + 1} of shift: {Number(studentDetails.idxShift) + 1} on floor: {studentDetails.idxFloor}</p>
 
                                     <p>Subscription Date: {new Date(studentDetails.subscriptionDate).getDate()}/{Number(new Date(studentDetails.subscriptionDate).getMonth()) + 1}/{new Date(studentDetails.subscriptionDate).getFullYear()}</p>
 
