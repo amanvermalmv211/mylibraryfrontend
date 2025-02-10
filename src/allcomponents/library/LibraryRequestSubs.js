@@ -20,7 +20,7 @@ const LibraryRequestSubs = () => {
 
   const navigate = useNavigate(null);
   const context = useContext(authContext);
-  const { invalidUser, libraryDetails, getLibOwner } = context;
+  const { invalidUser, libraryDetails, setLibraryDetails, getLibOwner } = context;
 
   const [openPreview, setOpenPreview] = useState(false);
   const [openReject, setOpenReject] = useState(false);
@@ -151,6 +151,7 @@ const LibraryRequestSubs = () => {
 
       const json = await response.json();
       if (json.success) {
+        setLibraryDetails(json.data);
         setAllRequests(allRequests.filter((request) => request._id !== data._id));
         toast.success(json.message);
       } else {

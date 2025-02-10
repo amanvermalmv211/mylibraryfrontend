@@ -12,17 +12,17 @@ const LibraryDetails = () => {
             {
                 studentDetails._id &&
                 <div className="mt-4 text-gray-700">
-                    <h1 className='text-2xl md:text-4xl font-bold text-center mb-4'>Library Subscriptions</h1>
-                    <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-2 gap-8">
+                    <h1 className='text-2xl md:text-4xl font-bold text-center mb-8'>Library Subscriptions</h1>
+                    <div className="flex max-lg:flex-col max-lg:space-y-12 items-center justify-center lg:space-x-12">
                         {studentDetails.subscriptionDetails.map((studentDetails, idx) => (
-                            <div key={idx} className='border rounded-md overflow-hidden bg-white shadow-md'>
+                            <div key={idx} className='border rounded-md overflow-hidden bg-white shadow-md w-full lg:max-w-screen-sm'>
                                 <div className='bg-gray-300'>
                                     <iframe
                                         title='addloc'
                                         src={studentDetails.libraryId.googlemap}
                                         loading="lazy"
                                         referrerPolicy="no-referrer-when-downgrade"
-                                        className='w-full h-40'></iframe>
+                                        className='w-full h-60'></iframe>
                                 </div>
                                 <div className='p-2 max-md:text-sm'>
                                     <h2 className='font-semibold text-lg'>{studentDetails.libraryId.libname}</h2>
