@@ -34,7 +34,7 @@ export const owner = () => {
         { name: "Result", link: "/results" },
         { name: "Library", link: "/libowner" },
         { name: "Requests", link: "/libraryreqsub" },
-        { name: "Notification", link: "/" }
+        { name: "Notification", link: "/notif-owner" }
     ]
 };
 

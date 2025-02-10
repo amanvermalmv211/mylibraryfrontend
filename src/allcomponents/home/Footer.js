@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
 import { ImLinkedin } from "react-icons/im";
 import { footerLinks } from '../../libs/AllRoutes';
+import myLiblogo from '../images/myLiblogo.svg';
 
 
 const Footer = () => {
@@ -13,8 +14,16 @@ const Footer = () => {
     }, []);
 
     return (
-        <div className="bg-neutral-700 pt-4 sm:pt-10 lg:pt-12 text-gray-200">
+        <div className="bg-neutral-700 text-gray-200">
             <footer className="mx-auto max-w-screen-2xl px-4 md:px-8">
+
+                <div className='py-10'>
+                    <Link to="/">
+                        <img src={myLiblogo} alt="" className='w-28 h-14 object-contain scale-150 mx-auto' />
+                    </Link>
+                </div>
+
+
                 <div className="flex flex-col items-center justify-between gap-4 border-t border-b py-6 md:flex-row rounded-lg px-2">
 
                     <ul className='flex flex-wrap justify-center gap-x-4 gap-y-2 md:justify-start md:gap-6'>

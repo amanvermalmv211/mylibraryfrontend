@@ -260,7 +260,7 @@ const EditLibrary = () => {
 
                                 <div className='w-full'>
                                     <label htmlFor="description" className="px-1 text-sm">
-                                        Description
+                                        Description (Optional)
                                     </label>
                                     <textarea
                                         id="description"

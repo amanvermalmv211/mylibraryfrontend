@@ -6,6 +6,7 @@ import { AllLibrariesAnim } from '../notificationmessage/SkeletonAnim';
 import { Link, useNavigate } from 'react-router-dom';
 import authContext from '../../context/auth/authContext';
 import searchlibrary from '../images/searchlibrary.svg';
+import librarynotfound from '../images/librarynotfound.svg';
 
 const SearchLibrary = () => {
     const context = useContext(authContext);
@@ -18,6 +19,7 @@ const SearchLibrary = () => {
 
     const navigate = useNavigate(null);
 
+    const [noLib, setNoLib] = useState(false);
     const [spinLoading, setSpinLoading] = useState(false);
     const [searchParams, setSearchParams] = useState({
         libname: '',
@@ -27,6 +29,7 @@ const SearchLibrary = () => {
 
     const handleSearch = async () => {
         setSearchLibRes([]);
+        setNoLib(false);
         const { libname, localarea, city } = searchParams;
 
         if (!libname.trim() && !localarea.trim() && !city.trim()) {
@@ -56,6 +59,7 @@ const SearchLibrary = () => {
                 setSearchLibRes(json.data);
             } else {
                 toast(json.message);
+                setNoLib(true);
             }
         } catch (err) {
             toast.error(`Search Lib: ${err.message}`);
@@ -122,9 +126,17 @@ const SearchLibrary = () => {
                 )}
 
                 {
-                    !(searchLibRes.length > 0) &&
+                    (!(searchLibRes.length > 0) && !noLib) &&
                     <div className='w-80 h-80 mx-auto'>
                         <img src={searchlibrary} alt='Search Library' className='w-full h-full' />
+                    </div>
+                }
+
+                {
+                    noLib &&
+                    <div className='w-80 h-80 mx-auto mt-10'>
+                        <p className='text-2xl font-semibold text-center'>No Libraries Found!</p>
+                        <img src={librarynotfound} alt='Search Library' className='w-full h-full' />
                     </div>
                 }
 
