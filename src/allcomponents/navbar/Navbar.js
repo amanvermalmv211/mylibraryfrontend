@@ -18,18 +18,28 @@ const Navbar = () => {
     let navigate = useNavigate();
 
     useEffect(() => {
-        if(userType()){
+        if (userType()) {
             setUserProfile(userType() + "/profile");
         }
-        else{
+        else {
             setUserProfile("login")
         }
         setLinks();
 
-        // eslint-disable-next-line
-    }, []);
+        if (open) {
+            document.body.classList.add('modal-open');
+        } else {
+            document.body.classList.remove('modal-open');
+        }
 
-    const handleLogout = ()=>{
+        return () => {
+            document.body.classList.remove('modal-open');
+        };
+
+        // eslint-disable-next-line
+    }, [open]);
+
+    const handleLogout = () => {
         localStorage.removeItem("type");
         localStorage.removeItem("authtoken");
         localStorage.removeItem("isallowed");
@@ -47,7 +57,7 @@ const Navbar = () => {
             <div className='fixed top-0 p-4 w-full flex items-center justify-center z-50'>
                 <div className='border border-gray-300 md:w-4/5 w-full flex items-center justify-between px-2 md:px-4 bg-gray-200 shadow-[1px_6px_10px] shadow-gray-400 rounded-xl'>
                     <div className='flex items-center space-x-2'>
-                        <Link to="/">
+                        <Link to="/" onClick={() => { setOpen(false) }}>
                             <img src={myLiblogo1} alt="" className='w-28 h-14 object-contain' />
                         </Link>
 
@@ -69,7 +79,7 @@ const Navbar = () => {
                             <IoIosSearch className='scale-150' />
                         </Link>
 
-                        <Link to={"/"+userProfile} className="border border-black p-0.5 rounded-full">
+                        <Link to={"/" + userProfile} className="border border-black p-0.5 rounded-full">
                             <FaUser className='scale-90' />
                         </Link>
 
@@ -80,11 +90,11 @@ const Navbar = () => {
 
                     <div className='lg:hidden pr-2 flex items-center justify-center space-x-6'>
 
-                        <Link to="/searchlibrary">
+                        <Link to="/searchlibrary" onClick={() => { setOpen(false) }}>
                             <IoIosSearch className='scale-150' />
                         </Link>
 
-                        <Link to={"/"+userProfile} className="border border-black p-0.5 rounded-full">
+                        <Link to={"/" + userProfile} onClick={() => { setOpen(false) }} className="border border-black p-0.5 rounded-full">
                             <FaUser className='scale-90' />
                         </Link>
 
@@ -97,9 +107,9 @@ const Navbar = () => {
 
             </div>
 
-            <div className={`fixed lg:hidden top-16 px-4 w-full h-full z-40 overflow-hidden ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}>
+            <div onClick={() => { setOpen(false) }} className={`fixed lg:hidden top-16 px-4 w-full h-full z-40 overflow-hidden ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}>
                 <div className={`absolute right-0 w-full max-h-full ${open ? '-top-16' : 'top-[-100%]'} transition-all duration-500 ease-in-out flex justify-center px-4`}>
-                    <div className='border border-gray-300 bg-gray-200 mt-[5.7rem] md:w-4/5 w-full rounded-xl overflow-y-auto py-2'>
+                    <div className='border border-gray-300 bg-gray-200 mt-[5.7rem] md:w-4/5 w-full rounded-xl overflow-y-auto pt-2'>
 
                         <ul className='flex flex-col text-center' onClick={() => { setOpen(!open) }}>
                             <Link to="/" className='p-3'>Home </Link>
@@ -108,14 +118,13 @@ const Navbar = () => {
                                     return <Link to={routes.link} key={routes.name} className='p-3'>{routes.name}</Link>
                                 })
                             }
-                            {
-                                islogedin ? <div className='p-3 mb-3'>
-                                    <div className='p-3 border rounded-full bg-blue-600 text-white px-20 inline' onClick={handleLogout} >Logout</div>
-                                </div> : <div className='p-3 mb-3'>
-                                    <Link to="/signup" className='p-3 border rounded-full bg-blue-600 text-white px-20'>SignUp Now</Link>
-                                </div>
-                            }
+                            <div className='p-3 pb-8' onClick={(e) => { e.stopPropagation() }}>
+                                {
+                                    islogedin ? <div className='p-3 border rounded-full bg-blue-600 text-white px-20 inline' onClick={() => { handleLogout(); setOpen(false) }} >Logout</div> : <Link to="/signup" onClick={() => { setOpen(false) }} className='p-3 border rounded-full bg-blue-600 text-white px-20'>SignUp Now</Link>
+                                }
+                            </div>
                         </ul>
+
                     </div>
 
                 </div>

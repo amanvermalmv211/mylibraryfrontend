@@ -17,9 +17,9 @@ const Footer = () => {
         <div className="bg-neutral-700 text-gray-200">
             <footer className="mx-auto max-w-screen-2xl px-4 md:px-8">
 
-                <div className='py-10'>
-                    <Link to="/">
-                        <img src={myLiblogo} alt="" className='w-28 h-14 object-contain scale-150 mx-auto' />
+                <div className='py-10 text-center'>
+                    <Link to="/" className='w-32 inline-block'>
+                        <img src={myLiblogo} alt="" className='w-32 h-20 object-contain scale-150' />
                     </Link>
                 </div>
 
