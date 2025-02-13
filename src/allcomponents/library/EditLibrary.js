@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
 import apiList from '../../libs/apiLists';
 import LibSeats from './LibSeats';
-import { PriceOptionInputBox } from '../notificationmessage/InputBox';
+import InputBox, { PriceOptionInputBox } from '../notificationmessage/InputBox';
 import authContext from '../../context/auth/authContext';
 import { userType } from '../../libs/AllRoutes';
 import { TbLibrary } from 'react-icons/tb';
@@ -12,6 +12,7 @@ import { PreviewModal } from '../notificationmessage/Modal';
 import LibraryPreview from '../notificationmessage/LibraryPreview';
 import { BiLibrary } from 'react-icons/bi';
 import { FaDeleteLeft } from 'react-icons/fa6';
+import ReactPlayer from 'react-player';
 
 const EditLibrary = () => {
 
@@ -21,6 +22,7 @@ const EditLibrary = () => {
     const context = useContext(authContext);
     const { invalidUser, setLibraryDetails } = context;
     const [open, setOpen] = useState(false);
+    const [ytvideo, setYTVideo] = useState("");
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -159,6 +161,37 @@ const EditLibrary = () => {
         setLibDetails((prevData) => ({ ...prevData, floors: updatedFloors }));
     };
 
+    const handleOnChange = (_, value) => {
+        setYTVideo(value);
+    };
+
+    const handleRemoveYTVideo = (idx) => {
+        const allYTVideo = libDetails.ytvideo.filter((_, index)=>{return index !== idx});
+
+        setLibDetails((prevData) => ({
+            ...prevData,
+            ytvideo: allYTVideo
+        }));
+    };
+
+    const handleAddYTVLink = () => {
+        if (!ytvideo) {
+            return toast.warn("Enter youtube video link!");
+        }
+
+        const allYTVideo = [...libDetails.ytvideo];
+
+        const updatedytvideo = [...allYTVideo, ytvideo];
+
+        setLibDetails((prevData) => ({
+            ...prevData,
+            ytvideo: updatedytvideo
+        }));
+
+        setYTVideo("");
+        toast.success("Video link added successfully!");
+    };
+
     const handleEditLibrary = async () => {
         if (!isClicked) {
             setIsClicked(true);
@@ -199,6 +232,34 @@ const EditLibrary = () => {
         <div className='bg-gray-50 pb-6 sm:pb-8 lg:pb-12 text-gray-700'>
             <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
                 <div className='pt-28 text-center font-bold text-2xl md:text-4xl'>{libDetails.libname}</div>
+
+                <div className='border border-gray-400 max-w-screen-md mx-auto p-2 my-8 rounded-lg bg-gray-200'>
+                    <p className='text-center text-lg font-semibold'>Add youtube video link <br />(Add shorts video only)</p>
+                    <div className='flex items-end justify-center space-x-2'>
+                        <InputBox name="Video Link" id="ytvideo" type="text" value={ytvideo} placeholder="Enter youtube video link" handleOnChange={handleOnChange} />
+                        <button
+                            type="button"
+                            className={`w-44 py-2.5 md:py-2 px-3 text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 flex items-center justify-center space-x-1`}
+                            onClick={handleAddYTVLink}
+                        >
+                            <span>Add Link</span>
+                            <TbLibrary size={18} />
+                        </button>
+                    </div>
+                </div>
+
+                <div className='nobar grid grid-row-1 grid-flow-col gap-1 overflow-x-auto my-6'>
+                    {
+                        libDetails.ytvideo.map((data, idx) => {
+                            return <div key={idx} className='flex flex-col items-center justify-center m-3'>
+                                <div className='w-52 flex items-center justify-center'>
+                                    <ReactPlayer controls url={data} />
+                                </div>
+                                <button onClick={() => { handleRemoveYTVideo(idx) }} className='rounded-b-lg p-1 text-white font-semibold bg-red-500 w-full'>Remove</button>
+                            </div>
+                        })
+                    }
+                </div>
 
                 <div className='flex items-center justify-around my-4 space-x-4'>
                     <div className='w-full md:w-60'>

@@ -9,6 +9,7 @@ import { BiEdit } from 'react-icons/bi';
 import { toast } from 'react-toastify';
 import LibraryPreview from '../notificationmessage/LibraryPreview';
 import { TbLibrary } from 'react-icons/tb';
+import ReactPlayer from 'react-player';
 
 const LibOwner = () => {
 
@@ -193,6 +194,18 @@ const LibOwner = () => {
                         </div>
 
                         <LibSeats actSeats={actSeats} hadleSeatGender={handleOpenSeatDetails} />
+
+                        <div className='nobar grid grid-row-1 grid-flow-col gap-1 overflow-x-auto my-6'>
+                            {
+                                libraryDetails.ytvideo.map((data, idx) => {
+                                    return <div key={idx} className='flex flex-col items-center justify-center m-3'>
+                                        <div className='w-52 flex items-center justify-center'>
+                                            <ReactPlayer controls url={data} />
+                                        </div>
+                                    </div>
+                                })
+                            }
+                        </div>
 
                         <div className='flex max-md:flex-col max-md:space-y-4 items-center justify-around md:space-x-4 mt-4'>
                             <PreviewModal open={openPreview} setOpen={setOpenPreview}>
