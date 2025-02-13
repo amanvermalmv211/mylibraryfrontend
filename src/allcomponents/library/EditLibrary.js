@@ -166,7 +166,7 @@ const EditLibrary = () => {
     };
 
     const handleRemoveYTVideo = (idx) => {
-        const allYTVideo = libDetails.ytvideo.filter((_, index)=>{return index !== idx});
+        const allYTVideo = libDetails.ytvideo.filter((_, index) => { return index !== idx });
 
         setLibDetails((prevData) => ({
             ...prevData,
@@ -234,7 +234,8 @@ const EditLibrary = () => {
                 <div className='pt-28 text-center font-bold text-2xl md:text-4xl'>{libDetails.libname}</div>
 
                 <div className='border border-gray-400 max-w-screen-md mx-auto p-2 my-8 rounded-lg bg-gray-200'>
-                    <p className='text-center text-lg font-semibold'>Add youtube video link <br />(Add shorts video only)</p>
+                    <p className='text-center text-lg font-semibold'>Add YouTube Video Link</p>
+                    <p className='text-center'>(Please include only YouTube Shorts videos)</p>
                     <div className='flex items-end justify-center space-x-2'>
                         <InputBox name="Video Link" id="ytvideo" type="text" value={ytvideo} placeholder="Enter youtube video link" handleOnChange={handleOnChange} />
                         <button
@@ -255,7 +256,7 @@ const EditLibrary = () => {
                                 <div className='w-52 flex items-center justify-center'>
                                     <ReactPlayer controls url={data} />
                                 </div>
-                                <button onClick={() => { handleRemoveYTVideo(idx) }} className='rounded-b-lg p-1 text-white font-semibold bg-red-500 w-full'>Remove</button>
+                                <button onClick={() => { handleRemoveYTVideo(idx) }} className='rounded-b-lg p-1 text-white font-semibold bg-red-500 w-52'>Remove</button>
                             </div>
                         })
                     }

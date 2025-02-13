@@ -4,6 +4,7 @@ import { RequestLibAnim } from '../notificationmessage/SkeletonAnim';
 import apiList from '../../libs/apiLists';
 import { toast } from 'react-toastify';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import norequest from '../images/norequest.svg';
 
 const Request = () => {
 
@@ -132,7 +133,10 @@ const Request = () => {
                     }
                     {
                         !loading && allLib.length === 0 && <>
-                            <div className='h-96 flex items-center justify-center'>
+                            <div className='h-96 flex flex-col items-center justify-center'>
+                                <div>
+                                    <img src={norequest} alt='Not Found' className='w-full h-full' />
+                                </div>
                                 <div className='font-bold text-2xl md:text-4xl text-center'>There is no requests for the approval!</div>
                             </div>
                         </>

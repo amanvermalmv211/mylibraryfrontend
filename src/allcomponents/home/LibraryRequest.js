@@ -10,6 +10,7 @@ import authContext from '../../context/auth/authContext';
 import { BiSolidBookmark } from 'react-icons/bi';
 import { TiCancel } from 'react-icons/ti';
 import apiList from '../../libs/apiLists';
+import ReactPlayer from 'react-player';
 
 const LibraryRequest = () => {
 
@@ -162,7 +163,8 @@ const LibraryRequest = () => {
     return (
         <div className='bg-gray-50 pb-6 sm:pb-8 lg:pb-12 text-gray-700'>
             <div className='mx-auto max-w-screen-2xl px-4 md:px-8 relative'>
-                <div className='my-4 flex flex-col lg:flex-row items-center lg:space-x-10 max-lg:space-y-4 pt-24 xl:mx-20'>
+                <h1 className='p-4 md:mb-4 text-4xl font-bold sm:text-5xl text-center pt-28'>Library Details</h1>
+                <div className='my-4 flex flex-col lg:flex-row items-center lg:space-x-10 max-lg:space-y-4 xl:mx-20'>
                     <div className='p-2 border mx-auto w-full md:w-3/6 lg:w-2/6 flex flex-col rounded-md bg-gradient-to-tl from-blue-200 to-pink-200'>
                         <h1 className='text-xl font-semibold mx-auto mb-2'>{libDetails.libname}</h1>
                         <p><span className='font-semibold'>Owner Name: </span><span>{libDetails.ownername}</span></p>
@@ -174,6 +176,18 @@ const LibraryRequest = () => {
                     <div className='flex items-center justify-center w-full lg:w-4/6 h-60 lg:h-72'>
                         <iframe title='addloc' src={libDetails.googlemap} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className='w-full h-full'></iframe>
                     </div>
+                </div>
+
+                <div className='nobar grid grid-row-1 grid-flow-col gap-1 overflow-x-auto my-6'>
+                    {
+                        libDetails.ytvideo.map((data, idx) => {
+                            return <div key={idx} className='flex flex-col items-center justify-center m-3'>
+                                <div className='w-52 flex items-center justify-center'>
+                                    <ReactPlayer controls url={data} />
+                                </div>
+                            </div>
+                        })
+                    }
                 </div>
 
                 <PreviewModal open={open} setOpen={setOpen}>
@@ -278,6 +292,18 @@ const LibraryRequest = () => {
                                             </ul>
                                         </td>
                                     </tr>
+
+                                    {
+                                        libDetails.floors[idxFloor].shifts[idxShift].description && <tr className="">
+                                            <div className='py-2 px-4'>
+                                                <span className='font-bold'>Note: </span>
+                                                {
+                                                    libDetails.floors[idxFloor].shifts[idxShift].description
+                                                }
+                                            </div>
+                                        </tr>
+                                    }
+
                                 </tbody>
                             </table>
                         </div>
