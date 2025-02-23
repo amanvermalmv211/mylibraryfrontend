@@ -41,7 +41,7 @@ const OwnerSignup = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "User Sign up - ML";
+        document.title = "User Sign Up - ML";
         if (open) {
             document.body.classList.add('modal-open');
         } else {

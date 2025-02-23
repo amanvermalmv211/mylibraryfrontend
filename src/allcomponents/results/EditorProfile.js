@@ -22,6 +22,8 @@ const EditorProfile = () => {
         }
 
         getEditor();
+
+        document.title = "Editor Profile - ML";
         // eslint-disable-next-line
     }, [])
 

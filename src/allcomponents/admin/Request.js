@@ -1,18 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { RequestLibAnim } from '../notificationmessage/SkeletonAnim';
 import apiList from '../../libs/apiLists';
 import { toast } from 'react-toastify';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import norequest from '../images/norequest.svg';
+import authContext from '../../context/auth/authContext';
+import { userType } from '../../libs/AllRoutes';
 
 const Request = () => {
+
+    const context = useContext(authContext);
+    const { invalidUser } = context;
 
     useEffect(() => {
         window.scrollTo(0, 0);
         document.title = "Request - ML";
         getRequests();
     }, []);
+
+    useEffect(() => {
+        if (userType() !== "admin") {
+            invalidUser()
+            navigate("/login")
+            return;
+        }
+        // eslint-disable-next-line
+    }, [])
 
     const navigate = useNavigate(null);
 

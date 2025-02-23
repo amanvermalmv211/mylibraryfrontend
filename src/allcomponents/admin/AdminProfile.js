@@ -21,6 +21,8 @@ const AdminProfile = () => {
             return;
         }
 
+        document.title = "Admin Profile - ML";
+
         getAdmin();
         // eslint-disable-next-line
     }, [])

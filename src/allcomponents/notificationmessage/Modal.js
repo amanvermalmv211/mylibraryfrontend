@@ -48,7 +48,7 @@ export const NotAllowed = ({ open, fromHeading, children }) => {
 
 export const PreviewModal = ({ open, setOpen, children }) => {
     return (
-        <div onClick={() => { setOpen(!open) }} className={`fixed inset-0 w-full h-full flex items-center justify-center z-50 px-8 md:px-12 transition-all duration-500 text-gray-700 ${open ? "bg-black/50 pointer-events-auto" : "invisible pointer-events-none"}`}>
+        <div onClick={() => { setOpen(!open) }} className={`fixed inset-0 w-full h-full flex items-center justify-center z-50 px-6 md:px-12 transition-all duration-500 text-gray-700 ${open ? "bg-black/50 pointer-events-auto" : "invisible pointer-events-none"}`}>
             <div onClick={(e) => { e.stopPropagation() }} className={`w-[48rem] max-h-screen overflow-y-auto nobar rounded-lg transition-all ${open ? "scale-100" : "scale-0"} overflow-hidden py-1.5`}>
                 {
                     children

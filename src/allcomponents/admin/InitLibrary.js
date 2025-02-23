@@ -25,7 +25,6 @@ const InitLibrary = () => {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        window.scrollTo(0, 0);
         if (open) {
             document.body.classList.add('modal-open');
         } else {
@@ -39,11 +38,14 @@ const InitLibrary = () => {
     }, [open]);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         if (userType() !== "admin" || !state.ownername) {
             invalidUser()
             navigate("/login")
             return;
         }
+
+        document.title = "Init Library - ML";
         // eslint-disable-next-line
     }, [])
 
@@ -213,8 +215,8 @@ const InitLibrary = () => {
     };
 
     const handleDeleteShift = () => {
-        if (libDetails.floors[idxFloor].shifts.length <= 3) {
-            return toast.warn("There should be at least three shifts");
+        if (libDetails.floors[idxFloor].shifts.length <= 2) {
+            return toast.warn("There should be at least two shifts");
         }
         const updatedFloors = [...libDetails.floors];
         updatedFloors[idxFloor].shifts = updatedFloors[idxFloor].shifts.filter((_, i) => i !== Number(idxShift));
@@ -476,7 +478,7 @@ const InitLibrary = () => {
                                                     className="appearance-none rounded-md relative block w-full p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                                                     placeholder="Enter descriptioin for this shift if any!"
                                                     value={libDetails.floors[idxFloor].shifts[idxShift].description}
-                                                    onChange={(e) => {handleShiftChange(e) }}
+                                                    onChange={(e) => { handleShiftChange(e) }}
                                                 />
                                             </div>
 

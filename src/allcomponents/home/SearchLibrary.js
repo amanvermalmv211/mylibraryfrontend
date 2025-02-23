@@ -41,7 +41,7 @@ const SearchLibrary = () => {
         const sanitizedLibname = libname.trim().toLowerCase();
 
         if ((!localarea && !city) && (genericTerms.includes(sanitizedLibname) || genericTerms.some(term => sanitizedLibname.includes(term)))) {
-            return toast.warning("Please provide a more specific library details.");
+            return toast.warning("Please provide more specific library details.");
         }
 
         setSpinLoading(true);
@@ -126,7 +126,7 @@ const SearchLibrary = () => {
                 )}
 
                 {
-                    (!(searchLibRes.length > 0) && !noLib) &&
+                    (!(searchLibRes.length > 0) && !noLib && !spinLoading) &&
                     <div className='w-80 h-80 mx-auto'>
                         <img src={searchlibrary} alt='Search Library' className='w-full h-full' />
                     </div>
@@ -135,7 +135,7 @@ const SearchLibrary = () => {
                 {
                     noLib &&
                     <div className='w-80 h-80 mx-auto mt-10'>
-                        <p className='text-2xl font-semibold text-center'>No Libraries Found!</p>
+                        <p className='text-2xl font-semibold text-center'>Oops! No Libraries Found</p>
                         <img src={librarynotfound} alt='Search Library' className='w-full h-full' />
                     </div>
                 }

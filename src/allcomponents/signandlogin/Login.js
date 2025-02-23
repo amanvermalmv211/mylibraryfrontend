@@ -27,7 +27,7 @@ const Login = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "User Sign up - ML";
+        document.title = "User Sign In - ML";
     }, [])
 
 

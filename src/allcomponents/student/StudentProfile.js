@@ -12,6 +12,7 @@ import { stdProfileValidation } from '../../libs/Validation';
 import { LibownerProfileAnim } from '../notificationmessage/SkeletonAnim';
 import RequestView from './RequestView';
 import LibraryDetails from './LibraryDetails';
+import SuggestLib from './SuggestLib';
 
 const StudentProfile = () => {
 
@@ -19,6 +20,7 @@ const StudentProfile = () => {
     const { invalidUser, loading, studentDetails, setStudentDetails, getStudent } = context;
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         if (userType() !== "student") {
             invalidUser()
             navigate("/login")
@@ -27,6 +29,8 @@ const StudentProfile = () => {
         if (!studentDetails.name) {
             getStudent();
         }
+
+        document.title = "Student Profile - ML";
         // eslint-disable-next-line
     }, [])
 
@@ -36,7 +40,6 @@ const StudentProfile = () => {
     const [spinLoading, setSpinLoading] = useState(false);
 
     useEffect(() => {
-        window.scrollTo(0, 0);
         if (open) {
             document.body.classList.add('modal-open');
         } else {
@@ -69,7 +72,7 @@ const StudentProfile = () => {
                     'Content-Type': 'application/json',
                     'authtoken': localStorage.getItem("authtoken")
                 },
-                body: JSON.stringify({ profileImg: stdProfile.profileImg, name: stdProfile.name, contactnum: stdProfile.contactnum, city: stdProfile.city, pin: stdProfile.pin, gender: stdProfile.gender })
+                body: JSON.stringify({ profileImg: stdProfile.profileImg, name: stdProfile.name, contactnum: stdProfile.contactnum, localarea: stdProfile.localarea, city: stdProfile.city, gender: stdProfile.gender })
             });
 
             const json = await response.json();
@@ -135,9 +138,9 @@ const StudentProfile = () => {
                     </div>
 
                     <div className='flex space-x-1.5'>
-                        <InputBox name="City" id="city" type="text" value={stdProfile.city} placeholder="Enter your city" handleOnChange={handleOnChange} />
+                        <InputBox name="Local Area" id="localarea" type="text" value={stdProfile.localarea} placeholder="Enter your local area" handleOnChange={handleOnChange} />
 
-                        <InputBox name="PIN" id="pin" type="text" value={stdProfile.pin} placeholder="Enter your pin" handleOnChange={handleOnChange} />
+                        <InputBox name="City" id="city" type="text" value={stdProfile.city} placeholder="Enter your city" handleOnChange={handleOnChange} />
                     </div>
 
                     <InputBox name="Contact No." id="contactnum" type="text" value={stdProfile.contactnum} placeholder="Enter your contact number" handleOnChange={handleOnChange} />
@@ -189,36 +192,34 @@ const StudentProfile = () => {
                                 <div className='w-full py-4'>
                                     <div className='flex items-center justify-center flex-col max-lg:pt-12 text-center mb-2'>
                                         <h1 className='text-xl lg:text-2xl font-semibold'>{studentDetails.name}</h1>
-                                        <h2 className='text-lg lg:text-xl font-semibold'>{studentDetails.city}, {studentDetails.pin}</h2>
+                                        <h2 className='text-lg lg:text-xl font-semibold'>{studentDetails.localarea}, {studentDetails.city}</h2>
                                     </div>
 
                                     <div className='text-center'>
-                                        <div><span className='font-semibold'>Contact Number : </span><span>{studentDetails.contactnum}</span></div>
+                                        <div><span className='font-semibold'>Contact No : </span><span>{studentDetails.contactnum}</span></div>
+                                    </div>
+
+                                    <div className='text-center'>
+                                        <div><span className='font-semibold'>Aadhar No : </span><span>{studentDetails.aadharnum}</span></div>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-
-                        <div className='my-8 flex flex-col items-center justify-center'>
-                            <div className='text-center pb-4'>
-                                <h1 className='text-2xl md:text-3xl font-bold'>Location Info.</h1>
-                                <p className='md:text-xl'>{studentDetails.city}, {studentDetails.pin}</p>
-                            </div>
-                            <div className='w-full lg:px-20'>
-                                {
-                                    studentDetails.googlemap ? <iframe title='map' src={studentDetails.googlemap} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className='w-full h-[26rem]'></iframe> : <div className='border h-56 rounded-md bg-gray-200 flex items-center justify-center text-xl animate-pulse'>Library address is not found!</div>
-                                }
-                            </div>
-                        </div>
                     </>
                 }
 
-                <div className="mb-6">
+                <div className="m-12">
                     <LibraryDetails />
                 </div>
 
-                <RequestView />
+                <div className="mb-8">
+                    <RequestView />
+                </div>
+
+                <div className="mb-6">
+                    <SuggestLib />
+                </div>
 
             </div>
         </div>

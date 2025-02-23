@@ -25,6 +25,7 @@ const LibraryRequest = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        document.title = "Reserve Seat - ML";
         setLibDetails(state);
         if (!studentDetails.name && islogedin) {
             getStudent();
@@ -182,7 +183,7 @@ const LibraryRequest = () => {
                     {
                         libDetails.ytvideo.map((data, idx) => {
                             return <div key={idx} className='flex flex-col items-center justify-center m-3'>
-                                <div className='w-52 flex items-center justify-center'>
+                                <div className='w-52 flex items-center justify-center rounded-lg overflow-hidden'>
                                     <ReactPlayer controls url={data} />
                                 </div>
                             </div>
@@ -294,14 +295,12 @@ const LibraryRequest = () => {
                                     </tr>
 
                                     {
-                                        libDetails.floors[idxFloor].shifts[idxShift].description && <tr className="">
-                                            <div className='py-2 px-4'>
-                                                <span className='font-bold'>Note: </span>
-                                                {
-                                                    libDetails.floors[idxFloor].shifts[idxShift].description
-                                                }
-                                            </div>
-                                        </tr>
+                                        libDetails.floors[idxFloor].shifts[idxShift].description && <th colSpan="2" className="font-semibold text-left py-2 px-3 w-full">
+                                            <span className='font-bold text-black'>Note: </span>
+                                            {
+                                                libDetails.floors[idxFloor].shifts[idxShift].description
+                                            }
+                                        </th>
                                     }
 
                                 </tbody>
@@ -324,8 +323,20 @@ const LibraryRequest = () => {
                         <h1 className='text-xl md:text-2xl text-center font-bold'>Student please get logged in </h1>
 
                         <div className=''>
-                            <p className='text-start'>To reserve a seat it is neccessary to logged in to your account. Please <Link to={"/login"} className='underline text-blue-600'>login</Link> if you have an account! If not <Link to={"/student/signup"} className='underline text-blue-600'>Signup</Link> to have an account!</p>
+                            <p className='text-left'>To reserve a seat it is neccessary to logged in to your account. Please <Link to={"/login"} className='underline'>login</Link> if you have an account! If not <Link to={"/student/signup"} className='underline'>Signup</Link> to have an account!</p>
                         </div>
+
+                        <div className='flex items-center justify-around text-center w-full space-x-4 mt-4'>
+                            <Link to="/student/signup" className={`w-40 p-1.5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}>
+                                <span>SignUp</span>
+                            </Link>
+
+                            <Link to="/login" className={`w-40 p-1.5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}>
+                                <span>Login</span>
+                            </Link>
+
+                        </div>
+
                     </div>
                 </div>
             </PreviewModal>
@@ -336,7 +347,7 @@ const LibraryRequest = () => {
                         <h1 className='text-xl md:text-2xl font-bold'>Seat Reservation's Details</h1>
 
                         <div className=''>
-                            <p>You have selected seat number {idxSeatSelected + 1} in shift {idxShift + 1} of floor {idxFloor} with time slot {getStTime(libDetails.floors[idxFloor].shifts[idxShift])} - {getEndTime(libDetails.floors[idxFloor].shifts[idxShift])}. Request for this seat will be send to the library owner and he will soon contact you!</p>
+                            <p>You have selected seat number {Number(idxSeatSelected) + 1} in shift {Number(idxShift) + 1} of floor {idxFloor} with time slot {getStTime(libDetails.floors[idxFloor].shifts[idxShift])} - {getEndTime(libDetails.floors[idxFloor].shifts[idxShift])}. Request for this seat will be send to the library owner and he will soon contact you!</p>
                         </div>
 
                         <div className='flex items-center justify-around space-x-4 w-full'>

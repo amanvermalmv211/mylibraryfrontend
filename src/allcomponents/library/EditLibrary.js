@@ -25,7 +25,6 @@ const EditLibrary = () => {
     const [ytvideo, setYTVideo] = useState("");
 
     useEffect(() => {
-        window.scrollTo(0, 0);
         if (open) {
             document.body.classList.add('modal-open');
         } else {
@@ -45,6 +44,9 @@ const EditLibrary = () => {
             navigate("/login")
             return;
         }
+
+        document.title = "Edit Library - ML";
+
         // eslint-disable-next-line
     }, [])
 
@@ -235,7 +237,7 @@ const EditLibrary = () => {
 
                 <div className='border border-gray-400 max-w-screen-md mx-auto p-2 my-8 rounded-lg bg-gray-200'>
                     <p className='text-center text-lg font-semibold'>Add YouTube Video Link</p>
-                    <p className='text-center'>(Please include only YouTube Shorts videos)</p>
+                    <p className='text-center mb-2'>(Please include only YouTube Shorts videos)</p>
                     <div className='flex items-end justify-center space-x-2'>
                         <InputBox name="Video Link" id="ytvideo" type="text" value={ytvideo} placeholder="Enter youtube video link" handleOnChange={handleOnChange} />
                         <button
@@ -253,7 +255,7 @@ const EditLibrary = () => {
                     {
                         libDetails.ytvideo.map((data, idx) => {
                             return <div key={idx} className='flex flex-col items-center justify-center m-3'>
-                                <div className='w-52 flex items-center justify-center'>
+                                <div className='w-52 flex items-center justify-center rounded-t-lg overflow-hidden'>
                                     <ReactPlayer controls url={data} />
                                 </div>
                                 <button onClick={() => { handleRemoveYTVideo(idx) }} className='rounded-b-lg p-1 text-white font-semibold bg-red-500 w-52'>Remove</button>

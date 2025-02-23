@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import LibSeats from './LibSeats';
 import authContext from '../../context/auth/authContext';
 import { getEndTime, getStTime, userType } from '../../libs/AllRoutes';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LibownerProfileAnim } from '../notificationmessage/SkeletonAnim';
 import { NotAllowed, PreviewModal } from '../notificationmessage/Modal';
-import { BiEdit } from 'react-icons/bi';
+import { BiEdit, BiSolidPhoneCall } from 'react-icons/bi';
 import { toast } from 'react-toastify';
 import LibraryPreview from '../notificationmessage/LibraryPreview';
 import { TbLibrary } from 'react-icons/tb';
@@ -19,9 +19,11 @@ const LibOwner = () => {
     const navigate = useNavigate(null);
     const [open, setOpen] = useState(false);
     const [openPreview, setOpenPreview] = useState(false);
+    const [openStdDet, setOpenStdDet] = useState(false);
     const [idxFloor, setIdxFloor] = useState(0);
     const [idxShift, setIdxShift] = useState(0);
     const [actSeats, setactSeats] = useState([]);
+    const [stdData, setStdData] = useState({});
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -37,12 +39,13 @@ const LibOwner = () => {
         if (!libraryDetails.ownername) {
             getLibOwner();
         }
+
+        document.title = "Library Details - ML";
         // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-        if (open || openPreview) {
+        if (open || openPreview || openStdDet) {
             document.body.classList.add('modal-open');
         } else {
             document.body.classList.remove('modal-open');
@@ -52,7 +55,7 @@ const LibOwner = () => {
             document.body.classList.remove('modal-open');
         };
 
-    }, [open, openPreview]);
+    }, [open, openPreview, openStdDet]);
 
     useEffect(() => {
         if (libraryDetails.floors && libraryDetails.floors[0].shifts.length > 0) {
@@ -74,8 +77,12 @@ const LibOwner = () => {
         }
     };
 
-    const handleOpenSeatDetails = (e) => {
-        toast("this is to test the things")
+    const handleOpenSeatDetails = (idx) => {
+        if (!libraryDetails.floors[idxFloor].shifts[idxShift].numberOfSeats[idx].isBooked) {
+            return toast("Seat is not reserved by any student");
+        }
+        setStdData(libraryDetails.floors[idxFloor].shifts[idxShift].numberOfSeats[idx].student);
+        setOpenStdDet(true);
     };
 
     const handleEditLib = () => {
@@ -179,14 +186,13 @@ const LibOwner = () => {
                                         </td>
                                     </tr>
                                     {
-                                        libraryDetails.floors[idxFloor].shifts[idxShift].description && <tr className="">
-                                            <div className='py-2 px-4'>
-                                                <span className='font-bold'>Note: </span>
-                                                {
-                                                    libraryDetails.floors[idxFloor].shifts[idxShift].description
-                                                }
-                                            </div>
-                                        </tr>
+                                        libraryDetails.floors[idxFloor].shifts[idxShift].description &&
+                                        <th colSpan="2" className="font-semibold text-left py-2 px-3 w-full">
+                                            <span className='font-bold text-black'>Note: </span>
+                                            {
+                                                libraryDetails.floors[idxFloor].shifts[idxShift].description
+                                            }
+                                        </th>
                                     }
 
                                 </tbody>
@@ -199,7 +205,7 @@ const LibOwner = () => {
                             {
                                 libraryDetails.ytvideo.map((data, idx) => {
                                     return <div key={idx} className='flex flex-col items-center justify-center m-3'>
-                                        <div className='w-52 flex items-center justify-center'>
+                                        <div className='w-52 flex items-center justify-center rounded-lg overflow-hidden'>
                                             <ReactPlayer controls url={data} />
                                         </div>
                                     </div>
@@ -233,6 +239,42 @@ const LibOwner = () => {
                 ) : (
                     <LibownerProfileAnim />
                 )}
+
+                <PreviewModal open={openStdDet} setOpen={setOpenStdDet}>
+                    <div className='my-2'>
+                        <div className="bg-white max-w-sm shadow-md rounded-md mx-auto overflow-hidden">
+                            <div className='flex items-center justify-between py-0.5 px-3 text-lg lg:text-xl font-semibold bg-blue-600 text-white'>
+                                <div>{stdData?.name}</div>
+                                <Link to={`tel:+91${stdData?.contactnum}`}><BiSolidPhoneCall /></Link>
+                            </div>
+
+                            <div className='p-2'>
+                                <div><span className='font-semibold'>Contact No: </span>{stdData?.contactnum}</div>
+                                <div><span className='font-semibold'>Aadhar No: </span>{stdData?.aadharnum}</div>
+                                <div><span className='font-semibold'>Address: </span>{stdData?.localarea}, {stdData?.city}</div>
+
+                                {
+                                    stdData?.subscriptionDetails?.map((data, idx) => {
+                                        return <div key={idx} className={`${!data.libraryId ? "hidden" : "block"}`}>
+                                            <div>
+                                                <span className='font-semibold'>Expiry Date:</span> {new Date(data.expiryDate).getDate()}/{new Date(data.expiryDate).getMonth() + 1}/{new Date(data.expiryDate).getFullYear()}
+                                            </div>
+
+                                            <div>
+                                                <span className='font-semibold'>Subscription Date:</span> {new Date(data.subscriptionDate).getDate()}/{new Date(data.subscriptionDate).getMonth() + 1}/{new Date(data.subscriptionDate).getFullYear()}
+                                            </div>
+
+                                            <div>
+                                                <span className='font-semibold'>Subscribed for: </span>
+                                                <span>Seat no. {Number(data.idxSeatSelected) + 1} in shift {Number(data.idxShift) + 1} of floor {data.idxFloor}</span>
+                                            </div>
+                                        </div>
+                                    })
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </PreviewModal>
 
                 {open && (
                     <NotAllowed open={open} setOpen={setOpen} fromHeading="Currently you are not allowed!">

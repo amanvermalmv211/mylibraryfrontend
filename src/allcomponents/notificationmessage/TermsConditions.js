@@ -5,6 +5,7 @@ const TermsConditions = (props) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        document.title = "Terms and Conditions - ML";
     }, []);
 
     const { handleOnChange, handleLogin, istrue } = props;

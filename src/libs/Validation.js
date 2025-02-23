@@ -29,6 +29,16 @@ const isValidContact = (value) => {
     return false;
 };
 
+const isValidAadhar = (value) => {
+    const aadharRegex = /^\d{12}$/;
+    if (!aadharRegex.test(value)) {
+        toast.warn("Please enter a valid 12 digits aadhar no.");
+        return true;
+    }
+
+    return false;
+};
+
 const isValidPIN = (value) => {
     const emailRegex = /^\d{6}$/;
     if (!emailRegex.test(value)) {
@@ -58,8 +68,8 @@ export const initLibraryValidation = (libDetails) => {
 
 export const stdProfileValidation = (ProfileDet) => {
     if (isEmpty(ProfileDet.name, "name")) { return false; }
+    if (isEmpty(ProfileDet.localarea, "local area")) { return false; }
     if (isEmpty(ProfileDet.city, "city")) { return false; }
-    if (isEmpty(ProfileDet.pin, "pin")) { return false; }
     if (isEmpty(ProfileDet.contactnum, "contact number")) { return false; }
     if (isValidContact(ProfileDet.contactnum)) { return false; }
 
@@ -137,6 +147,10 @@ export const stdSignupValidation = (signupDet) => {
     if (isEmpty(signupDet.name, "name")) { return false; }
     if (isEmpty(signupDet.contactnum, "contact number")) { return false; }
     if (isValidContact(signupDet.contactnum)) { return false; }
+    if (isEmpty(signupDet.aadharnum, "aadhar no.")) { return false; }
+    if (isValidAadhar(signupDet.aadharnum)) { return false; }
+    if (isEmpty(signupDet.localarea, "local area")) { return false; }
+    if (isEmpty(signupDet.city, "city")) { return false; }
     if (isEmpty(signupDet.email, "email")) { return false; }
     if (isValidEmail(signupDet.email)) { return false; }
     if (isEmpty(signupDet.password, "password")) { return false; }

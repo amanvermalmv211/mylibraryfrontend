@@ -11,7 +11,7 @@ const HomePage = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "My Library";
+        document.title = "meriLibrary";
     }, []);
 
     return (

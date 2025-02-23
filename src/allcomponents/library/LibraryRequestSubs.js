@@ -335,7 +335,7 @@ const LibraryRequestSubs = () => {
                 {
                   allRequests.map((data, idx) => {
                     return <div key={idx} className='rounded-md overflow-hidden border border-gray-300 shadow-lg'>
-                      <div className='flex items-center justify-between px-2 lg:text-xl font-semibold bg-blue-600 text-white'>
+                      <div className='flex items-center justify-between py-0.5 px-3 text-lg lg:text-xl font-semibold bg-blue-600 text-white'>
                         <div>{data.studentId.name}</div>
                         <Link to={`tel:+91${data.studentId.contactnum}`}><BiSolidPhoneCall /></Link>
                       </div>

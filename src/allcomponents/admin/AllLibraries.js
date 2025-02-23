@@ -1,10 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AllLibrariesAnim } from '../notificationmessage/SkeletonAnim';
 import { Link, useNavigate } from 'react-router-dom';
 import apiList from '../../libs/apiLists';
 import { toast } from 'react-toastify';
+import authContext from '../../context/auth/authContext';
+import { userType } from '../../libs/AllRoutes';
 
 const AllLibraries = () => {
+
+    const context = useContext(authContext);
+    const { invalidUser } = context;
+
+    useEffect(() => {
+        if (userType() !== "admin") {
+            invalidUser()
+            navigate("/login")
+            return;
+        }
+        // eslint-disable-next-line
+    }, [])
 
     useEffect(() => {
         window.scrollTo(0, 0);

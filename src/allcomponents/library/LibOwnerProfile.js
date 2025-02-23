@@ -17,6 +17,7 @@ const LibOwnerProfile = () => {
   const { invalidUser, loading, libraryDetails, setLibraryDetails, getLibOwner, activeStd } = context;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (userType() !== "libowner") {
       invalidUser()
       navigate("/login")
@@ -29,6 +30,8 @@ const LibOwnerProfile = () => {
     if (!libraryDetails.ownername) {
       getLibOwner();
     }
+
+    document.title = "Library Owner Profile - ML";
     // eslint-disable-next-line
   }, [])
 
@@ -38,7 +41,6 @@ const LibOwnerProfile = () => {
   const [spinLoading, setSpinLoading] = useState(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (open) {
       document.body.classList.add('modal-open');
     } else {
@@ -204,7 +206,8 @@ const LibOwnerProfile = () => {
                   </div>
 
                   <div className='text-center'>
-                    <div><span className='font-semibold'>Contact Number : </span><span>{libraryDetails.contactnum}, {libraryDetails.libcontactnum}</span></div>
+                    <div className='font-semibold'>Contact Number</div>
+                    <div className='mb-2'>{libraryDetails.contactnum}, {libraryDetails.libcontactnum}</div>
                     <div><span className='font-semibold'>Active Students : </span><span>{activeStd}</span></div>
                   </div>
                 </div>

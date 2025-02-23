@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import notifimg from '../images/notifimg.svg';
 
 const NotificationByOwner = () => {
+
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+        document.title = "Notification - ML";
+    }, []);
 
     return (
         <div className='bg-gray-50 pb-6 sm:pb-8 lg:pb-12'>

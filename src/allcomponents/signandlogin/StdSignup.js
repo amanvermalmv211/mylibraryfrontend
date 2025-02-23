@@ -18,10 +18,11 @@ const StdSignup = () => {
 
     const [signupDetails, setSignupDetails] = useState({
         name: "",
+        localarea: "",
         city: "",
-        pin: "",
         gender: "boy",
         contactnum: "",
+        aadharnum: "",
         email: "",
         password: "",
         confPassword: "",
@@ -173,6 +174,11 @@ const StdSignup = () => {
                             <InputBox name="Name" id="name" type="text" value={signupDetails.name} placeholder="Enter your name" handleOnChange={handleOnChange} />
 
                             <InputBox name="Contact Number" id="contactnum" type="text" value={signupDetails.contactnum} placeholder="Enter your phone number" handleOnChange={handleOnChange} />
+                        </div>
+
+                        <div className='flex items-center justify-center space-x-1.5'>
+
+                            <InputBox name="Aadhar No." id="aadharnum" type="text" value={signupDetails.aadharnum} placeholder="Enter your Aadhar No." handleOnChange={handleOnChange} />
 
                             <div className='w-full'>
                                 <label htmlFor="gender" className="px-1 text-sm">Gender</label>
@@ -181,21 +187,20 @@ const StdSignup = () => {
                                     value={signupDetails.gender}
                                 >
                                     <option value="boy">Male</option>
-                                    <option value="girl">Femal</option>
+                                    <option value="girl">Female</option>
 
                                 </select>
                             </div>
-                        </div>
 
+                        </div>
 
                         <div className='flex items-center justify-center space-x-1.5'>
 
+                            <InputBox name="Local Area" id="localarea" type="text" value={signupDetails.localarea} placeholder="Enter your local area" handleOnChange={handleOnChange} />
+
                             <InputBox name="City" id="city" type="text" value={signupDetails.city} placeholder="Enter your city" handleOnChange={handleOnChange} />
 
-                            <InputBox name="PIN" id="pin" type="text" value={signupDetails.pin} placeholder="Enter your pin" handleOnChange={handleOnChange} />
-
                         </div>
-
 
                         <div className='flex flex-col lg:flex-row items-center justify-center lg:space-x-1.5'>
                             <InputBox name="E-mail" id="email" type="email" value={signupDetails.email} placeholder="Enter your email address" handleOnChange={handleOnChange} />

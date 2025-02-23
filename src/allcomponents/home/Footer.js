@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
 import { ImLinkedin } from "react-icons/im";
 import { footerLinks } from '../../libs/AllRoutes';
-import myLiblogo from '../images/myLiblogo.svg';
+import myLiblogo from '../images/myLiblogo1.svg';
 
 
 const Footer = () => {
@@ -18,8 +18,8 @@ const Footer = () => {
             <footer className="mx-auto max-w-screen-2xl px-4 md:px-8">
 
                 <div className='py-10 text-center'>
-                    <Link to="/" className='w-32 inline-block'>
-                        <img src={myLiblogo} alt="" className='w-32 h-20 object-contain scale-150' />
+                    <Link to="/" className='w-64 inline-block'>
+                        <img src={myLiblogo} alt="" className='w-full h-14 object-fill' />
                     </Link>
                 </div>
 

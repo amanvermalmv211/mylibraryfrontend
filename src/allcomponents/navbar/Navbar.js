@@ -58,7 +58,7 @@ const Navbar = () => {
                 <div className='border border-gray-300 md:w-4/5 w-full flex items-center justify-between px-2 md:px-4 bg-gray-200 shadow-[1px_6px_10px] shadow-gray-400 rounded-xl'>
                     <div className='flex items-center space-x-2'>
                         <Link to="/" onClick={() => { setOpen(false) }}>
-                            <img src={myLiblogo1} alt="" className='w-28 h-14 object-contain' />
+                            <img src={myLiblogo1} alt="" className='w-28 h-14 scale-125 mx-4 object-contain' />
                         </Link>
 
                         <div className='border-l border-blue-700 hidden lg:flex'>
