@@ -12,7 +12,7 @@ export const getEndTime = (shift) => {
 
 export const footerLinks = () => {
     return [
-        { name: "About", link: "/" },
+        { name: "About", link: "/about" },
         { name: "Result", link: "/results" },
         { name: "E-Books", link: "/ebooks" },
         { name: "Contact Us", link: "/contactus" },
@@ -54,7 +54,7 @@ export const superadmin = () => {
 };
 
 const genLinks = [
-    { name: "About", link: "/" },
+    { name: "About", link: "/about" },
     { name: "Result", link: "/results" },
     { name: "E-Books", link: "/ebooks" },
     { name: "Contact Us", link: "/contactus" }

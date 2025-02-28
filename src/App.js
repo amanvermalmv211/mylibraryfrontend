@@ -28,6 +28,8 @@ import TermsConditions from './allcomponents/notificationmessage/TermsConditions
 import LibraryRequestSubs from './allcomponents/library/LibraryRequestSubs';
 import StdLibrary from './allcomponents/student/StdLibrary';
 import NotificationByOwner from './allcomponents/library/NotificationByOwner';
+import About from './allcomponents/home/About';
+import ResetPass from './allcomponents/signandlogin/ResetPass';
 
 function App() {
   return (
@@ -44,6 +46,7 @@ function App() {
             <Route exact path="/student/signup" element={<StdSignup />}></Route>
             <Route exact path="/owner/signup" element={<OwnerSignup />}></Route>
             <Route exact path="/login" element={<Login />}></Route>
+            <Route exact path="/resetpassword" element={<ResetPass />}></Route>
             <Route exact path="/searchlibrary" element={<SearchLibrary />}></Route>
             <Route exact path="/admin/profile" element={<AdminProfile />}></Route>
             <Route exact path="/request" element={<Request />}></Route>
@@ -65,6 +68,7 @@ function App() {
             <Route exact path="/results" element={<Results />}></Route>
             <Route exact path="/ebooks" element={<Ebooks />}></Route>
             <Route exact path="/contactus" element={<Contact />}></Route>
+            <Route exact path="/about" element={<About />}></Route>
             <Route exact path="/termsandconditions" element={<TermsConditions />}></Route>
           </Routes>
 

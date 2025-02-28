@@ -40,19 +40,19 @@ const Footer = () => {
 
                         <div className="flex items-center justify-center gap-8">
 
-                            <Link to="https://www.facebook.com/profile.php?id=100011377276805" target="_blank" className="text-blue-600 bg-white rounded-full transition duration-200 hover:text-blue-700 scale-150">
+                            <Link to="https://www.facebook.com/share/12Dc1E1LmzN" target="_blank" className="text-blue-600 bg-white rounded-full transition duration-200 hover:text-blue-700 scale-150">
                                 <FaFacebook />
                             </Link>
 
-                            <Link to="https://www.instagram.com/invites/contact/?i=1ele9i6x7lf2r&utm_content=40gsjzh" target="_blank" className="text-pink-500 transition duration-200 hover:text-pink-600 scale-150">
+                            <Link to="https://www.instagram.com/merilibrary.in" target="_blank" className="text-pink-500 transition duration-200 hover:text-pink-600 scale-150">
                                 <FaInstagram />
                             </Link>
 
-                            <Link to="https://www.youtube.com" target="_blank" className="text-red-500 transition duration-200 hover:text-red-600 scale-150">
+                            <Link to="https://www.youtube.com/@merilibrary-v9h" target="_blank" className="text-red-500 transition duration-200 hover:text-red-600 scale-150">
                                 <FaYoutube />
                             </Link>
 
-                            <Link to="https://www.linkedin.com/in/aman-verma-770ab5252" target="_blank" className="text-blue-700 bg-white rounded-lg transition duration-200 hover:text-blue-800 active:text-gray-600 scale-150">
+                            <Link to="https://www.linkedin.com/in/merilibrary-services-00525b353" target="_blank" className="text-blue-700 bg-white rounded-lg transition duration-200 hover:text-blue-800 active:text-gray-600 scale-150">
                                 <ImLinkedin />
                             </Link>
 
@@ -60,7 +60,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="py-8 text-center text-sm">© 2024 - Present myLibrary. All rights reserved.</div>
+                <div className="py-8 text-center text-sm">© 2025 - Present meriLibrary. All rights reserved.</div>
             </footer>
         </div>
     )

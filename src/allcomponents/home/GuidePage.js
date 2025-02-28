@@ -10,7 +10,7 @@ const GuidePage = () => {
             {/* Header Section */}
             <header className="py-6">
                 <div className="mx-auto md:text-center">
-                    <h1 className="text-3xl md:text-5xl font-bold">How myLibrary Works</h1>
+                    <h1 className="text-3xl md:text-5xl font-bold">How meriLibrary Works</h1>
                     <p className="mt-2 text-lg">An easy guide to discover, subscribe, and access the best library for your needs.</p>
                 </div>
             </header>

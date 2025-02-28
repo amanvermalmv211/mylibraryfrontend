@@ -3,6 +3,8 @@ export const server = "https://mylibrary-kw5s.onrender.com";
 
 const apiList = {
   login: `${server}/user/userauth/loginuser`,
+  forgotpassword: `${server}/user/userauth/forgotpassword`,
+  resetpassword: `${server}/user/userauth/resetpassword`,
   usersignup: `${server}/user/userauth/createuser`,
   verifyotp: `${server}/user/userauth/verifyotp`,
   sendotp: `${server}/auth/sendotp`,

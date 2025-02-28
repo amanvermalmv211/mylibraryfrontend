@@ -44,8 +44,8 @@ const LibraryPreview = ({ library }) => {
                   {shift.price.map((priceOption, index) => (
                     <li key={index}>
                       {priceOption.duration}:{" "}
-                      <span className="text-green-600">₹{priceOption.discountPrice}</span>{" "}
-                      <span className="text-xs text-red-500 line-through">₹{priceOption.actualPrice}</span>
+                      <span className="text-green-600">₹{priceOption.actualPrice}</span>{" "}
+                      <span className="text-xs text-red-500 line-through">₹{Number(priceOption.actualPrice) + 200}</span>
                     </li>
                   ))}
                 </ul>

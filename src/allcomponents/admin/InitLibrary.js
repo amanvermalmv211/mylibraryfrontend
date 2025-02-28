@@ -71,7 +71,6 @@ const InitLibrary = () => {
                     price: [
                         {
                             actualPrice: 700,
-                            discountPrice: 500,
                             duration: '30 Days'
                         }
                     ],
@@ -88,7 +87,6 @@ const InitLibrary = () => {
                     price: [
                         {
                             actualPrice: 700,
-                            discountPrice: 500,
                             duration: '30 Days'
                         }
                     ],
@@ -105,7 +103,6 @@ const InitLibrary = () => {
                     price: [
                         {
                             actualPrice: 700,
-                            discountPrice: 500,
                             duration: '30 Days'
                         }
                     ],
@@ -135,7 +132,6 @@ const InitLibrary = () => {
             price: [
                 {
                     actualPrice: 700,
-                    discountPrice: 500,
                     duration: '30 Days'
                 }
             ],
@@ -187,7 +183,6 @@ const InitLibrary = () => {
 
         const newPriceOption = {
             actualPrice: 700,
-            discountPrice: 500,
             duration: selectedDuration
         };
 
@@ -429,7 +424,7 @@ const InitLibrary = () => {
                                         >
                                             {
                                                 libDetails.floors[idxFloor].shifts.map((data, idx) => {
-                                                    return <option key={idx} value={idx}>Slot {idx + 1} Price: {data.price[0].discountPrice} for {data.price[0].duration}</option>
+                                                    return <option key={idx} value={idx}>Slot {idx + 1} Price: {data.price[0].actualPrice} for {data.price[0].duration}</option>
                                                 })
                                             }
                                         </select>
@@ -508,8 +503,6 @@ const InitLibrary = () => {
                                                             <FaDeleteLeft onClick={() => { handleDeletePriceOpt(idx) }} className='absolute top-0 right-0 m-2 cursor-pointer' />
                                                             <div className='flex items-center justify-center space-x-1.5 w-full'>
                                                                 <PriceOptionInputBox name="Price" id="actualPrice" type="text" value={price.actualPrice} idx={idx} placeholder="Price for the shift" handleOnChange={handleShiftPriceChange} />
-
-                                                                <PriceOptionInputBox name="D. Price" id="discountPrice" type="text" value={price.discountPrice} idx={idx} placeholder="Price after discount" handleOnChange={handleShiftPriceChange} />
                                                             </div>
                                                         </div>
                                                     })

@@ -21,7 +21,7 @@ const SignupPage = () => {
 
                     <div className='lg:w-3/5 p-2'>
                         <h1 className='text-4xl font-bold mb-3'>Sign-up as Student</h1>
-                        <p className='font-semibold text-lg'>Join myLibrary – Your Gateway to the Best Study Spaces!</p>
+                        <p className='font-semibold text-lg'>Join meriLibrary – Your Gateway to the Best Study Spaces!</p>
 
                         <ul className="mt-2 list-disc space-y-2 ml-4 mb-4">
                             <li><strong>Discover Libraries Near You</strong>: Find the best study spots with ease.</li>
@@ -43,7 +43,7 @@ const SignupPage = () => {
 
                     <div className='lg:w-3/5 p-2 lg:pl-6'>
                         <h1 className='text-4xl font-bold mb-3'>Sign-up as Library Owner</h1>
-                        <p className='font-semibold text-lg'>Partner with myLibrary – Connect Students to Your Library!</p>
+                        <p className='font-semibold text-lg'>Partner with meriLibrary – Connect Students to Your Library!</p>
                         
                         <ul className="mt-2 list-disc space-y-2 ml-4 mb-4">
                             <li><strong>Increase Visibility</strong>: Let students easily discover your library.</li>

@@ -89,9 +89,9 @@ const Contact = () => {
         content: "Effortlessly manage library resources and student subscriptions with our streamlined tools. Easily track student engagement and gather feedback to enhance your services. With automated subscription management, you can focus more on growing your library and less on administrative tasks. We take care of the details for you!"
     }];
 
-    const buttonLinks = [{ name: "WhatsApp", link: "tel:+916306805527", bg: "bg-green-500", hover: "hover:bg-green-600", border: "border-green-300", icon: <FaWhatsapp /> },
-    { name: "Call", link: "tel:+916306805527", bg: "bg-gray-500", hover: "hover:bg-gray-600", border: "border-gray-300", icon: <BiSolidPhoneCall /> },
-    { name: "Gmail", link: "tel:+916306805527", bg: "bg-yellow-400", hover: "hover:bg-yellow-500", border: "border-yellow-300", icon: <BiLogoGmail /> },
+    const buttonLinks = [{ name: "WhatsApp", link: "https://wa.me/918188879731", bg: "bg-green-500", hover: "hover:bg-green-600", border: "border-green-300", icon: <FaWhatsapp /> },
+    { name: "Call", link: "tel:+918188879731", bg: "bg-gray-500", hover: "hover:bg-gray-600", border: "border-gray-300", icon: <BiSolidPhoneCall /> },
+    { name: "Gmail", link: "mailto:merilibrary.in@gmail.com", bg: "bg-yellow-400", hover: "hover:bg-yellow-500", border: "border-yellow-300", icon: <BiLogoGmail /> },
     { name: "Register", link: "/owner/signup", bg: "bg-blue-500", hover: "hover:bg-blue-600", border: "border-blue-300", icon: <FaRegIdBadge /> }
     ]
 
@@ -102,7 +102,7 @@ const Contact = () => {
                 <section className="flex max-lg:flex-col justify-around">
 
                     <div className='lg:w-2/3'>
-                        <h2 className='text-xl text-blue-600 font-semibold mb-2'>myLibrary for Enterpreneurs!</h2>
+                        <h2 className='text-xl text-blue-600 font-semibold mb-2'>meriLibrary for Enterpreneurs!</h2>
 
                         <h1 className='mb-2 text-4xl font-bold md:text-5xl'>Wanna join us?</h1>
                         <p className='text-gray-700 text-justify'>If you’re planning to start your own library but are still unsure how to proceed, join us! We will guide you in establishing a successful library and help you connect with students. Our mission is to support library owners across the country in joining our platform and enhancing their services. Reach out to learn more!</p>
@@ -185,7 +185,7 @@ const Contact = () => {
                             <ul className='flex max-lg:justify-center flex-wrap text-white'>
                                 {
                                     buttonLinks.map((data, idx) => {
-                                        return <Link key={idx} to={data.link} className={`flex items-center justify-center space-x-1 border ${data.border} p-2 rounded-lg ${data.bg} ${data.hover} w-32 m-1`}><span>{data.name}</span> {data.icon}</Link>
+                                        return <Link key={idx} to={data.link} target='_blank' className={`flex items-center justify-center space-x-1 border ${data.border} p-2 rounded-lg ${data.bg} ${data.hover} w-32 m-1`}><span>{data.name}</span> {data.icon}</Link>
                                     })
                                 }
                             </ul>

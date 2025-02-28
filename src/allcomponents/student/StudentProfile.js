@@ -91,19 +91,16 @@ const StudentProfile = () => {
         setSpinLoading(false);
     };
 
-    const profilePic = ["https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
+    const profilePic = [
+        "https://png.pngtree.com/background/20230610/original/pngtree-profile-of-an-image-of-a-man-in-a-square-design-picture-image_3098265.jpg",
+        "https://st.depositphotos.com/46542440/55684/i/450/depositphotos_556849354-stock-illustration-square-face-character-stiff-art.jpg",
         "https://static.vecteezy.com/system/resources/previews/027/224/407/original/girl-hugs-stack-of-books-standing-in-library-or-bookstore-and-rejoicing-at-opportunity-to-read-lot-png.png",
         "https://www.pngkey.com/png/detail/204-2049354_ic-account-box-48px-profile-picture-icon-square.png",
-        "https://images.pexels.com/photos/1926404/pexels-photo-1926404.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkVPTu0F-CIhbqDMFkcatqHGb2UeAVFgPOCw&s",
         "https://img.freepik.com/free-vector/icons-with-empty-square-templates_1308-85393.jpg",
         "https://img.freepik.com/premium-vector/line-art-diamonds-squares-brush-vector-illustration_756957-1433.jpg",
         "https://i.pinimg.com/564x/76/f0/11/76f0117bcced04cba3d2910007070b0d.jpg",
         "https://images.pexels.com/photos/25626523/pexels-photo-25626523.jpeg?cs=srgb&dl=pexels-googledeepmind-25626523.jpg&fm=jpg",
-        "https://media.istockphoto.com/id/1216124671/photo/square-tubes.jpg?s=612x612&w=0&k=20&c=rJ2fybTzpiUK9LrPJ1ZRBKDp41Hpb5et1HvmkbJ1BkU=",
-        "https://plus.unsplash.com/premium_photo-1676299910876-747eeb0c11dc?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c3F1YXJlfGVufDB8fDB8fHww",
-        "https://png.pngtree.com/background/20230610/original/pngtree-profile-of-an-image-of-a-man-in-a-square-design-picture-image_3098265.jpg",
-        "https://st.depositphotos.com/46542440/55684/i/450/depositphotos_556849354-stock-illustration-square-face-character-stiff-art.jpg"
+        "https://media.istockphoto.com/id/1216124671/photo/square-tubes.jpg?s=612x612&w=0&k=20&c=rJ2fybTzpiUK9LrPJ1ZRBKDp41Hpb5et1HvmkbJ1BkU="
     ]
 
     const formTemplate = () => {
@@ -209,7 +206,7 @@ const StudentProfile = () => {
                     </>
                 }
 
-                <div className="m-12">
+                <div className="mb-12">
                     <LibraryDetails />
                 </div>
 

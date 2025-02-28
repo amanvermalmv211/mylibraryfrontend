@@ -131,7 +131,7 @@ const LibOwner = () => {
                                 >
                                     {libraryDetails.floors[idxFloor].shifts.map((data, idx) => (
                                         <option key={idx} value={idx}>
-                                            Slot {idx + 1} Price {data.price[0].discountPrice}
+                                            Shift {idx + 1} Price {data.price[0].actualPrice}
                                         </option>
                                     ))}
                                 </select>
@@ -178,8 +178,8 @@ const LibOwner = () => {
                                                     <li key={index} className="mb-1">
                                                         <div className='inline font-semibold mr-0.5'>*</div>
                                                         <span>{priceOption.duration}</span>{" "}
-                                                        <span className="text-green-600">₹{priceOption.discountPrice}</span>{" "}
-                                                        <span className="text-xs text-red-500 line-through">₹{priceOption.actualPrice}</span>
+                                                        <span className="text-green-600">₹{priceOption.actualPrice}</span>{" "}
+                                                        <span className="text-xs text-red-500 line-through">₹{Number(priceOption.actualPrice) + 200}</span>
                                                     </li>
                                                 ))}
                                             </ul>

@@ -67,7 +67,7 @@ const Login = () => {
                     setUserProfile(json.type + "/profile")
                     setIsloggedin(true);
                     setSpinSingUpLoading(false);
-                    navigate("/")
+                    navigate("/");
                 }
                 else {
                     toast.error(json.message);
@@ -118,14 +118,14 @@ const Login = () => {
                             </button>
                         </div>
 
-                        <Link to="/forgotpassword" className='text-red-500 font-medium text-end w-full inline-block text-sm underline'>Forgot Password?</Link>
+                        <Link to="/resetpassword" className='text-red-500 font-medium text-end w-full inline-block text-sm underline'>Forgot Password?</Link>
 
                     </div>
 
                     <div>
                         <button
                             type="submit"
-                            className={`group relative w-full flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 space-x-2 -mt-4`}
+                            className={`group relative w-full flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 space-x-2 -mt-4`}
                             onClick={handleLogin}
                         >
                             <span>Login</span>
