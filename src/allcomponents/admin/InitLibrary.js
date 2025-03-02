@@ -367,13 +367,28 @@ const InitLibrary = () => {
                             </div>
 
                             <div className='flex items-center justify-center space-x-2'>
-                                <InputBox name="Aadhar No." id="aadharnum" type="text" value={libDetails.aadharnum} placeholder="Enter your aadhar number" handleOnChange={handleOnChange} />
+                                <div className='w-full'>
+                                    <label htmlFor="isregistered" className="px-1 text-sm">Registered Library</label>
+                                    <select name="isregistered" id="isregistered" className='rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
+                                        onChange={(e) => { handleOnChange("isregistered", e.target.value) }}
+                                        value={libDetails.isregistered}
+                                    >
+                                        <option value="true">Registered</option>
+                                        <option value="false">Not Registered</option>
 
-                                <InputBox name="PIN" id="pin" type="text" value={libDetails.pin} placeholder="PIN Code of your area" handleOnChange={handleOnChange} />
+                                    </select>
+                                </div>
+
+                                <InputBox name="Registration No" id="registeredno" type="text" value={libDetails.registeredno} placeholder="Enter registered number" handleOnChange={handleOnChange} />
                             </div>
 
-                            <div className='flex flex-col items-center space-y-4'>
+                            <div className='flex items-center justify-center space-x-2'>
+                                <InputBox name="Aadhar No." id="aadharnum" type="text" value={libDetails.aadharnum} placeholder="Enter your aadhar number" handleOnChange={handleOnChange} />
+
                                 <InputBox name="Embaded Google Map Link" id="googlemap" type="text" value={libDetails.googlemap} placeholder="Enter embaded google map link" handleOnChange={handleOnChange} />
+                            </div>
+
+                            <div className='pt-2'>
 
                                 {
                                     libDetails.googlemap ? <iframe title='map' src={libDetails.googlemap} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className='w-full h-96'></iframe> : <div className='border w-full flex items-center justify-center bg-gray-300 font-semibold h-32'>There is no any google map link</div>
