@@ -117,7 +117,6 @@ const EditorSignup = () => {
                 });
 
                 const verifyJson = await verifyResponse.json();
-                console.log(verifyJson);
                 if (verifyJson.success) {
                     localStorage.setItem("authtoken", verifyJson.authtoken);
                     localStorage.setItem("type", verifyJson.type);

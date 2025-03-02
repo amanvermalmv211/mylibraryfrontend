@@ -48,7 +48,7 @@ const Navbar = () => {
         setLinks();
         setUserProfile("login")
         setIsloggedin(false);
-        toast("User logout");
+        toast("User logout successfully!");
         navigate("/login");
     }
 

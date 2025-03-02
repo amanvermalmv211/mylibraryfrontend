@@ -1,5 +1,6 @@
 // export const server = "https://mylibrary-kw5s.onrender.com";
-export const server = "http://localhost:5000";
+// export const server = "http://localhost:5000";
+export const server = "https://merilibrary.in";
 
 const apiList = {
   login: `${server}/user/userauth/loginuser`,
