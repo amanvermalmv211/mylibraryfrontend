@@ -185,7 +185,7 @@ const Contact = () => {
                             <ul className='flex max-lg:justify-center flex-wrap text-white'>
                                 {
                                     buttonLinks.map((data, idx) => {
-                                        return <Link key={idx} to={data.link} target='_blank' className={`flex items-center justify-center space-x-1 border ${data.border} p-2 rounded-lg ${data.bg} ${data.hover} w-32 m-1`}><span>{data.name}</span> {data.icon}</Link>
+                                        return <Link key={idx} to={data.link} target={`${idx === 3 ? "_self": "_blank"}`} className={`flex items-center justify-center space-x-1 border ${data.border} p-2 rounded-lg ${data.bg} ${data.hover} w-32 m-1`}><span>{data.name}</span> {data.icon}</Link>
                                     })
                                 }
                             </ul>

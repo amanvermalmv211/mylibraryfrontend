@@ -9,6 +9,7 @@ import { RiDeleteBack2Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { EbookAnim } from '../notificationmessage/SkeletonAnim';
 import InputBox from '../notificationmessage/InputBox';
+import { monthsname } from '../../libs/AllRoutes';
 
 const Ebooks = () => {
 
@@ -294,7 +295,7 @@ const Ebooks = () => {
                                     <div className='p-2 overflow-y-auto h-28 nobar'>
                                         <h4 className='font-semibold text-xl text-center p-1'>{ebook.name}</h4>
                                         <p className='text-start font-semibold'>Author : <span className='font-normal'>{ebook.authname}</span></p>
-                                        <p className='text-start font-semibold'>Published On : <span className='font-normal'>{ebook.published}</span></p>
+                                        <p className='text-start font-semibold'>Published On : <span className='font-normal'>{monthsname[new Date(ebook.published).getMonth()]}, {new Date(ebook.published).getFullYear()}</span></p>
                                     </div>
                                     <Link to={ebook.ebooklink} target='_blank' className='w-full block text-center p-1.5 bg-blue-500 hover:bg-blue-600 text-white'>Read Now</Link>
                                 </div>

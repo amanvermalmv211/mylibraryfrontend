@@ -2,6 +2,8 @@ export const userType = () => {
     return localStorage.getItem("type");
 }
 
+export const monthsname = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 export const getStTime = (shift) => {
     return Number(shift.stTime) === 0 ? `12 AM` : Number(shift.stTime) < 12 ? `${shift.stTime} AM` : Number(shift.stTime) === 12 ? `${shift.stTime} PM` : `${Number(shift.stTime) - 12} PM`;
 }

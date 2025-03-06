@@ -274,7 +274,7 @@ const Results = () => {
 
                     <div>
                         <label htmlFor="name" className="block ml-1">Application Type</label>
-                        <select name="name" id="name" className='appearance-none rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
+                        <select name="name" id="name" className='rounded-md relative flex-1 block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
                             onChange={(e) => { handleOnChange("papername", e.target.value) }}
                             value={appDetails.papername}
                         >
@@ -284,13 +284,13 @@ const Results = () => {
                         </select>
                     </div>
 
-                    <InputBox name="Application Name" id="appname" type="text" value={appDetails.appname} placeholder="Enter the application name" handleOnChange={handleOnChange}/>
+                    <InputBox name="Application Name" id="appname" type="text" value={appDetails.appname} placeholder="Enter the application name" handleOnChange={handleOnChange} />
 
-                    <InputBox name="Application form link" id="formlink" type="text" value={appDetails.formlink} placeholder="Enter the link for application" handleOnChange={handleOnChange}/>
+                    <InputBox name="Application form link" id="formlink" type="text" value={appDetails.formlink} placeholder="Enter the link for application" handleOnChange={handleOnChange} />
 
-                    <InputBox name="Youtube link" id="youtubelink" type="text" value={appDetails.youtubelink} placeholder="Enter the youtube video link for application" handleOnChange={handleOnChange}/>
+                    <InputBox name="Youtube link" id="youtubelink" type="text" value={appDetails.youtubelink} placeholder="Enter the youtube video link for application" handleOnChange={handleOnChange} />
 
-                    <InputBox name="Form end date" id="endformdate" type="date" value={appDetails.endformdate} placeholder="Enter end date for form submition" handleOnChange={handleOnChange}/>
+                    <InputBox name="Form end date" id="endformdate" type="date" value={appDetails.endformdate} placeholder="Enter end date for form submition" handleOnChange={handleOnChange} />
 
                 </div>
                 <div className='flex justify-around items-center space-x-4 text-white font-semibold text-sm'>
@@ -341,7 +341,7 @@ const Results = () => {
 
                             <DeleteModal open={openDel} setOpen={setOpenDel} handleDeleteEbook={handleDeleteEbook}>
                                 <div className='pb-2 flex items-center justify-center'>
-                                    <h1 className='text-xl text-center pb-2'><span className='font-semibold'>Book :</span> {appDetails.appname}</h1>
+                                    <h1 className='text-xl text-center pb-2'><span className='font-semibold'>App. name :</span> {appDetails.appname}</h1>
                                 </div>
                             </DeleteModal>
 
@@ -369,6 +369,7 @@ const Results = () => {
                                                             <div className='flex items-center justify-between text-xs md:text-sm'>
                                                                 <div className='flex items-center space-x-2'>
                                                                     <Link to={appData.youtubelink} target='_blank' className='underline'>YouTube Video Link</Link>
+
                                                                     {
                                                                         localStorage.getItem("type") === "editor" && <div className='flex items-center space-x-2'>
                                                                             <div> <BiEdit size={17} className='hover:scale-110 cursor-pointer transition-all duration-200' onClick={() => { handleOpen(appData, true) }} /> </div>
@@ -377,7 +378,9 @@ const Results = () => {
                                                                         </div>
                                                                     }
                                                                 </div>
-                                                                <div className='font-semibold'>Last date: <span className='text-red-500'>{new Date(appData.endformdate).getDate()}/{new Date(appData.endformdate).getMonth() + 1}/{new Date(appData.endformdate).getFullYear()}</span></div>
+                                                                {
+                                                                    appData.endformdate && <div className='font-semibold'>Last date: <span className='text-red-500'>{new Date(appData.endformdate).getDate()}/{new Date(appData.endformdate).getMonth() + 1}/{new Date(appData.endformdate).getFullYear()}</span></div>
+                                                                }
                                                             </div>
                                                         </div>
                                                     </>

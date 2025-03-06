@@ -1,11 +1,38 @@
 import React, { useContext } from 'react';
 import authContext from '../../context/auth/authContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import apiList from '../../libs/apiLists';
+import { toast } from 'react-toastify';
 
 const LibraryDetails = () => {
 
     const context = useContext(authContext);
     const { studentDetails } = context;
+
+    const navigate = useNavigate(null);
+
+    const handleReserveAgain = async (libraryId) => {
+        try {
+            const response = await fetch(apiList.getLibraryAgain + `/${libraryId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authtoken': localStorage.getItem("authtoken")
+                }
+            });
+
+            const json = await response.json();
+            if (json.success) {
+                navigate("/details/library", { state: json.data });
+            }
+            else {
+                toast.warn(json.message);
+            }
+        }
+        catch (err) {
+            toast.warn(`Std: ${err.message}`);
+        }
+    }
 
     return (
         <div>
@@ -33,15 +60,14 @@ const LibraryDetails = () => {
 
                                     <p>Subscription Date: {new Date(studentDetails.subscriptionDate).getDate()}/{Number(new Date(studentDetails.subscriptionDate).getMonth()) + 1}/{new Date(studentDetails.subscriptionDate).getFullYear()}</p>
 
-                                    <p>Subscription End Date: {new Date(studentDetails.expiryDate).getDate()}/{Number(new Date(studentDetails.expiryDate).getMonth()) + 1}/{new Date(studentDetails.expiryDate).getFullYear()}</p>
+                                    <p className={`${new Date() > new Date(studentDetails.expiryDate) ? "text-red-500" : "text-gray-700"}`}>Subscription End Date: {new Date(studentDetails.expiryDate).getDate()}/{Number(new Date(studentDetails.expiryDate).getMonth()) + 1}/{new Date(studentDetails.expiryDate).getFullYear()}</p>
 
                                     <p>Contact Details: <Link to={`tel:+91${studentDetails.libraryId.contactnum}`}>{studentDetails.libraryId.contactnum}</Link>, <Link to={`tel:+91${studentDetails.libraryId.libcontactnum}`}>{studentDetails.libraryId.libcontactnum}</Link>
                                     </p>
-                                    {/* <button
-                                        className='block w-full mt-2 py-2 text-center text-white bg-blue-700 rounded-md hover:bg-blue-800'
-                                        onClick={() => navigate("/details/library", { state: data })}>
-                                        View and Request Seat
-                                    </button> */}
+                                    {new Date() > new Date(studentDetails.expiryDate) && <button
+                                        className='block w-full mt-2 py-2 text-center text-white bg-blue-700 rounded-md hover:bg-blue-800' onClick={() => { handleReserveAgain(studentDetails.libraryId._id) }}>
+                                        Reserve Seat Again
+                                    </button>}
                                 </div>
                             </div>
                         ))}
