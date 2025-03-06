@@ -24,7 +24,7 @@ const SocialMediaSection = () => {
                             <p className="mt-3 text-lg font-medium group-hover:scale-110 group-hover:text-pink-600 transition-all duration-300">Instagram</p>
                         </Link>
 
-                        <Link to="https://www.youtube.com/@merilibrary-v9h" target="_blank" rel="noopener noreferrer" className="group relative p-6 rounded-xl bg-red-100 shadow-md shadow-red-200 transition-all duration-300 hover:bg-red-200">
+                        <Link to="https://www.youtube.com/@merilibrary-in" target="_blank" rel="noopener noreferrer" className="group relative p-6 rounded-xl bg-red-100 shadow-md shadow-red-200 transition-all duration-300 hover:bg-red-200">
                             <FaYoutube className="text-4xl mx-auto text-red-600 group-hover:scale-110 transition-all duration-300" />
                             <p className="mt-3 text-lg font-medium group-hover:scale-110 group-hover:text-red-600 transition-all duration-300">YouTube</p>
                         </Link>

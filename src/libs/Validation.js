@@ -117,6 +117,7 @@ export const resultsValidation = (appDetails) => {
     if (isEmpty(appDetails.appname, "application name")) { return false; }
     if (isEmpty(appDetails.formlink, "form link")) { return false; }
     if (isEmpty(appDetails.youtubelink, "youtube link")) { return false; }
+    if (isEmpty(appDetails.endformdate, "form end date")) { return false; }
 
     return true;
 };

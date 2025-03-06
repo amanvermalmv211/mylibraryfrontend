@@ -48,7 +48,7 @@ const Footer = () => {
                                 <FaInstagram />
                             </Link>
 
-                            <Link to="https://www.youtube.com/@merilibrary-v9h" target="_blank" className="text-red-500 transition duration-200 hover:text-red-600 scale-150">
+                            <Link to="https://www.youtube.com/@merilibrary-in" target="_blank" className="text-red-500 transition duration-200 hover:text-red-600 scale-150">
                                 <FaYoutube />
                             </Link>
 
