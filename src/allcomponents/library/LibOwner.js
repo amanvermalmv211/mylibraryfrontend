@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import LibSeats from './LibSeats';
 import authContext from '../../context/auth/authContext';
-import { getEndTime, getStTime, userType } from '../../libs/AllRoutes';
+import { getEndTime, getStTime, monthsname, userType } from '../../libs/AllRoutes';
 import { Link, useNavigate } from 'react-router-dom';
 import { LibownerProfileAnim } from '../notificationmessage/SkeletonAnim';
 import { NotAllowed, PreviewModal } from '../notificationmessage/Modal';
@@ -14,7 +14,7 @@ import ReactPlayer from 'react-player';
 const LibOwner = () => {
 
     const context = useContext(authContext);
-    const { invalidUser, loading, libraryDetails, getLibOwner } = context;
+    const { invalidUser, activeStd, loading, libraryDetails, getLibOwner } = context;
 
     const navigate = useNavigate(null);
     const [open, setOpen] = useState(false);
@@ -102,6 +102,15 @@ const LibOwner = () => {
                     <LibownerProfileAnim />
                 ) : libraryDetails.floors && libraryDetails.floors[0].shifts.length > 0 ? (
                     <>
+                        <div className='max-w-80 mx-auto border border-blue-200 rounded-md bg-gradient-to-tl from-pink-200 to-blue-200 p-2 my-8 shadow-lg'>
+                            <h1 className='text-xl lg:text-2xl font-semibold text-center mb-2'>Subscription Details</h1>
+                            <div>
+                                <p><span className='font-semibold'>Active Students : </span><span>{activeStd}</span></p>
+                                <p><span className='font-semibold'>Subscription Date : </span><span>{new Date(libraryDetails.subscriptionDetails.subscriptionDate).getDate()} {monthsname[new Date(libraryDetails.subscriptionDetails.subscriptionDate).getMonth()]}, {new Date(libraryDetails.subscriptionDetails.subscriptionDate).getFullYear()}</span></p>
+
+                                <p><span className='font-semibold'>Expiry Date : </span><span className='text-red-600'>{new Date(libraryDetails.subscriptionDetails.expiryDate).getDate()} {monthsname[new Date(libraryDetails.subscriptionDetails.expiryDate).getMonth()]}, {new Date(libraryDetails.subscriptionDetails.expiryDate).getFullYear()}</span></p>
+                            </div>
+                        </div>
                         <div className='flex items-center justify-around my-4 space-x-4'>
                             <div className='w-full md:w-60'>
                                 <label htmlFor="shifts" className='ml-1 text-sm'>Select Floor</label>

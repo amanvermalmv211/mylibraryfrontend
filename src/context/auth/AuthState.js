@@ -75,6 +75,8 @@ const AuthState = (props) => {
                     }
                 }
                 setActiveStd(count);
+                localStorage.setItem("expiryDate", json.data.subscriptionDetails.expiryDate);
+                localStorage.setItem("subscriptionDate", json.data.subscriptionDetails.subscriptionDate);
                 setLoading(false);
             }
             else {
@@ -88,7 +90,7 @@ const AuthState = (props) => {
 
     const getStudent = async () => {
         setLoading(true);
-        
+
         try {
             const response = await fetch(apiList.getstudent, {
                 method: 'GET',

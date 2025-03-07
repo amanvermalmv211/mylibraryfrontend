@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { userType } from '../../libs/AllRoutes';
+import { monthsname, userType } from '../../libs/AllRoutes';
 import { useNavigate } from 'react-router-dom';
 import authContext from '../../context/auth/authContext';
 import { BiEdit } from 'react-icons/bi';
@@ -205,10 +205,19 @@ const LibOwnerProfile = () => {
                   <div className='text-center'>
                     <div className='font-semibold'>Contact Number</div>
                     <div className='mb-2'>{libraryDetails.contactnum}, {libraryDetails.libcontactnum}</div>
-                    <div><span className='font-semibold'>Active Students : </span><span>{activeStd}</span></div>
                   </div>
                 </div>
 
+              </div>
+            </div>
+
+            <div className='max-w-80 mx-auto border border-blue-200 rounded-md bg-gradient-to-tl from-pink-200 to-blue-200 p-2 my-8 shadow-lg'>
+              <h1 className='text-xl lg:text-2xl font-semibold text-center mb-2'>Subscription Details</h1>
+              <div>
+                <p><span className='font-semibold'>Active Students : </span><span>{activeStd}</span></p>
+                <p><span className='font-semibold'>Subscription Date : </span><span>{new Date(libraryDetails.subscriptionDetails.subscriptionDate).getDate()} {monthsname[new Date(libraryDetails.subscriptionDetails.subscriptionDate).getMonth()]}, {new Date(libraryDetails.subscriptionDetails.subscriptionDate).getFullYear()}</span></p>
+
+                <p><span className='font-semibold'>Expiry Date : </span><span className='text-red-600'>{new Date(libraryDetails.subscriptionDetails.expiryDate).getDate()} {monthsname[new Date(libraryDetails.subscriptionDetails.expiryDate).getMonth()]}, {new Date(libraryDetails.subscriptionDetails.expiryDate).getFullYear()}</span></p>
               </div>
             </div>
 
@@ -221,6 +230,7 @@ const LibOwnerProfile = () => {
                 <iframe title='map' src={libraryDetails.googlemap} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className='w-full h-[26rem]'></iframe>
               </div>
             </div>
+
           </>
         }
 
