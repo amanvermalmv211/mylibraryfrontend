@@ -10,12 +10,12 @@ import { Link } from 'react-router-dom';
 import { EbookAnim } from '../notificationmessage/SkeletonAnim';
 import InputBox from '../notificationmessage/InputBox';
 import { monthsname } from '../../libs/AllRoutes';
+import { Helmet } from 'react-helmet-async';
 
 const Ebooks = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "E-books - ML";
         getEbooks();
     }, []);
 
@@ -249,6 +249,12 @@ const Ebooks = () => {
 
     return (
         <div className='bg-gray-50 pb-6 sm:pb-8 lg:pb-12'>
+
+            <Helmet>
+                <title>Free Ebooks | Materials & Guides</title>
+                <meta name="description" content="Access a vast collection of free ebooks, study materials, and guides for competitive exams, academics, and personal growth." />
+            </Helmet>
+
             <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
                 <div className='pt-28'>
                     <h1 className='text-2xl md:text-4xl font-bold text-center text-gray-700 mb-8'>Read free E-books ({ebooks.length})</h1>

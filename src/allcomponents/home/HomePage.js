@@ -6,17 +6,23 @@ import GuidePage from './GuidePage';
 import SocialMediaSection from './SocialMediaSection';
 import Studying from '../images/Studying.svg';
 import CallToAction from './CallToAction';
+import { Helmet } from 'react-helmet-async';
 
 const HomePage = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "meriLibrary";
     }, []);
 
     return (
         <>
             <div className="bg-gray-50 pb-6 sm:pb-8 lg:pb-12 relative overflow-hidden">
+
+                <Helmet>
+                    <title>meriLibrary - Get Library around you</title>
+                    <meta name="description" content="Explore top-rated libraries in your city with merilibrary. Find study spaces, subscribe to a seat, and enjoy a peaceful reading environment." />
+                </Helmet>
+
                 <div className="mx-auto max-w-screen-2xl px-4 md:px-8 text-gray-700">
                     <section className="mb-8 flex flex-col justify-around gap-6 sm:gap-10 md:mb-16 md:gap-16 lg:flex-row pt-28 lg:pt-36">
                         <div className="flex flex-col justify-center sm:text-center lg:py-12 lg:text-left xl:w-5/12">
@@ -25,7 +31,7 @@ const HomePage = () => {
                             <p className="mb-8 font-semibold text-blue-500 md:mb-12 md:text-lg xl:text-xl">Find the perfect library that fits your needs with meriLibrary – your search ends here!</p>
 
                             <div className="flex justify-center">
-                                <Link to="/searchlibrary" className="rounded-lg bg-blue-600 px-16 py-3 font-semibold text-white hover:bg-blue-700 flex items-center justify-center space-x-2"><span>Click to Search</span> <IoIosSearch className='scale-150' /></Link>
+                                <Link to="/merilibrary-search-library" className="rounded-lg bg-blue-600 px-16 py-3 font-semibold text-white hover:bg-blue-700 flex items-center justify-center space-x-2"><span>Click to Search</span> <IoIosSearch className='scale-150' /></Link>
                             </div>
                         </div>
 

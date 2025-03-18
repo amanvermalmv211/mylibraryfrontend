@@ -9,6 +9,7 @@ import { resultsValidation } from '../../libs/Validation';
 import { toast } from 'react-toastify';
 import ResultAnim from '../notificationmessage/SkeletonAnim';
 import InputBox from '../notificationmessage/InputBox';
+import { Helmet } from 'react-helmet-async';
 
 const Results = () => {
 
@@ -16,7 +17,6 @@ const Results = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "Results - ML";
         if (shouldDo.current) {
             getResults();
             shouldDo.current = false;
@@ -316,6 +316,12 @@ const Results = () => {
 
     return (
         <div className='bg-gray-50 pb-6 sm:pb-8 lg:pb-12'>
+
+            <Helmet>
+                <title>Sarkari & Private Job Updates | Admit Cards & Exam Results</title>
+                <meta name="description" content="Get the latest updates on government and private job applications, admit cards, and exam results. Stay informed with real-time notifications and apply now!" />
+            </Helmet>
+
             <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
                 <div className='pt-28'>
                     <h1 className='text-2xl md:text-4xl font-bold text-center text-gray-700 mb-8'>Government Jobs, Appilications and Admit Cards</h1>

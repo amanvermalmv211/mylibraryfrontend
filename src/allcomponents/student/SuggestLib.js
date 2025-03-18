@@ -51,7 +51,7 @@ const SuggestLib = () => {
                     <h1 className='text-xl md:text-2xl font-semibold text-center text-gray-700 mb-2'>Find best library and reserve your seat!</h1>
 
                     <div className="mb-10">
-                        <Link to="/searchlibrary" className="rounded-lg bg-blue-600 p-2 font-semibold text-white hover:bg-blue-700 flex items-center justify-center space-x-2 w-60 mx-auto"><span>Search More Libraries</span> <IoIosSearch className='scale-150' /></Link>
+                        <Link to="/merilibrary-search-library" className="rounded-lg bg-blue-600 p-2 font-semibold text-white hover:bg-blue-700 flex items-center justify-center space-x-2 w-60 mx-auto"><span>Search More Libraries</span> <IoIosSearch className='scale-150' /></Link>
                     </div>
 
                     <div className='grid gap-6 mt-6 md:grid-cols-2 lg:grid-cols-3'>
@@ -90,7 +90,7 @@ const SuggestLib = () => {
                     <p className='text-2xl font-semibold text-center'>Oops! There is no Library around you</p>
                     <img src={librarynotfound} alt='Search Library' className='w-full h-full' />
                     <div className="mb-10">
-                        <Link to="/searchlibrary" className="rounded-lg bg-blue-600 px-16 py-3 font-semibold text-white hover:bg-blue-700 flex items-center justify-center space-x-2"><span>Click to Search</span> <IoIosSearch className='scale-150' /></Link>
+                        <Link to="/merilibrary-search-library" className="rounded-lg bg-blue-600 px-16 py-3 font-semibold text-white hover:bg-blue-700 flex items-center justify-center space-x-2"><span>Click to Search</span> <IoIosSearch className='scale-150' /></Link>
                     </div>
                 </div>
             }

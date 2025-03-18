@@ -41,7 +41,7 @@ const InitLibrary = () => {
         window.scrollTo(0, 0);
         if (userType() !== "admin" || !state.ownername) {
             invalidUser()
-            navigate("/login")
+            navigate("/merilibrary-login")
             return;
         }
 

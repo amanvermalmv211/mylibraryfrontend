@@ -22,7 +22,7 @@ const Navbar = () => {
             setUserProfile(userType() + "/profile");
         }
         else {
-            setUserProfile("login")
+            setUserProfile("merilibrary-login")
         }
         setLinks();
 
@@ -46,10 +46,10 @@ const Navbar = () => {
         setLibraryDetails({});
         setStudentDetails({});
         setLinks();
-        setUserProfile("login")
+        setUserProfile("merilibrary-login")
         setIsloggedin(false);
         toast("User logout successfully!");
-        navigate("/login");
+        navigate("/merilibrary-login");
     }
 
     return (
@@ -75,7 +75,7 @@ const Navbar = () => {
 
                     <div className='hidden lg:flex items-center justify-center space-x-8'>
 
-                        <Link to="/searchlibrary">
+                        <Link to="/merilibrary-search-library">
                             <IoIosSearch className='scale-150' />
                         </Link>
 
@@ -84,13 +84,13 @@ const Navbar = () => {
                         </Link>
 
                         {
-                            islogedin ? <div className='p-1.5 border rounded-full bg-blue-600 hover:bg-blue-700 text-white px-6 cursor-pointer' onClick={handleLogout} >Logout</div> : <Link to="/signup" className='p-1.5 border rounded-full bg-blue-600 hover:bg-blue-700 text-white px-6'>SignUp Now</Link>
+                            islogedin ? <div className='p-1.5 border rounded-full bg-blue-600 hover:bg-blue-700 text-white px-6 cursor-pointer' onClick={handleLogout} >Logout</div> : <Link to="/merilibrary-signup" className='p-1.5 border rounded-full bg-blue-600 hover:bg-blue-700 text-white px-6'>SignUp Now</Link>
                         }
                     </div>
 
                     <div className='lg:hidden pr-2 flex items-center justify-center space-x-6'>
 
-                        <Link to="/searchlibrary" onClick={() => { setOpen(false) }}>
+                        <Link to="/merilibrary-search-library" onClick={() => { setOpen(false) }}>
                             <IoIosSearch className='scale-150' />
                         </Link>
 
@@ -120,7 +120,7 @@ const Navbar = () => {
                             }
                             <div className='p-3 pb-8' onClick={(e) => { e.stopPropagation() }}>
                                 {
-                                    islogedin ? <div className='p-3 border rounded-full bg-blue-600 text-white px-20 inline' onClick={() => { handleLogout(); setOpen(false) }} >Logout</div> : <Link to="/signup" onClick={() => { setOpen(false) }} className='p-3 border rounded-full bg-blue-600 text-white px-20'>SignUp Now</Link>
+                                    islogedin ? <div className='p-3 border rounded-full bg-blue-600 text-white px-20 inline' onClick={() => { handleLogout(); setOpen(false) }} >Logout</div> : <Link to="/merilibrary-signup" onClick={() => { setOpen(false) }} className='p-3 border rounded-full bg-blue-600 text-white px-20'>SignUp Now</Link>
                                 }
                             </div>
                         </ul>

@@ -41,7 +41,7 @@ const EditLibrary = () => {
         window.scrollTo(0, 0);
         if (userType() !== "libowner" || !state.ownername) {
             invalidUser()
-            navigate("/login")
+            navigate("/merilibrary-login")
             return;
         }
 

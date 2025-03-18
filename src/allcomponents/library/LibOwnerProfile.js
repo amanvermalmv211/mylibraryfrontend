@@ -20,7 +20,7 @@ const LibOwnerProfile = () => {
     window.scrollTo(0, 0);
     if (userType() !== "libowner") {
       invalidUser()
-      navigate("/login")
+      navigate("/merilibrary-login")
       return;
     }
     if (localStorage.getItem("isallowed") !== "true") {

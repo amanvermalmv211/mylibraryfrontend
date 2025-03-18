@@ -17,7 +17,7 @@ const StdLibrary = () => {
         document.title = "Subscription Details - ML";
         if (userType() !== "student") {
             invalidUser();
-            navigate("/login")
+            navigate("/merilibrary-login")
             return;
         }
 

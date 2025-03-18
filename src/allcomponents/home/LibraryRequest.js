@@ -83,7 +83,7 @@ const LibraryRequest = () => {
         }
         if (userType() !== "student") {
             invalidUser();
-            navigate("/login")
+            navigate("/merilibrary-login")
             return;
         }
 
@@ -323,15 +323,15 @@ const LibraryRequest = () => {
                         <h1 className='text-xl md:text-2xl text-center font-bold'>Student please get logged in </h1>
 
                         <div className=''>
-                            <p className='text-left'>To reserve a seat it is neccessary to logged in to your account. Please <Link to={"/login"} className='underline'>login</Link> if you have an account! If not <Link to={"/student/signup"} className='underline'>Signup</Link> to have an account!</p>
+                            <p className='text-left'>To reserve a seat it is neccessary to logged in to your account. Please <Link to={"/merilibrary-login"} className='underline'>login</Link> if you have an account! If not <Link to={"/merilibrary-student-signup"} className='underline'>Signup</Link> to have an account!</p>
                         </div>
 
                         <div className='flex items-center justify-around text-center w-full space-x-4 mt-4'>
-                            <Link to="/student/signup" className={`w-40 p-1.5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}>
+                            <Link to="/merilibrary-student-signup" className={`w-40 p-1.5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}>
                                 <span>SignUp</span>
                             </Link>
 
-                            <Link to="/login" className={`w-40 p-1.5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}>
+                            <Link to="/merilibrary-login" className={`w-40 p-1.5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}>
                                 <span>Login</span>
                             </Link>
 

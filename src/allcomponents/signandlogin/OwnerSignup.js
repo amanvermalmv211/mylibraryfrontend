@@ -10,6 +10,7 @@ import authContext from '../../context/auth/authContext';
 import { PreviewModal } from '../notificationmessage/Modal';
 import TermsConditions from '../notificationmessage/TermsConditions';
 import ownersignuppage from '../images/ownersignuppage.svg';
+import { Helmet } from 'react-helmet-async';
 
 const OwnerSignup = () => {
 
@@ -39,9 +40,11 @@ const OwnerSignup = () => {
     const [isClicked, setIsClicked] = useState(false);
     const [open, setOpen] = useState(false);
 
-    useEffect(() => {
+    useEffect(()=>{
         window.scrollTo(0, 0);
-        document.title = "User Sign Up - ML";
+    }, []);
+
+    useEffect(() => {
         if (open) {
             document.body.classList.add('modal-open');
         } else {
@@ -156,6 +159,12 @@ const OwnerSignup = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
+
+            <Helmet>
+                <title>Register as a Library Owner | Expand Your Library with meriLibrary</title>
+                <meta name="description" content="Sign up as a library owner on meriLibrary and connect with students searching for study spaces. Manage subscriptions, track active students, and grow your library online. Get started today!" />
+            </Helmet>
+
             <div className={`w-full max-lg:max-w-sm lg:w-10/12 space-y-4 shadow-lg shadow-gray-400 rounded-xl p-2 pb-8 bg-gray-200 relative flex items-center justify-center max-lg:flex-col flex-row`}>
                 <div className='space-y-1 w-full lg:w-2/5 flex items-center justify-center flex-col' data-aos="zoom-in" data-aos-duration="500">
                     <div className="flex justify-center">
@@ -168,10 +177,10 @@ const OwnerSignup = () => {
                         </div>
                     </div>
                     <h2 className={`text-center text-2xl font-extrabold pt-2`}>Sign up as Library Owner</h2>
-                    <div className='text-sm lg:hidden'>Already have an account? <Link to="/login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
+                    <div className='text-sm lg:hidden'>Already have an account? <Link to="/merilibrary-login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
                     <div className='hidden lg:flex flex-col w-full h-60 items-center justify-center'>
                         <img src={ownersignuppage} alt="" className='w-full h-full object-contain' />
-                        <div className='text-sm'>Already have an account? <Link to="/login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
+                        <div className='text-sm'>Already have an account? <Link to="/merilibrary-login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
                     </div>
                 </div>
 

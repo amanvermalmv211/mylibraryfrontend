@@ -14,25 +14,25 @@ export const getEndTime = (shift) => {
 
 export const footerLinks = () => {
     return [
-        { name: "About", link: "/about" },
-        { name: "Result", link: "/results" },
-        { name: "E-Books", link: "/ebooks" },
-        { name: "Contact Us", link: "/contactus" },
-        { name: "Terms & Conditions", link: "/termsandconditions" }
+        { name: "About", link: "/merilibrary-about-us" },
+        { name: "Result", link: "/merilibrary-sarkari-results-jobapp" },
+        { name: "E-Books", link: "/merilibrary-ebooks" },
+        { name: "Contact Us", link: "/merilibrary-contact" },
+        { name: "Terms & Conditions", link: "/merilibrary-terms-and-conditions" }
     ]
 };
 
 export const student = () => {
     return [
-        { name: "Result", link: "/results" },
-        { name: "E-Books", link: "/ebooks" },
+        { name: "Result", link: "/merilibrary-sarkari-results-jobapp" },
+        { name: "E-Books", link: "/merilibrary-ebooks" },
         { name: "Library", link: "/std-library" }
     ]
 };
 
 export const owner = () => {
     return [
-        { name: "Result", link: "/results" },
+        { name: "Result", link: "/merilibrary-sarkari-results-jobapp" },
         { name: "Library", link: "/libowner" },
         { name: "Requests", link: "/libraryreqsub" },
         { name: "Notification", link: "/notif-owner" }
@@ -41,8 +41,8 @@ export const owner = () => {
 
 export const editor = () => {
     return [
-        { name: "Result", link: "/results" },
-        { name: "E-Books", link: "/ebooks" },
+        { name: "Result", link: "/merilibrary-sarkari-results-jobapp" },
+        { name: "E-Books", link: "/merilibrary-ebooks" },
         { name: "Requests", link: "/" }
     ]
 };
@@ -56,10 +56,10 @@ export const superadmin = () => {
 };
 
 const genLinks = [
-    { name: "About", link: "/about" },
-    { name: "Result", link: "/results" },
-    { name: "E-Books", link: "/ebooks" },
-    { name: "Contact Us", link: "/contactus" }
+    { name: "About", link: "/merilibrary-about-us" },
+    { name: "Result", link: "/merilibrary-sarkari-results-jobapp" },
+    { name: "E-Books", link: "/merilibrary-ebooks" },
+    { name: "Contact Us", link: "/merilibrary-contact" }
 ]
 
 

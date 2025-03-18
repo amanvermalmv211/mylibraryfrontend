@@ -22,7 +22,7 @@ const Request = () => {
     useEffect(() => {
         if (userType() !== "admin") {
             invalidUser()
-            navigate("/login")
+            navigate("/merilibrary-login")
             return;
         }
         // eslint-disable-next-line

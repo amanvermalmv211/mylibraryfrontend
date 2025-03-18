@@ -17,7 +17,7 @@ const AdminProfile = () => {
     useEffect(() => {
         if (userType() !== "admin") {
             invalidUser()
-            navigate("/login")
+            navigate("/merilibrary-login")
             return;
         }
 

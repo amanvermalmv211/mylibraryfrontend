@@ -10,12 +10,12 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import InputBox from '../notificationmessage/InputBox';
 import contact from '../images/contact.svg';
 import contactus from '../images/contactus.svg';
+import { Helmet } from 'react-helmet-async';
 
 const Contact = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "Contact Us - ML";
     }, [])
 
     const initDetails = { name: "", contactnum: "", email: "", address: "", message: "" }
@@ -92,11 +92,17 @@ const Contact = () => {
     const buttonLinks = [{ name: "WhatsApp", link: "https://wa.me/918188879731", bg: "bg-green-500", hover: "hover:bg-green-600", border: "border-green-300", icon: <FaWhatsapp /> },
     { name: "Call", link: "tel:+918188879731", bg: "bg-gray-500", hover: "hover:bg-gray-600", border: "border-gray-300", icon: <BiSolidPhoneCall /> },
     { name: "Gmail", link: "mailto:merilibrary.in@gmail.com", bg: "bg-yellow-400", hover: "hover:bg-yellow-500", border: "border-yellow-300", icon: <BiLogoGmail /> },
-    { name: "Register", link: "/owner/signup", bg: "bg-blue-500", hover: "hover:bg-blue-600", border: "border-blue-300", icon: <FaRegIdBadge /> }
+    { name: "Register", link: "/merilibrary-library-owner-signup", bg: "bg-blue-500", hover: "hover:bg-blue-600", border: "border-blue-300", icon: <FaRegIdBadge /> }
     ]
 
     return (
         <div className='bg-gray-50 pb-6 sm:pb-8 lg:pb-12'>
+
+            <Helmet>
+                <title>Contact Us | meriLibrary - Your Study Partner</title>
+                <meta name="description" content="Need help with library subscriptions or management? Contact meriLibrary for support. We’re here to assist students and library owners." />
+            </Helmet>
+
             <div className='mx-auto max-w-screen-2xl px-4 md:px-8 pt-28 text-gray-700'>
 
                 <section className="flex max-lg:flex-col justify-around">
@@ -185,7 +191,7 @@ const Contact = () => {
                             <ul className='flex max-lg:justify-center flex-wrap text-white'>
                                 {
                                     buttonLinks.map((data, idx) => {
-                                        return <Link key={idx} to={data.link} target={`${idx === 3 ? "_self": "_blank"}`} className={`flex items-center justify-center space-x-1 border ${data.border} p-2 rounded-lg ${data.bg} ${data.hover} w-32 m-1`}><span>{data.name}</span> {data.icon}</Link>
+                                        return <Link key={idx} to={data.link} target={`${idx === 3 ? "_self" : "_blank"}`} className={`flex items-center justify-center space-x-1 border ${data.border} p-2 rounded-lg ${data.bg} ${data.hover} w-32 m-1`}><span>{data.name}</span> {data.icon}</Link>
                                     })
                                 }
                             </ul>

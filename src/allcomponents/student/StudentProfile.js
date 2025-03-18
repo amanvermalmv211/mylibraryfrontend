@@ -23,7 +23,7 @@ const StudentProfile = () => {
         window.scrollTo(0, 0);
         if (userType() !== "student") {
             invalidUser()
-            navigate("/login")
+            navigate("/merilibrary-login")
             return;
         }
         if (!studentDetails.name) {

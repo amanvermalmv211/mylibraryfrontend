@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const About = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "About Us - ML";
     }, []);
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col items-center px-4 py-12">
+
+            <Helmet>
+                <title>About meriLibrary - Revolutionizing Library Management & Access</title>
+                <meta name="description" content="meriLibrary is a digital platform connecting students with libraries. Learn about our mission to make study spaces more accessible and convenient." />
+            </Helmet>
+
             <div className="max-w-4xl text-center pt-16">
                 <h1 className="text-3xl font-bold md:text-5xl text-blue-600 mb-6">Welcome to meriLibrary</h1>
                 <p className="text-lg text-gray-700 leading-relaxed max-md:text-justify">
@@ -67,14 +73,14 @@ const About = () => {
                 </p>
                 <div className="mt-8 flex flex-col md:flex-row items-center justify-center gap-6">
                     <Link
-                        to="/student/signup"
+                        to="/merilibrary-student-signup"
                         className="bg-white text-blue-600 font-semibold py-3 rounded-lg shadow-md hover:bg-gray-100 transition duration-300 w-44"
                     >
                         Sign Up as Student
                     </Link>
 
                     <Link
-                        to="/owner/signup"
+                        to="/merilibrary-library-owner-signup"
                         className="bg-white text-pink-500 font-semibold py-3 rounded-lg shadow-md hover:bg-gray-100 transition duration-300 w-44"
                     >
                         List Your Library

@@ -8,6 +8,7 @@ import authContext from '../../context/auth/authContext';
 import { loginValidation } from '../../libs/Validation';
 import InputBox from '../notificationmessage/InputBox';
 import loginsvg from '../images/loginsvg.svg';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
 
@@ -27,7 +28,6 @@ const Login = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "User Sign In - ML";
     }, [])
 
 
@@ -87,6 +87,12 @@ const Login = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+
+            <Helmet>
+                <title>Login to meriLibrary | Access Your Account Now</title>
+                <meta name="description" content="Login to your meriLibrary account to manage your library or student subscription. Secure access for students and library owners. Sign in now to continue!" />
+            </Helmet>
+
             <div className={`max-w-sm w-full space-y-2 shadow-lg shadow-gray-400 rounded-xl p-4 pb-8 bg-gray-200 relative`}>
                 <div className='space-y-1' data-aos="zoom-in" data-aos-duration="500">
                     <div className="flex justify-center">
@@ -141,7 +147,7 @@ const Login = () => {
                 </div>
 
                 <div>
-                    <p className='text-center text-sm mt-3'>Don't have account? <Link to='/signup' className='underline text-blue-700 font-semibold'>SignUp</Link></p>
+                    <p className='text-center text-sm mt-3'>Don't have account? <Link to='/merilibrary-signup' className='underline text-blue-700 font-semibold'>SignUp</Link></p>
 
                 </div>
 

@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import authContext from '../../context/auth/authContext';
 import searchlibrary from '../images/searchlibrary.svg';
 import librarynotfound from '../images/librarynotfound.svg';
+import { Helmet } from 'react-helmet-async';
 
 const SearchLibrary = () => {
     const context = useContext(authContext);
@@ -14,7 +15,6 @@ const SearchLibrary = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "Search Library - ML";
     }, []);
 
     const navigate = useNavigate(null);
@@ -70,6 +70,12 @@ const SearchLibrary = () => {
 
     return (
         <div className='bg-gray-50 pb-6 sm:pb-8 lg:pb-12'>
+
+            <Helmet>
+                <title>Search & Discover Libraries Near You | meriLibrary</title>
+                <meta name="description" content="Looking for a library? meriLibrary helps you search and subscribe to the best study spaces near you. Browse available seats, timings, and facilities now!" />
+            </Helmet>
+
             <div className='mx-auto max-w-screen-2xl px-4 md:px-8 pt-28 text-gray-700 min-h-screen'>
                 <h1 className='mb-2 md:mb-4 text-4xl font-bold sm:text-5xl md:text-center'>Search Library Near You!</h1>
                 <div className='border rounded-lg mx-auto max-w-screen-md p-2 bg-gray-200 shadow-md'>

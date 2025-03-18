@@ -30,10 +30,11 @@ import StdLibrary from './allcomponents/student/StdLibrary';
 import NotificationByOwner from './allcomponents/library/NotificationByOwner';
 import About from './allcomponents/home/About';
 import ResetPass from './allcomponents/signandlogin/ResetPass';
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
   return (
-    <>
+    <HelmetProvider>
       <AuthState>
         <Router>
           <Navbar />
@@ -42,12 +43,12 @@ function App() {
 
           <Routes>
             <Route exact path="/" element={<HomePage />}></Route>
-            <Route exact path="/signup" element={<SignupPage />}></Route>
-            <Route exact path="/student/signup" element={<StdSignup />}></Route>
-            <Route exact path="/owner/signup" element={<OwnerSignup />}></Route>
-            <Route exact path="/login" element={<Login />}></Route>
+            <Route exact path="/merilibrary-signup" element={<SignupPage />}></Route>
+            <Route exact path="/merilibrary-student-signup" element={<StdSignup />}></Route>
+            <Route exact path="/merilibrary-library-owner-signup" element={<OwnerSignup />}></Route>
+            <Route exact path="/merilibrary-login" element={<Login />}></Route>
             <Route exact path="/resetpassword" element={<ResetPass />}></Route>
-            <Route exact path="/searchlibrary" element={<SearchLibrary />}></Route>
+            <Route exact path="/merilibrary-search-library" element={<SearchLibrary />}></Route>
             <Route exact path="/admin/profile" element={<AdminProfile />}></Route>
             <Route exact path="/request" element={<Request />}></Route>
             <Route exact path="/initlib" element={<InitLibrary />}></Route>
@@ -58,18 +59,18 @@ function App() {
             <Route exact path="/editlibrary" element={<EditLibrary />}></Route>
             <Route exact path="/libraryreqsub" element={<LibraryRequestSubs />}></Route>
             <Route exact path="/notif-owner" element={<NotificationByOwner />}></Route>
-            
+
             <Route exact path="/student/profile" element={<StudentProfile />}></Route>
             <Route exact path="/std-library" element={<StdLibrary />}></Route>
             <Route exact path="/details/library" element={<LibraryRequest />}></Route>
 
             <Route exact path="/signup/editor" element={<EditorSignup />}></Route>
-            <Route exact path="/editor/profile" element={<EditorProfile istrue={false}/>}></Route>
-            <Route exact path="/results" element={<Results />}></Route>
-            <Route exact path="/ebooks" element={<Ebooks />}></Route>
-            <Route exact path="/contactus" element={<Contact />}></Route>
-            <Route exact path="/about" element={<About />}></Route>
-            <Route exact path="/termsandconditions" element={<TermsConditions />}></Route>
+            <Route exact path="/editor/profile" element={<EditorProfile istrue={false} />}></Route>
+            <Route exact path="/merilibrary-sarkari-results-jobapp" element={<Results />}></Route>
+            <Route exact path="/merilibrary-ebooks" element={<Ebooks />}></Route>
+            <Route exact path="/merilibrary-contact" element={<Contact />}></Route>
+            <Route exact path="/merilibrary-about-us" element={<About />}></Route>
+            <Route exact path="/merilibrary-terms-and-conditions" element={<TermsConditions />}></Route>
           </Routes>
 
           <Footer />
@@ -77,7 +78,7 @@ function App() {
         </Router>
 
       </AuthState>
-    </>
+    </HelmetProvider>
   );
 }
 
