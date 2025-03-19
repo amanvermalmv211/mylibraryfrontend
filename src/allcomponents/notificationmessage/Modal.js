@@ -18,10 +18,10 @@ export const NotAllowed = ({ open, fromHeading, children }) => {
         localStorage.removeItem("authtoken");
         localStorage.removeItem("isallowed");
         setLinks();
-        setUserProfile("merilibrary-login");
+        setUserProfile("login");
         setIsloggedin(false);
         toast("User logout successfully!");
-        navigate("/merilibrary-login");
+        navigate("/login");
     }
 
     return (

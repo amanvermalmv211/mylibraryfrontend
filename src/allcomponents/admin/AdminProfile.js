@@ -17,11 +17,11 @@ const AdminProfile = () => {
     useEffect(() => {
         if (userType() !== "admin") {
             invalidUser()
-            navigate("/merilibrary-login")
+            navigate("/login")
             return;
         }
 
-        document.title = "Admin Profile - ML";
+        document.title = "Admin - ML";
 
         getAdmin();
         // eslint-disable-next-line

@@ -92,7 +92,7 @@ const Contact = () => {
     const buttonLinks = [{ name: "WhatsApp", link: "https://wa.me/918188879731", bg: "bg-green-500", hover: "hover:bg-green-600", border: "border-green-300", icon: <FaWhatsapp /> },
     { name: "Call", link: "tel:+918188879731", bg: "bg-gray-500", hover: "hover:bg-gray-600", border: "border-gray-300", icon: <BiSolidPhoneCall /> },
     { name: "Gmail", link: "mailto:merilibrary.in@gmail.com", bg: "bg-yellow-400", hover: "hover:bg-yellow-500", border: "border-yellow-300", icon: <BiLogoGmail /> },
-    { name: "Register", link: "/merilibrary-library-owner-signup", bg: "bg-blue-500", hover: "hover:bg-blue-600", border: "border-blue-300", icon: <FaRegIdBadge /> }
+    { name: "Register", link: "/signup/library-owner", bg: "bg-blue-500", hover: "hover:bg-blue-600", border: "border-blue-300", icon: <FaRegIdBadge /> }
     ]
 
     return (

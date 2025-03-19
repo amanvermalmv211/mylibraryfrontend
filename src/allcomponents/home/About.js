@@ -73,14 +73,14 @@ const About = () => {
                 </p>
                 <div className="mt-8 flex flex-col md:flex-row items-center justify-center gap-6">
                     <Link
-                        to="/merilibrary-student-signup"
+                        to="/signup/student"
                         className="bg-white text-blue-600 font-semibold py-3 rounded-lg shadow-md hover:bg-gray-100 transition duration-300 w-44"
                     >
                         Sign Up as Student
                     </Link>
 
                     <Link
-                        to="/merilibrary-library-owner-signup"
+                        to="/signup/library-owner"
                         className="bg-white text-pink-500 font-semibold py-3 rounded-lg shadow-md hover:bg-gray-100 transition duration-300 w-44"
                     >
                         List Your Library

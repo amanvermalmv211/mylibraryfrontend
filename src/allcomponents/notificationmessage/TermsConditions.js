@@ -129,10 +129,12 @@ const TermsConditions = (props) => {
     return (
         <div className={`bg-white max-w-screen-md rounded-md p-4 mx-auto ${!istrue && "pt-28"}`}>
 
-            <Helmet>
-                <title>Terms and Conditions | meriLibrary Usage Policy</title>
-                <meta name="description" content="Read the terms and conditions for using meriLibrary. Understand our policies on user accounts, subscriptions, payments, and content access before proceeding." />
-            </Helmet>
+            {
+                !istrue && <Helmet>
+                    <title>Terms and Conditions | meriLibrary Usage Policy</title>
+                    <meta name="description" content="Read the terms and conditions for using meriLibrary. Understand our policies on user accounts, subscriptions, payments, and content access before proceeding." />
+                </Helmet>
+            }
 
             <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 text-blue-600">
                 Terms & Conditions

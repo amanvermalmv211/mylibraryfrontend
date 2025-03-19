@@ -14,52 +14,52 @@ export const getEndTime = (shift) => {
 
 export const footerLinks = () => {
     return [
-        { name: "About", link: "/merilibrary-about-us" },
-        { name: "Result", link: "/merilibrary-sarkari-results-jobapp" },
-        { name: "E-Books", link: "/merilibrary-ebooks" },
-        { name: "Contact Us", link: "/merilibrary-contact" },
-        { name: "Terms & Conditions", link: "/merilibrary-terms-and-conditions" }
+        { name: "About", link: "/about" },
+        { name: "Result", link: "/sarkari-results" },
+        { name: "E-Books", link: "/ebooks" },
+        { name: "Contact Us", link: "/contact" },
+        { name: "Terms & Conditions", link: "/terms-and-conditions" }
     ]
 };
 
 export const student = () => {
     return [
-        { name: "Result", link: "/merilibrary-sarkari-results-jobapp" },
-        { name: "E-Books", link: "/merilibrary-ebooks" },
-        { name: "Library", link: "/std-library" }
+        { name: "Result", link: "/sarkari-results" },
+        { name: "E-Books", link: "/ebooks" },
+        { name: "Library", link: "/student/subscription" }
     ]
 };
 
 export const owner = () => {
     return [
-        { name: "Result", link: "/merilibrary-sarkari-results-jobapp" },
-        { name: "Library", link: "/libowner" },
-        { name: "Requests", link: "/libraryreqsub" },
-        { name: "Notification", link: "/notif-owner" }
+        { name: "Result", link: "/sarkari-results" },
+        { name: "Library", link: "/libowner/library" },
+        { name: "Requests", link: "/libowner/library/requests" },
+        { name: "Students", link: "/libowner/library/students" }
     ]
 };
 
 export const editor = () => {
     return [
-        { name: "Result", link: "/merilibrary-sarkari-results-jobapp" },
-        { name: "E-Books", link: "/merilibrary-ebooks" },
+        { name: "Result", link: "/sarkari-results" },
+        { name: "E-Books", link: "/ebooks" },
         { name: "Requests", link: "/" }
     ]
 };
 
 export const superadmin = () => {
     return [
-        { name: "Libraries", link: "/alllibraries" },
-        { name: "Requests", link: "/request" },
+        { name: "Libraries", link: "/admin/alllibraries" },
+        { name: "Requests", link: "/admin/request" },
         { name: "Dashboard", link: "/" }
     ]
 };
 
 const genLinks = [
-    { name: "About", link: "/merilibrary-about-us" },
-    { name: "Result", link: "/merilibrary-sarkari-results-jobapp" },
-    { name: "E-Books", link: "/merilibrary-ebooks" },
-    { name: "Contact Us", link: "/merilibrary-contact" }
+    { name: "About", link: "/about" },
+    { name: "Result", link: "/sarkari-results" },
+    { name: "E-Books", link: "/ebooks" },
+    { name: "Contact Us", link: "/contact" }
 ]
 
 

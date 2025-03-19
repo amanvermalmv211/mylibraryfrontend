@@ -20,7 +20,7 @@ const LibOwnerProfile = () => {
     window.scrollTo(0, 0);
     if (userType() !== "libowner") {
       invalidUser()
-      navigate("/merilibrary-login")
+      navigate("/login")
       return;
     }
     if (localStorage.getItem("isallowed") !== "true") {
@@ -31,7 +31,7 @@ const LibOwnerProfile = () => {
       getLibOwner();
     }
 
-    document.title = "Library Owner Profile - ML";
+    document.title = "Library Owner - ML";
     // eslint-disable-next-line
   }, [])
 

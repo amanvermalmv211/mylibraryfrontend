@@ -14,7 +14,7 @@ const AllLibraries = () => {
     useEffect(() => {
         if (userType() !== "admin") {
             invalidUser()
-            navigate("/merilibrary-login")
+            navigate("/login")
             return;
         }
         // eslint-disable-next-line
@@ -86,7 +86,7 @@ const AllLibraries = () => {
                                                 </p>
                                                 <button
                                                     className='block w-full mt-2 py-2 text-center text-white bg-blue-700 rounded-md hover:bg-blue-800'
-                                                    onClick={() => navigate("/initlib", { state: data })}>
+                                                    onClick={() => navigate("/admin/request/initlib", { state: data })}>
                                                     View Details
                                                 </button>
                                             </div>

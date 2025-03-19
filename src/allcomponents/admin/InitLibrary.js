@@ -41,7 +41,7 @@ const InitLibrary = () => {
         window.scrollTo(0, 0);
         if (userType() !== "admin" || !state.ownername) {
             invalidUser()
-            navigate("/merilibrary-login")
+            navigate("/login")
             return;
         }
 
@@ -315,7 +315,7 @@ const InitLibrary = () => {
                 const json = await response.json();
                 if (json.success) {
                     toast.success(json.message);
-                    navigate("/request");
+                    navigate("/admin/request");
                     setSpinLoading(false);
                 }
                 else {

@@ -122,7 +122,7 @@ const SearchLibrary = () => {
                                     </p>
                                     <button
                                         className='block w-full mt-2 py-2 text-center text-white bg-blue-700 rounded-md hover:bg-blue-800'
-                                        onClick={() => navigate("/details/library", { state: data })}>
+                                        onClick={() => navigate("/reserve-seat", { state: data })}>
                                         View and Request Seat
                                     </button>
                                 </div>

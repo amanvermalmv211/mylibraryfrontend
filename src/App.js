@@ -43,34 +43,34 @@ function App() {
 
           <Routes>
             <Route exact path="/" element={<HomePage />}></Route>
-            <Route exact path="/merilibrary-signup" element={<SignupPage />}></Route>
-            <Route exact path="/merilibrary-student-signup" element={<StdSignup />}></Route>
-            <Route exact path="/merilibrary-library-owner-signup" element={<OwnerSignup />}></Route>
-            <Route exact path="/merilibrary-login" element={<Login />}></Route>
+            <Route exact path="/signup" element={<SignupPage />}></Route>
+            <Route exact path="/signup/student" element={<StdSignup />}></Route>
+            <Route exact path="/signup/library-owner" element={<OwnerSignup />}></Route>
+            <Route exact path="/login" element={<Login />}></Route>
             <Route exact path="/resetpassword" element={<ResetPass />}></Route>
-            <Route exact path="/merilibrary-search-library" element={<SearchLibrary />}></Route>
-            <Route exact path="/admin/profile" element={<AdminProfile />}></Route>
-            <Route exact path="/request" element={<Request />}></Route>
-            <Route exact path="/initlib" element={<InitLibrary />}></Route>
-            <Route exact path="/alllibraries" element={<AllLibraries />}></Route>
+            <Route exact path="/libraries" element={<SearchLibrary />}></Route>
+            <Route exact path="/admin" element={<AdminProfile />}></Route>
+            <Route exact path="/admin/request" element={<Request />}></Route>
+            <Route exact path="/admin/request/initlib" element={<InitLibrary />}></Route>
+            <Route exact path="/admin/alllibraries" element={<AllLibraries />}></Route>
 
-            <Route exact path="/libowner/profile" element={<LibOwnerProfile />}></Route>
-            <Route exact path="/libowner" element={<LibOwner />}></Route>
-            <Route exact path="/editlibrary" element={<EditLibrary />}></Route>
-            <Route exact path="/libraryreqsub" element={<LibraryRequestSubs />}></Route>
-            <Route exact path="/notif-owner" element={<NotificationByOwner />}></Route>
+            <Route exact path="/libowner" element={<LibOwnerProfile />}></Route>
+            <Route exact path="/libowner/library" element={<LibOwner />}></Route>
+            <Route exact path="/libowner/library/edit" element={<EditLibrary />}></Route>
+            <Route exact path="/libowner/library/requests" element={<LibraryRequestSubs />}></Route>
+            <Route exact path="/libowner/library/students" element={<NotificationByOwner />}></Route>
 
-            <Route exact path="/student/profile" element={<StudentProfile />}></Route>
-            <Route exact path="/std-library" element={<StdLibrary />}></Route>
-            <Route exact path="/details/library" element={<LibraryRequest />}></Route>
+            <Route exact path="/student" element={<StudentProfile />}></Route>
+            <Route exact path="/student/subscription" element={<StdLibrary />}></Route>
+            <Route exact path="/reserve-seat" element={<LibraryRequest />}></Route>
 
             <Route exact path="/signup/editor" element={<EditorSignup />}></Route>
-            <Route exact path="/editor/profile" element={<EditorProfile istrue={false} />}></Route>
-            <Route exact path="/merilibrary-sarkari-results-jobapp" element={<Results />}></Route>
-            <Route exact path="/merilibrary-ebooks" element={<Ebooks />}></Route>
-            <Route exact path="/merilibrary-contact" element={<Contact />}></Route>
-            <Route exact path="/merilibrary-about-us" element={<About />}></Route>
-            <Route exact path="/merilibrary-terms-and-conditions" element={<TermsConditions />}></Route>
+            <Route exact path="/editor" element={<EditorProfile istrue={false} />}></Route>
+            <Route exact path="/sarkari-results" element={<Results />}></Route>
+            <Route exact path="/ebooks" element={<Ebooks />}></Route>
+            <Route exact path="/contact" element={<Contact />}></Route>
+            <Route exact path="/about" element={<About />}></Route>
+            <Route exact path="/terms-and-conditions" element={<TermsConditions />}></Route>
           </Routes>
 
           <Footer />

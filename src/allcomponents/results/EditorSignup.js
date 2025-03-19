@@ -123,7 +123,7 @@ const EditorSignup = () => {
                     // localStorage.setItem("isallowed", verifyJson.isallowed);
                     toast.success(verifyJson.message);
                     setLinks(verifyJson.type);
-                    setUserProfile(verifyJson.type + "/profile")
+                    setUserProfile(verifyJson.type)
                     setIsloggedin(true);
                     setSpinSingUpLoading(false);
                     setIsClicked(false);
@@ -158,10 +158,10 @@ const EditorSignup = () => {
                         </div>
                     </div>
                     <h2 className={`text-center text-2xl font-extrabold pt-2`}>Sign as Editor</h2>
-                    <div className='text-sm lg:hidden'>Already have an account? <Link to="/merilibrary-login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
+                    <div className='text-sm lg:hidden'>Already have an account? <Link to="/login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
                     <div className='hidden lg:flex flex-col w-full h-60 items-center justify-center'>
                         <img src={editorsignup} alt="" className='w-full h-full object-contain' />
-                        <div className='text-sm'>Already have an account? <Link to="/merilibrary-login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
+                        <div className='text-sm'>Already have an account? <Link to="/login" className='text-blue-700 underline font-semibold'>Login</Link> </div>
                     </div>
                 </div>
 

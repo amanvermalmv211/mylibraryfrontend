@@ -13,21 +13,21 @@ const CallToAction = () => {
 
                     <div className="mt-8 flex flex-col md:flex-row items-center justify-center gap-6">
                         <Link
-                            to="/merilibrary-student-signup"
+                            to="/signup/student"
                             className="bg-white text-blue-600 font-semibold py-3 rounded-lg shadow-md hover:bg-gray-100 transition duration-300 w-44"
                         >
                             Sign Up as Student
                         </Link>
 
                         <Link
-                            to="/merilibrary-library-owner-signup"
+                            to="/signup/library-owner"
                             className="bg-white text-pink-500 font-semibold py-3 rounded-lg shadow-md hover:bg-gray-100 transition duration-300 w-44"
                         >
                             List Your Library
                         </Link>
 
                         <Link
-                            to="/merilibrary-search-library"
+                            to="/libraries"
                             className="bg-transparent border-2 border-white py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300 w-44"
                         >
                             Explore Libraries
@@ -36,7 +36,7 @@ const CallToAction = () => {
 
                     <p className="mt-6 text-sm">
                         Read{" "}
-                        <Link to="/merilibrary-terms-and-conditions" className="underline font-semibold hover:text-gray-200">
+                        <Link to="/terms-and-conditions" className="underline font-semibold hover:text-gray-200">
                             Terms & Conditions
                         </Link>
                     </p>

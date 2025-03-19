@@ -20,7 +20,7 @@ const HomePage = () => {
 
                 <Helmet>
                     <title>meriLibrary - Get Library around you</title>
-                    <meta name="description" content="Explore top-rated libraries in your city with merilibrary. Find study spaces, subscribe to a seat, and enjoy a peaceful reading environment." />
+                    <meta name="description" content="Get Library around you with merilibrary. Find study spaces, subscribe to a seat, and enjoy a peaceful reading environment. meriLibrary service for the library owners, helps to connect with students!" />
                 </Helmet>
 
                 <div className="mx-auto max-w-screen-2xl px-4 md:px-8 text-gray-700">
@@ -31,7 +31,7 @@ const HomePage = () => {
                             <p className="mb-8 font-semibold text-blue-500 md:mb-12 md:text-lg xl:text-xl">Find the perfect library that fits your needs with meriLibrary – your search ends here!</p>
 
                             <div className="flex justify-center">
-                                <Link to="/merilibrary-search-library" className="rounded-lg bg-blue-600 px-16 py-3 font-semibold text-white hover:bg-blue-700 flex items-center justify-center space-x-2"><span>Click to Search</span> <IoIosSearch className='scale-150' /></Link>
+                                <Link to="/libraries" className="rounded-lg bg-blue-600 px-16 py-3 font-semibold text-white hover:bg-blue-700 flex items-center justify-center space-x-2"><span>Click to Search</span> <IoIosSearch className='scale-150' /></Link>
                             </div>
                         </div>
 

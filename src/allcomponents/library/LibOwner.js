@@ -29,7 +29,7 @@ const LibOwner = () => {
         window.scrollTo(0, 0);
         if (userType() !== "libowner") {
             invalidUser()
-            navigate("/merilibrary-login")
+            navigate("/login")
             return;
         }
         if (localStorage.getItem("isallowed") !== "true") {
@@ -86,7 +86,7 @@ const LibOwner = () => {
     };
 
     const handleEditLib = () => {
-        navigate("/editlibrary", { state: libraryDetails });
+        navigate("/libowner/library/edit", { state: libraryDetails });
     }
 
     return (

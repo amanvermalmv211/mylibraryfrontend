@@ -23,7 +23,7 @@ const LibraryDetails = () => {
 
             const json = await response.json();
             if (json.success) {
-                navigate("/details/library", { state: json.data });
+                navigate("/reserve-seat", { state: json.data });
             }
             else {
                 toast.warn(json.message);
@@ -41,7 +41,7 @@ const LibraryDetails = () => {
                 <div className="mt-4 text-gray-700">
                     {
                         studentDetails.subscriptionDetails.length > 0 &&
-                        <h1 className='text-2xl md:text-4xl font-bold text-center mb-8'>Library Subscriptions</h1>
+                        <h1 className='text-2xl md:text-4xl font-bold text-center mb-8'>Library Subscription</h1>
                     }
                     <div className="flex max-lg:flex-col max-lg:space-y-12 items-center justify-center lg:space-x-12">
                         {studentDetails.subscriptionDetails.map((studentDetails, idx) => (

@@ -37,7 +37,7 @@ const SignupPage = () => {
                         </ul>
 
                         <div className='flex justify-center m-2'>
-                            <Link to="/merilibrary-student-signup" className='rounded-lg cursor-pointer bg-orange-600 px-16 py-2 font-semibold text-white hover:bg-orange-700'>Register</Link>
+                            <Link to="/signup/student" className='rounded-lg cursor-pointer bg-orange-600 px-16 py-2 font-semibold text-white hover:bg-orange-700'>Register</Link>
                         </div>
                     </div>
                 </section>
@@ -59,7 +59,7 @@ const SignupPage = () => {
                         </ul>
 
                         <div className='flex justify-center m-2'>
-                            <Link to="/merilibrary-library-owner-signup" className='rounded-lg cursor-pointer bg-green-600 px-16 py-2 font-semibold text-white hover:bg-green-700'>Register</Link>
+                            <Link to="/signup/library-owner" className='rounded-lg cursor-pointer bg-green-600 px-16 py-2 font-semibold text-white hover:bg-green-700'>Register</Link>
                         </div>
 
                     </div>

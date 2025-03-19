@@ -46,7 +46,7 @@ const LibraryRequestSubs = () => {
     document.title = "Request - ML";
     if (userType() !== "libowner") {
       invalidUser()
-      navigate("/merilibrary-login")
+      navigate("/login")
       return;
     }
     if (!libraryDetails.ownername) {

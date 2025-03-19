@@ -64,7 +64,7 @@ const Login = () => {
                     localStorage.setItem("isallowed", json.isallowed);
                     toast.success(json.message);
                     setLinks(json.type);
-                    setUserProfile(json.type + "/profile")
+                    setUserProfile(json.type)
                     setIsloggedin(true);
                     setSpinSingUpLoading(false);
                     navigate("/");
@@ -147,7 +147,7 @@ const Login = () => {
                 </div>
 
                 <div>
-                    <p className='text-center text-sm mt-3'>Don't have account? <Link to='/merilibrary-signup' className='underline text-blue-700 font-semibold'>SignUp</Link></p>
+                    <p className='text-center text-sm mt-3'>Don't have account? <Link to='/signup' className='underline text-blue-700 font-semibold'>SignUp</Link></p>
 
                 </div>
 

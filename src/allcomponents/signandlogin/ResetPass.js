@@ -102,7 +102,7 @@ const ResetPass = () => {
             localStorage.setItem("isallowed", json.isallowed);
             toast.success(json.message);
             setLinks(json.type);
-            setUserProfile(json.type + "/profile")
+            setUserProfile(json.type)
             setIsloggedin(true);
             setSpinSingUpLoading(false);
             navigate("/");

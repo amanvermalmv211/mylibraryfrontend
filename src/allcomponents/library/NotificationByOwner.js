@@ -5,7 +5,7 @@ const NotificationByOwner = () => {
 
     useEffect(()=>{
         window.scrollTo(0, 0);
-        document.title = "Notification - ML";
+        document.title = "All Students - ML";
     }, []);
 
     return (

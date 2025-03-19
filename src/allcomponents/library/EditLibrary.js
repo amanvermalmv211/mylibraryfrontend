@@ -41,7 +41,7 @@ const EditLibrary = () => {
         window.scrollTo(0, 0);
         if (userType() !== "libowner" || !state.ownername) {
             invalidUser()
-            navigate("/merilibrary-login")
+            navigate("/login")
             return;
         }
 
@@ -211,7 +211,7 @@ const EditLibrary = () => {
                 if (json.success) {
                     toast.success(json.message);
                     setLibraryDetails(libDetails);
-                    navigate("/libowner");
+                    navigate("/libowner/library");
                     setSpinLoading(false);
                 }
                 else {

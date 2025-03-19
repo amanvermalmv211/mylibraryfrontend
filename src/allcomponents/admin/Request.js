@@ -15,14 +15,14 @@ const Request = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "Request - ML";
+        document.title = "Request for admin - ML";
         getRequests();
     }, []);
 
     useEffect(() => {
         if (userType() !== "admin") {
             invalidUser()
-            navigate("/merilibrary-login")
+            navigate("/login")
             return;
         }
         // eslint-disable-next-line
@@ -36,7 +36,7 @@ const Request = () => {
     const [allEditors, setAllEditors] = useState([]);
 
     const handleInitLib = (data) => {
-        navigate("/initlib", { state: data });
+        navigate("/admin/request/initlib", { state: data });
     }
 
     const initEditor = async (id) => {

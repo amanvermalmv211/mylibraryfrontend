@@ -7,7 +7,7 @@ import apiList from '../../libs/apiLists';
 const AuthState = (props) => {
 
     const [islogedin, setIsloggedin] = useState(localStorage.getItem("authtoken"));
-    const [userProfile, setUserProfile] = useState("merilibrary-login");
+    const [userProfile, setUserProfile] = useState("login");
     const [loading, setLoading] = useState(true);
     const [activeStd, setActiveStd] = useState(100);
     const [studentDetails, setStudentDetails] = useState({});
@@ -37,7 +37,7 @@ const AuthState = (props) => {
         localStorage.removeItem("type");
         localStorage.removeItem("authtoken");
         setLinks();
-        setUserProfile("merilibrary-login")
+        setUserProfile("login")
         setIsloggedin(false);
         toast.warn("Invalid User");
         setStudentDetails({});

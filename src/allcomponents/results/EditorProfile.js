@@ -17,7 +17,7 @@ const EditorProfile = () => {
     useEffect(() => {
         if (userType() !== "editor") {
             invalidUser()
-            navigate("/merilibrary-login")
+            navigate("/login")
             return;
         }
 
