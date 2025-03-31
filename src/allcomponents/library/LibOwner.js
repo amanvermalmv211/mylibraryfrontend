@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import LibraryPreview from '../notificationmessage/LibraryPreview';
 import { TbLibrary } from 'react-icons/tb';
 import ReactPlayer from 'react-player';
+import RenewSubscription from './RenewSubscription';
 
 const LibOwner = () => {
 
@@ -18,6 +19,7 @@ const LibOwner = () => {
 
     const navigate = useNavigate(null);
     const [open, setOpen] = useState(false);
+    const [openSubsExpired, setOpenSubsExpired] = useState(false);
     const [openPreview, setOpenPreview] = useState(false);
     const [openStdDet, setOpenStdDet] = useState(false);
     const [idxFloor, setIdxFloor] = useState(0);
@@ -45,7 +47,7 @@ const LibOwner = () => {
     }, []);
 
     useEffect(() => {
-        if (open || openPreview || openStdDet) {
+        if (open || openPreview || openStdDet || openSubsExpired) {
             document.body.classList.add('modal-open');
         } else {
             document.body.classList.remove('modal-open');
@@ -55,7 +57,17 @@ const LibOwner = () => {
             document.body.classList.remove('modal-open');
         };
 
-    }, [open, openPreview, openStdDet]);
+    }, [open, openPreview, openStdDet, openSubsExpired]);
+
+    useEffect(() => {
+        if (libraryDetails.ownername && libraryDetails.subscriptionDetails) {
+            const currDate = new Date();
+            const expDate = new Date(libraryDetails.subscriptionDetails.expiryDate);
+            if (currDate > expDate) {
+                setOpenSubsExpired(true);
+            }
+        }
+    }, [libraryDetails?.ownername, libraryDetails?.subscriptionDetails])
 
     useEffect(() => {
         if (libraryDetails.floors && libraryDetails.floors[0].shifts.length > 0) {
@@ -258,7 +270,7 @@ const LibOwner = () => {
                             </div>
 
                             <div className='p-2'>
-                                <div><span className='font-semibold'>Contact No: </span>{stdData?.contactnum}</div>
+                                <div><span className='font-semibold'>Contact No: </span> <Link to={`tel:+91${stdData?.contactnum}`}>{stdData?.contactnum}</Link></div>
                                 <div><span className='font-semibold'>Aadhar No: </span>{stdData?.aadharnum}</div>
                                 <div><span className='font-semibold'>Address: </span>{stdData?.localarea}, {stdData?.city}</div>
 
@@ -283,6 +295,10 @@ const LibOwner = () => {
                             </div>
                         </div>
                     </div>
+                </PreviewModal>
+
+                <PreviewModal open={openSubsExpired} setOpen={() => { setOpenSubsExpired(true) }}>
+                    <RenewSubscription setOpenSubsExpired={setOpenSubsExpired} />
                 </PreviewModal>
 
                 {open && (

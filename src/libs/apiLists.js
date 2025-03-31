@@ -32,6 +32,7 @@ const apiList = {
   rejectrequest: `${server}/libowner/rejectrequest`,
   updatelibandprofile: `${server}/libowner/updateprofile`,
   approverequest: `${server}/libowner/approve-request`,
+  subscribe: `${server}/libowner/subscribe`,
 
   getstudent: `${server}/student/getstudent`,
   updateStdProfile: `${server}/student/updateprofile`,

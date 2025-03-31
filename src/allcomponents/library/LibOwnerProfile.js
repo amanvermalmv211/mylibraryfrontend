@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import authContext from '../../context/auth/authContext';
 import { BiEdit } from 'react-icons/bi';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { FormModal, NotAllowed } from '../notificationmessage/Modal';
+import { FormModal, NotAllowed, PreviewModal } from '../notificationmessage/Modal';
 import { libownerProfileValidation } from '../../libs/Validation';
 import { LibownerProfileAnim } from '../notificationmessage/SkeletonAnim';
 import InputBox from '../notificationmessage/InputBox';
 import apiList from '../../libs/apiLists';
 import { toast } from 'react-toastify';
+import RenewSubscription from './RenewSubscription';
 
 const LibOwnerProfile = () => {
 
@@ -38,10 +39,21 @@ const LibOwnerProfile = () => {
   const navigate = useNavigate(null);
 
   const [open, setOpen] = useState(false);
+  const [openSubsExpired, setOpenSubsExpired] = useState(false);
   const [spinLoading, setSpinLoading] = useState(false);
 
   useEffect(() => {
-    if (open) {
+    if (libraryDetails.ownername && libraryDetails.subscriptionDetails) {
+      const currDate = new Date();
+      const expDate = new Date(libraryDetails.subscriptionDetails.expiryDate);
+      if(currDate > expDate){
+        setOpenSubsExpired(true);
+      }
+    }
+  }, [libraryDetails?.ownername, libraryDetails?.subscriptionDetails])
+
+  useEffect(() => {
+    if (open || openSubsExpired) {
       document.body.classList.add('modal-open');
     } else {
       document.body.classList.remove('modal-open');
@@ -52,7 +64,7 @@ const LibOwnerProfile = () => {
       document.body.classList.remove('modal-open');
     };
 
-  }, [open]);
+  }, [open, openSubsExpired]);
 
   const [libownerProfile, setLibownerProfile] = useState(libraryDetails);
 
@@ -116,7 +128,7 @@ const LibOwnerProfile = () => {
           <div className="nobar grid grid-row-1 grid-flow-col gap-3 overflow-x-auto">
             {
               profilePic.map((data, idx) => {
-                return <div className={`h-10 md:h-14 w-10 md:w-14 ${libownerProfile.profileImg === idx ? "border-2 border-blue-600" : "hover:border-2 hover:border-blue-500"} border rounded-md overflow-hidden cursor-pointer`} onClick={() => { handleOnChange("profileImg", idx) }}>
+                return <div key={idx} className={`h-10 md:h-14 w-10 md:w-14 ${libownerProfile.profileImg === idx ? "border-2 border-blue-600" : "hover:border-2 hover:border-blue-500"} border rounded-md overflow-hidden cursor-pointer`} onClick={() => { handleOnChange("profileImg", idx) }}>
                   <img src={data} alt='Profile Pic' className='w-full h-full object-cover' />
                 </div>
               })
@@ -211,15 +223,17 @@ const LibOwnerProfile = () => {
               </div>
             </div>
 
-            <div className='max-w-80 mx-auto border border-blue-200 rounded-md bg-gradient-to-tl from-pink-200 to-blue-200 p-2 my-8 shadow-lg'>
-              <h1 className='text-xl lg:text-2xl font-semibold text-center mb-2'>Subscription Details</h1>
-              <div>
-                <p><span className='font-semibold'>Active Students : </span><span>{activeStd}</span></p>
-                <p><span className='font-semibold'>Subscription Date : </span><span>{new Date(libraryDetails.subscriptionDetails.subscriptionDate).getDate()} {monthsname[new Date(libraryDetails.subscriptionDetails.subscriptionDate).getMonth()]}, {new Date(libraryDetails.subscriptionDetails.subscriptionDate).getFullYear()}</span></p>
+            {
+              libraryDetails.ownername && <div className='max-w-80 mx-auto border border-blue-200 rounded-md bg-gradient-to-tl from-pink-200 to-blue-200 p-2 my-8 shadow-lg'>
+                <h1 className='text-xl lg:text-2xl font-semibold text-center mb-2'>Subscription Details</h1>
+                <div>
+                  <p><span className='font-semibold'>Active Students : </span><span>{activeStd}</span></p>
+                  <p><span className='font-semibold'>Subscription Date : </span><span>{new Date(libraryDetails.subscriptionDetails.subscriptionDate).getDate()} {monthsname[new Date(libraryDetails.subscriptionDetails.subscriptionDate).getMonth()]}, {new Date(libraryDetails.subscriptionDetails.subscriptionDate).getFullYear()}</span></p>
 
-                <p><span className='font-semibold'>Expiry Date : </span><span className='text-red-600'>{new Date(libraryDetails.subscriptionDetails.expiryDate).getDate()} {monthsname[new Date(libraryDetails.subscriptionDetails.expiryDate).getMonth()]}, {new Date(libraryDetails.subscriptionDetails.expiryDate).getFullYear()}</span></p>
+                  <p><span className='font-semibold'>Expiry Date : </span><span className='text-red-600'>{new Date(libraryDetails.subscriptionDetails.expiryDate).getDate()} {monthsname[new Date(libraryDetails.subscriptionDetails.expiryDate).getMonth()]}, {new Date(libraryDetails.subscriptionDetails.expiryDate).getFullYear()}</span></p>
+                </div>
               </div>
-            </div>
+            }
 
             <div className='my-8 flex flex-col items-center justify-center'>
               <div className='text-center pb-4'>
@@ -233,6 +247,10 @@ const LibOwnerProfile = () => {
 
           </>
         }
+
+        <PreviewModal open={openSubsExpired} setOpen={()=>{setOpenSubsExpired(true)}}>
+          <RenewSubscription setOpenSubsExpired={setOpenSubsExpired} />
+        </PreviewModal>
 
         {
           localStorage.getItem("isallowed") !== "true" && <NotAllowed open={open} fromHeading="Currently you are not allowed!">
