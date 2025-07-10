@@ -22,8 +22,7 @@
 
 - **React**  
 - **Tailwind CSS**  
-- **React Router DOM**  
-- **Axios**  
+- **React Router DOM**
 - **Deployment**: AWS
 
 ---
